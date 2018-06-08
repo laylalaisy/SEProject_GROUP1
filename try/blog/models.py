@@ -19,6 +19,7 @@ class account(models.Model):
     observers=[OperationObserver()]  # observer list
     account_id=models.IntegerField(primary_key=True)
     password=models.CharField(max_length=20,null=False)
+    type=models.IntegerField(null=False,default=0)
 
     def save(self, *args, **kwargs):
         print("account saved")
@@ -37,8 +38,8 @@ class attrib(models.Model):
     nickname=models.CharField(max_length=40,null=False)
     picture=models.CharField(max_length=40)
     email=models.CharField(max_length=40)
-    exp=models.IntegerField(null=False)
-    coin=models.IntegerField(null=False)
+    exp=models.IntegerField(null=True)
+    coin=models.IntegerField(null=True)
 class student(models.Model):
     '''
     student(student_id int, name varchar(20) not null, dorm varchar(40)) //学生
@@ -132,6 +133,8 @@ class learn(models.Model):
     '''
     student_id=models.ForeignKey(student,on_delete=models.CASCADE)
     course_id=models.ForeignKey(course,on_delete=models.CASCADE)
+    grade=models.IntegerField(null=True)
+    status=models.IntegerField(null=False,default=0)
     class Meta:
         unique_together=("student_id","course_id")
     primary=("student_id","course_id")
@@ -177,8 +180,8 @@ class time(models.Model):
     time(time_id int ,start time not null, end time not null, day int not null) // 时间段 const
     '''
     time_id=models.AutoField(primary_key=True)
-    start=models.DateTimeField(null=False)
-    end=models.DateTimeField(null=False)
+    start=models.TimeField(null=False)
+    end=models.TimeField(null=False)
     day=models.IntegerField(null=False)
 
 class takeup(models.Model):
@@ -191,6 +194,17 @@ class takeup(models.Model):
     class Meta:
         unique_together = ("course_id", "time_id","room_id")
     primary = ("course_id", "time_id","room_id")
+
+class examination(models.Model):
+    '''
+    exam(student_id int, takeup_id int, position int)//考生座位信息 ref student, takeup
+    '''
+    student_id=models.ForeignKey(student,on_delete=models.CASCADE)
+    takeup_id=models.ForeignKey(takeup,on_delete=models.CASCADE)
+    position=models.IntegerField(null=False)
+    class Meta:
+        unique_together = ("student_id", "takeup_id","position")
+    primary = ("student_id", "takeup_id","position")
 
 class teacher(models.Model):
     '''

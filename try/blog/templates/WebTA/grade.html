@@ -163,7 +163,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <td>{{course.name}}</td>
                             <td>{{course.id}}</td>
                             <td>{{course.semester}}</td>
-                            <td>{{course.teac}}</td>
+                            <td>{{course.teacher}}</td>
                             <td>{{course.grade}}</td>
                         </tr>
                     </form>
@@ -247,13 +247,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     });
 </script>
 <!--js -->
-<script src="js/jquery.nicescroll.js"></script>
-<script src="js/scripts.js"></script>
+<script src="{% static 'js/jquery.nicescroll.js' %}"></script>
+<script src="{% static 'js/scripts.js' %}"></script>
 <!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
 <!-- /Bootstrap Core JavaScript -->
 <!-- real-time -->
-<script language="javascript" type="text/javascript" src="js/jquery.flot.js"></script>
+<script language="javascript" type="text/javascript" src="{% static 'js/jquery.flot.js' %}"></script>
 <script type="text/javascript">
 
     $(function() {
@@ -343,7 +343,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </script>
 <!-- /real-time -->
-<script src="js/jquery.fn.gantt.js"></script>
+<script src="{% static 'js/jquery.fn.gantt.js' %}"></script>
 <script>
 
     $(function() {
@@ -463,6 +463,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     });
 
 </script>
-<script src="js/menu_jquery.js"></script>
+		   <script src="{% static 'js/menu_jquery.js' %}"></script>
 </body>
 </html>

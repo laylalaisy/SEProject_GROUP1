@@ -119,8 +119,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 					<!-- /.row -->
 					<div class="col-lg-6">
-						<form role="form">
-
+						<form role="form" method="POST">
+							{% csrf_token %}
 							<div class="form-group">
 								<label for="disabledSelect">学号</label>
 								<input name="sid" type="text" class="form-control" aria-describedby="basic-addon2">
@@ -128,6 +128,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="form-group">
 								<label for="disabledSelect">姓名</label>
 								<input name="sname" type="text" class="form-control" aria-describedby="basic-addon2">
+							</div>
+							<div class="form-group">
+								<label for="disabledSelect">昵称</label>
+								<input name="snick" type="text" class="form-control" aria-describedby="basic-addon2">
 							</div>
 							<div class="form-group">
 								<label for="disabledSelect">专业</label>
@@ -141,8 +145,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<label for="disabledSelect">邮箱</label>
 								<input name="semail" type="text" class="form-control" aria-describedby="basic-addon2">
 							</div>
+							<button type="submit" value="Submit">确认修改</button>
 						</form>
-						<button type="submit" value="Submit">确认修改</button>
 					</div>
 					<!-- /.row -->
 				</div>
@@ -218,13 +222,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     });
 </script>
 <!--js -->
-<script src="js/jquery.nicescroll.js"></script>
-<script src="js/scripts.js"></script>
+<script src="{% static 'js/jquery.nicescroll.js' %}"></script>
+<script src="{% static 'js/scripts.js' %}"></script>
 <!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
 <!-- /Bootstrap Core JavaScript -->
 <!-- real-time -->
-<script language="javascript" type="text/javascript" src="js/jquery.flot.js"></script>
+<script language="javascript" type="text/javascript" src="{% static 'js/jquery.flot.js' %}"></script>
 <script type="text/javascript">
 
     $(function() {
@@ -314,7 +318,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </script>
 <!-- /real-time -->
-<script src="js/jquery.fn.gantt.js"></script>
+<script src="{% static 'js/jquery.fn.gantt.js' %}"></script>
 <script>
 
     $(function() {
@@ -434,6 +438,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     });
 
 </script>
-<script src="js/menu_jquery.js"></script>
+		   <script src="{% static 'js/menu_jquery.js' %}"></script>
 </body>
 </html>
