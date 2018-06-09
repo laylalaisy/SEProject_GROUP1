@@ -201,7 +201,8 @@ class examination(models.Model):
     '''
     student_id=models.ForeignKey(student,on_delete=models.CASCADE)
     takeup_id=models.ForeignKey(takeup,on_delete=models.CASCADE)
-    position=models.IntegerField(null=False)
+    position=models.IntegerField(null=True)
+    date=models.DateField(null=True)
     class Meta:
         unique_together = ("student_id", "takeup_id","position")
     primary = ("student_id", "takeup_id","position")
