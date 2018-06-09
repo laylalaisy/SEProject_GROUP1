@@ -2,7 +2,11 @@ from django.shortcuts import render
 from .forms import LoginPostForm
 from django.shortcuts import redirect
 from .models import account
+from .models import attrib
 from .models import operation
+from .models import learn
+from .models import examination
+import logging
 # Create your views here.
 
 
@@ -39,17 +43,41 @@ def calendar(request):
 
 def grade(request):
     account_id = request.session["name"]
+    if request.method == "GET":
+        try:
+            courses = learn.objects.filter(student_id=str(account_id))
+            return render(request, "WebTA/grade.html", {'account_id': account_id, 'courses':courses})
+        except:
+            return render(request, 'WebTA/grade.html', {'account_id': account_id})
     return render(request, "WebTA/grade.html", {'account_id': account_id})
 
 
 def exam(request):
     account_id = request.session["name"]
+    if request.method == "GET":
+        try:
+            exams = examination.objects.filter(student_id=str(account_id))
+            return render(request, "WebTA/exam.html", {'account_id': account_id, 'courses':exams})
+        except:
+            return render(request, 'WebTA/exam.html', {'account_id': account_id})
     return render(request, "WebTA/exam.html", {'account_id': account_id})
 
 
 def personinfo(request):
     account_id = request.session["name"]
-    return render(request, "WebTA/personinfo.html", {'account_id': account_id})
+    if request.method == "POST":
+        st_id = request.POST.get('st_id', '')
+        st_nick = request.POST.get('st_nick', '')
+        st_email = request.POST.get('st_email', '')
+        try:
+            record = attrib.objects.get(account_id=st_id)
+            record.nickname=st_nick
+            record.email=st_email
+            record.save()
+            return render(request, "WebTA/personinfo.html", {'st_id': st_id, 'st_nick': st_nick, 'st_email': st_email})
+        except:
+            return render(request, 'WebTA/personinfo.html', {})
+    return render(request, 'WebTA/personinfo.html', {'account_id': account_id})
 
 
 def CoursePlan(request):
@@ -59,4 +87,4 @@ def CoursePlan(request):
 
 def RegistLesson(request):
     account_id = request.session["name"]
-    return render(request, "WebTA/CoursePlan.html", {'account_id': account_id})
+    return render(request, "WebTA/RegistLesson.html", {'account_id': account_id})
