@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .forms import LoginPostForm
 from django.shortcuts import redirect
 from .models import account
+from .models import attrib
 from .models import operation
 # Create your views here.
 
@@ -48,8 +49,18 @@ def exam(request):
 
 
 def personinfo(request):
-    account_id = request.session["name"]
-    return render(request, "WebTA/personinfo.html", {'account_id': account_id})
+    if request.method == "POST":
+        st_id = request.POST.get('st_id', '')
+        st_nick = request.POST.get('st_nick', '')
+        st_email = request.POST.get('st_email', '')
+        try:
+            record = attrib.objects.get(account_id=st_id)
+            record.nickname=st_nick
+            record.email=st_email
+            record.save()
+            return render(request, "WebTA/personinfo.html", {'st_id': st_id, 'st_nick': st_nick, 'st_email': st_email})
+        except:
+            return render(request, 'WebTA/personinfo.html', {})
 
 
 def CoursePlan(request):
