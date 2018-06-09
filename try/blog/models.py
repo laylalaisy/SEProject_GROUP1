@@ -17,7 +17,7 @@ class account(models.Model):
     '''
 
     observers=[OperationObserver()]  # observer list
-    account_id=models.IntegerField(primary_key=True)
+    account_id=models.CharField(max_length=20,primary_key=True)
     password=models.CharField(max_length=20,null=False)
     type=models.IntegerField(null=False,default=0)
 
@@ -44,7 +44,7 @@ class student(models.Model):
     '''
     student(student_id int, name varchar(20) not null, dorm varchar(40)) //学生
     '''
-    student_id=models.AutoField(primary_key=True)
+    student_id=models.CharField(max_length=20,primary_key=True)
     name=models.CharField(max_length=20,null=False)
     dorm=models.CharField(max_length=40)
 
@@ -210,7 +210,7 @@ class teacher(models.Model):
     '''
     teacher(teacher_id int, name varchar(20) not null) //教师
     '''
-    teacher_id=models.AutoField(primary_key=True)
+    teacher_id=models.CharField(max_length=20,primary_key=True)
     name=models.CharField(max_length=20,null=False)
 
 class evaluate(models.Model):
