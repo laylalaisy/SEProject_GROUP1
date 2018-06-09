@@ -3,10 +3,10 @@ from .forms import LoginPostForm
 from django.shortcuts import redirect
 from .models import account
 from .models import attrib
+from .models import operation
 from .models import learn
 from .models import examination
 import logging
-from .models import operation
 # Create your views here.
 
 
@@ -49,7 +49,7 @@ def grade(request):
             return render(request, "WebTA/grade.html", {'account_id': account_id, 'courses':courses})
         except:
             return render(request, 'WebTA/grade.html', {'account_id': account_id})
-    return render(request, 'WebTA/grade.html', {'account_id': account_id})
+    return render(request, "WebTA/grade.html", {'account_id': account_id})
 
 
 def exam(request):
@@ -58,26 +58,25 @@ def exam(request):
         try:
             exams = examination.objects.filter(student_id=str(account_id))
             return render(request, "WebTA/exam.html", {'account_id': account_id, 'courses':exams})
-        except Exception as e:
-            logging.debug(e)
+        except:
             return render(request, 'WebTA/exam.html', {'account_id': account_id})
-    return render(request, 'WebTA/exam.html', {'account_id': account_id})
+    return render(request, "WebTA/exam.html", {'account_id': account_id})
 
 
 def personinfo(request):
     account_id = request.session["name"]
     if request.method == "POST":
-        st_id = request.POST.get('sid', '')
-        st_nick = request.POST.get('snick', '')
-        st_email = request.POST.get('semail', '')
+        st_id = request.POST.get('st_id', '')
+        st_nick = request.POST.get('st_nick', '')
+        st_email = request.POST.get('st_email', '')
         try:
             record = attrib.objects.get(account_id=st_id)
             record.nickname=st_nick
             record.email=st_email
             record.save()
-            return render(request, "WebTA/personinfo.html", {'account_id': account_id, 'st_id':st_id, 'st_nick':st_nick, 'st_email':st_email})
+            return render(request, "WebTA/personinfo.html", {'st_id': st_id, 'st_nick': st_nick, 'st_email': st_email})
         except:
-            return render(request, 'WebTA/personinfo.html', {'account_id': account_id})
+            return render(request, 'WebTA/personinfo.html', {})
     return render(request, 'WebTA/personinfo.html', {'account_id': account_id})
 
 
