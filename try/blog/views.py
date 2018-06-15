@@ -6,6 +6,8 @@ from .models import attrib
 from .models import operation
 from .models import learn
 from .models import examination
+from .models import takeup
+from .models import room
 import logging
 # Create your views here.
 
