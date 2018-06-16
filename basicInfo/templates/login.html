@@ -96,7 +96,8 @@
                        url: basicUrl+"api/account/login",
                        data: {
                            account_id: username,
-                           account_pw: password
+                           account_pw: password,
+                           csrfmiddlewaretoken: '{{ csrf_token }}'
                        },
                        success: function (data) {
                             resolve(data);
