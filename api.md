@@ -53,6 +53,23 @@
 	}
 ```
 
+##### POST /api/account/person
+账户信息修改
+```doc
+@param
+	account_id(string):当前的用户名
+	name(string):真实姓名
+    nick(string):昵称
+    email(string):电子邮箱
+    exp(int):个人经验
+    coin(int):金币数
+    //...(还有什么别的个人信息随便加)
+@return
+	json object{
+		success(bool):是否修改成功，
+		reason(string):原因
+	}
+```
 
 
 ##### GET /api/account/person
