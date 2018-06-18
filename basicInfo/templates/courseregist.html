@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 {% load staticfiles %}
 <html>
@@ -60,16 +59,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 }
             });
 
-            $('#demo-pie-4').pieChart({
-                barColor: '#aa6498',
-                trackColor: '#eee',
-                lineCap: 'square',
-                lineWidth: 8,
-                onStep: function (from, to, percent) {
-                    $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-                }
-            });
-
            
         });
 
@@ -83,155 +72,181 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<!-- header-starts -->
 			<div class="header-section">
 			<!-- top_bg -->
-						<div class="top_bg">
-							
-								<div class="header_top">
-									<div class="top_right">
-										<ul>
-											<li><a href="#">浙江大学教务中心</a></li>-
-											<li><a href="/basic/student">首页</a></li>
-										</ul>
-									</div>
-									<div class="top_left">
-										<li class="dropdown">
-											<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-												<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down">{{ account_id }}</i>
-											</a>
-											<ul class="dropdown-menu dropdown-user">
-												<li><a href="basic/login"><i class="fa fa-sign-out fa-fw"></i> 登出</a></li>
-												<li><a href="#"><i class="fa fa-cog fa-fw"></i>设置</a></li>
-											</ul>
-											<!-- /.dropdown-user -->
-										</li>
-									</div>
-										<div class="clearfix"> </div>
-								</div>
-							
+				<div class="top_bg">
+
+					<div class="header_top">
+						<div class="top_right">
+							<ul>
+								<li><a href="#">浙江大学教务中心</a></li>-
+                                <li><a href="/basic/student">主页</a></li>-
+								<li><a href="/basic/courseregist">选课</a></li>
+							</ul>
 						</div>
+						<div class="top_left">
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+									<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down">{{ account_id }}</i>
+								</a>
+								<ul class="dropdown-menu dropdown-user">
+									<li><a href="/basic"><i class="fa fa-sign-out fa-fw"></i> 登出</a></li>
+									<li><a href="#"><i class="fa fa-cog fa-fw"></i>设置</a></li>
+								</ul>
+								<!-- /.dropdown-user -->
+							</li>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+
+				</div>
 					<div class="clearfix"></div>
+				<!-- /top_bg -->
+				</div>
+		   <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
+		   <!-- Custom Fonts -->
+		   <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+		   <!-- Custom CSS -->
+				<!--content-->
 			<div class="content">
+				<div id="wrapper">
 
-							<div class="col-md-5 skil">
-								<div class="content-top-1">
-									<div class="col-md-6 top-content">
-										<h5>操作系统</h5>
-										<label>4</label>
-									</div>
-									<div class="col-md-6 top-content1">	   
-										<div id="demo-pie-1" class="pie-title-center" data-percent="25"> <span class="pie-value">25%</span> </div>
-									</div>
-										<div class="clearfix"> </div>
-								</div>
-								<div class="content-top-1">
-									<div class="col-md-6 top-content">
-										<h5>软件工程</h5>
-										<label>3</label>
-									</div>
-									<div class="col-md-6 top-content1">	   
-										<div id="demo-pie-2" class="pie-title-center" data-percent="50"> <span class="pie-value">50%</span> </div>
-									</div>
-									 <div class="clearfix"> </div>
-								</div>
-								<div class="content-top-1">
-									<div class="col-md-6 top-content">
-										<h5>数据结构</h5>
-										<label>6</label>
-									</div>
-									<div class="col-md-6 top-content1">
-										<div id="demo-pie-3" class="pie-title-center" data-percent="75"> <span class="pie-value">75%</span> </div>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="content-top-1">
-									<div class="col-md-6 top-content">
-										<h5>编译原理</h5>
-										<label>6</label>
-									</div>
-									<div class="col-md-6 top-content1">
-										<div id="demo-pie-4" class="pie-title-center" data-percent="75"> <span class="pie-value">75%</span> </div>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
 
+					<div id="page-wrapper" style="min-height: 58px;">
+						<div class="row">
+							<div class="col-lg-12">
+								<h1 class="page-header">选课</h1>
 							</div>
-							<div class="col-md-7 mid-content-top">
-								<div class="middle-content">
-									<h3>公告板
-									</h3>
-									<!-- start content_slider -->
-										<div id="owl-demo" class="owl-carousel text-center">
-											<div class="item">
-												<img class="lazyOwl img-responsive" data-src="{% static 'images/ad1.png' %}" alt="name">
-											</div>
-											<div class="item">
-												<img class="lazyOwl img-responsive" data-src="{% static 'images/ad2.png' %}" alt="name">
-											</div>
-											
-										</div>
-								</div>
-								<!--//sreen-gallery-cursual---->
-								<!-- requried-jsfiles-for owl -->
-								<link href="{% static 'css/owl.carousel.css' %}" rel="stylesheet">
-								<script src="{% static 'js/owl.carousel.js' %}"></script>
-									<script>
-										$(document).ready(function() {
-											$("#owl-demo").owlCarousel({
-												items : 1,
-												lazyLoad : true,
-												autoPlay : 7000,
-												pagination : true,
-												loop:true,
-												nav:true,
-											});
-										});
-									</script>
-								<!-- //requried-jsfiles-for owl -->
+							<!-- /.col-lg-12 -->
 						</div>
-						<div class="clearfix"></div>
-						
+						<!-- /.row -->
+						<div class="panel panel-default c_left">
+							<div class="panel-heading">
+								<h5>教学班列表</h5>
+							</div><table class="table table-hover table-condensed" id="kexuan-tab">
+							<thead>
+							<tr>
+								<th>教师姓名</th>
+								<th>学期</th>
+								<th>上课时间</th>
+								<th>上课地点</th>
+								<th>余量</th>
+								<th>待定人数</th>
+								<th>选课</th>
+							</tr>
+							</thead>
+							<tbody>
+							{% for section in sections %}
+							<form action="/courseSelection/student/selection/result" method="get">
+								<tr>
+									<td>{{section.instructors}}</td>
+									<td>{{section.semester}}</td>
+									<td>{{section.time}}</td>
+									<td>{{section.loc}}</td>
+									<td>{{section.rest_capita}}/{{section.capita}}</td>
+									<td>{{section.undecided_capita}}</td>
+									<td><button type="submit" name="select" value="{{section.section_id}}">选课</button></td>
+								</tr>
+							</form>
+							{% endfor %}
+							</tbody>
+						</table>
+						</div>
+						<div class="panel panel-default c_down">
+							<div class="panel-heading">
+								<div>
+									<h5>已选教学班</h5>
+								</div>
+							</div>
+							<div class="tbody">
+								<table class="table table-hover table-condensed" id="yxjxb-tab">
+									<thead>
+									<tr>
+										<th>教师姓名</th>
+										<th>学期</th>
+										<th>上课时间</th>
+										<th>上课地点</th>
+										<th>选课志愿</th>
+										<th>升降志愿</th>
+									</tr>
+									</thead>
+									<tbody>
+									{% for section in sections_selected %}
+									<tr>
+										<td>{{section.instructors}}</td>
+										<td>{{section.semester}}</td>
+										<td>{{section.time}}</td>
+										<td>{{section.loc}}</td>
+										<td>{{section.priority}}</td>
+										<td>
+											<button type="button" class="btn btn-default">
+												<span class="glyphicon glyphicon-arrow-up"></span>
+											</button>
+											<button type="button" class="btn btn-default">
+												<span class="glyphicon glyphicon-arrow-down"></span>
+											</button>
+										</td>
+									</tr>
+									{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /#page-wrapper -->
+				</div>
+				<!-- /#wrapper -->
 
-		</div>
-			</div>
+				<!-- jQuery -->
+				<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+				<!-- Bootstrap Core JavaScript -->
+				<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+				<!-- Custom Theme JavaScript -->
+				<script src="https://cdn.bootcss.com/startbootstrap-sb-admin-2/3.3.7+1/js/sb-admin-2.js"></script>
+
+</div>
 			<!--content-->
 		</div>
 </div>
 				<!--//content-inner-->
 			<!--/sidebar-menu-->
-				<div class="sidebar-menu">
-					<header class="logo1">
-						<a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> 
-					</header>
-						<div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
-                           <div class="menu">
-									<ul id="menu" >
-										 <li><a href="/basic/student"><i class="fa fa-tachometer"></i> <span>主页</span></a></li>
-										 <li id="menu-academico" ><a href="#"><i class="fa fa-table"></i> <span> 课程信息</span> <span class="fa fa-angle-right" style="float: right"></span></a>
-										    <ul id="menu-academico-sub" >
-													<li id="menu-academico-avaliacoes" ><a href="/basic/mycourse">我的课表</a></li>
-													<li id="menu-academico-avaliacoes" ><a href="/basic/courseregist">自主选课</a></li>
-													<li id="menu-academico-boletim" ><a href="/basic/courseplan">培养方案</a></li>
-													<li id="menu-academico-boletim" ><a href="/basic/coursesearch">课程搜索</a></li>
-										   </ul>
-										</li>
-										<!--<li id="menu-academico" ><a href="sunglasses.html"><i class="fa fa-file-text-o"></i> <span>作业情况</span></a></li>-->
-										<li><a href="/basic/exam"><i class="lnr lnr-pencil"></i> <span>考试安排</span></a></li>
-										<li id="menu-academico" ><a href="/basic/grade"><i class="fa fa-file-text-o"></i> <span>查看成绩</span></a></li>
-										<li id="menu-academico" ><a href="/basic/calender"><i class="lnr lnr-book"></i> <span>我的日程</span></a></li>
-										<li><a href="#"><i class="lnr lnr-chart-bars"></i> <span>浙大论坛</span> <span class="fa fa-angle-right" style="float: right"></span></a>
-									  		<!--<ul>-->
-												<!--<li><a href="input.html"> Input</a></li>-->
-												<!--<li><a href="validation.html">Validation</a></li>-->
-											<!--</ul>-->
-										</li>
-										<li><a href="/basic/personalinfo"><i class="lnr lnr-pencil"></i> <span>个人信息</span></a></li>
+	   <div class="sidebar-menu">
+		   <header class="logo1">
+			   <a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a>
+		   </header>
+		   <div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
+		   <div class="menu">
+                <ul id="menu" >
+                     <li><a href="/basic/student"><i class="fa fa-tachometer"></i> <span>主页</span></a></li>
+                     <li id="menu-academico" ><a href="#"><i class="fa fa-table"></i> <span> 课程信息</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                        <ul id="menu-academico-sub" >
+                                <li id="menu-academico-avaliacoes" ><a href="/basic/mycourse">我的课表</a></li>
+                                <li id="menu-academico-avaliacoes" ><a href="/basic/courseregist">自主选课</a></li>
+                                <li id="menu-academico-boletim" ><a href="/basic/courseplan">培养方案</a></li>
+                                <li id="menu-academico-boletim" ><a href="/basic/coursesearch">课程搜索</a></li>
+                       </ul>
+                    </li>
+                    <!--<li id="menu-academico" ><a href="sunglasses.html"><i class="fa fa-file-text-o"></i> <span>作业情况</span></a></li>-->
+                    <li><a href="/basic/exam"><i class="lnr lnr-pencil"></i> <span>考试安排</span></a></li>
+                    <li id="menu-academico" ><a href="/basic/grade"><i class="fa fa-file-text-o"></i> <span>查看成绩</span></a></li>
+                    <li id="menu-academico" ><a href="/basic/calender"><i class="lnr lnr-book"></i> <span>我的日程</span></a></li>
+                    <li><a href="#"><i class="lnr lnr-chart-bars"></i> <span>浙大论坛</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                        <!--<ul>-->
+                            <!--<li><a href="input.html"> Input</a></li>-->
+                            <!--<li><a href="validation.html">Validation</a></li>-->
+                        <!--</ul>-->
+                    </li>
+                    <li><a href="/basic/personalinfo"><i class="lnr lnr-pencil"></i> <span>个人信息</span></a></li>
 
-									</ul>
-						   </div>
-				</div>
+                </ul>
+           </div>
 
-							  <div class="clearfix"></div>		
+	   </div>
+
+	   <div class="clearfix"></div>
 							</div>
 							<script>
 							var toggle = true;
@@ -254,13 +269,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										});
 							</script>
 <!--js -->
-<script src="{% static 'js/jquery.nicescroll.js' %}"></script>
-<script src="{% static 'js/scripts.js' %}"></script>
+<script src="js/jquery.nicescroll.js"></script>
+<script src="js/scripts.js"></script>
 <!-- Bootstrap Core JavaScript -->
-   <script src="{% static 'js/bootstrap.min.js' %}"></script>
+   <script src="js/bootstrap.min.js"></script>
    <!-- /Bootstrap Core JavaScript -->
    <!-- real-time -->
-<script language="javascript" type="text/javascript" src="{% static 'js/jquery.flot.js' %}"></script>
+<script language="javascript" type="text/javascript" src="js/jquery.flot.js"></script>
 	<script type="text/javascript">
 
 	$(function() {
@@ -350,7 +365,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 	</script>
 <!-- /real-time -->
-<script src="{% static 'js/jquery.fn.gantt.js' %}"></script>
+<script src="js/jquery.fn.gantt.js"></script>
     <script>
 
 		$(function() {
@@ -470,6 +485,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 
     </script>
-		   <script src="{% static 'js/menu_jquery.js' %}"></script>
+		   <script src="js/menu_jquery.js"></script>
 </body>
 </html>

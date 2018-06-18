@@ -20,6 +20,63 @@ def student(request):
     }
     return render(request,"student.html",feedDict)
 
+def exam(request):
+    sid = request.session["account_id"]
+    feedDict={
+        "account_id":sid
+    }
+    return render(request,"exam.html",feedDict)
+
+def calendar(request):
+    sid = request.session["account_id"]
+    feedDict={
+        "account_id":sid
+    }
+    return render(request,"calender.html",feedDict)
+
+def courseplan(request):
+    sid = request.session["account_id"]
+    feedDict={
+        "account_id":sid
+    }
+    return render(request, "courseplan.html", feedDict)
+
+def personalinfo(request):
+    sid = request.session["account_id"]
+    feedDict={
+        "account_id":sid
+    }
+    return render(request,"personinfo.html",feedDict)
+
+def courseregist(request):
+    sid = request.session["account_id"]
+    feedDict={
+        "account_id":sid
+    }
+    return render(request,"courseregist.html",feedDict)
+
+
+def mycourse(request):
+    sid = request.session["account_id"]
+    feedDict={
+        "account_id":sid
+    }
+    return render(request,"mycourse.html",feedDict)
+
+def grade(request):
+    sid = request.session["account_id"]
+    feedDict={
+        "account_id":sid
+    }
+    return render(request,"grade.html",feedDict)
+
+def coursesearch(request):
+    sid = request.session["account_id"]
+    feedDict={
+        "account_id":sid
+    }
+    return render(request,"coursesearch.html",feedDict)
+
 def teacher(request):
     tid=request.session["account_id"]
     feedDict={

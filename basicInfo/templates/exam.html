@@ -2,7 +2,7 @@
 {% load staticfiles %}
 <html>
 <head>
-    <title>Products</title>
+    <title>浙江大学教务中心</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Gretong Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
@@ -78,7 +78,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <div class="top_right">
                             <ul>
                                 <li><a href="#">浙江大学教务中心</a></li>-
-                                <li><a href="index.html">首页</a></li>
+                                <li><a href="/basic/student">首页</a></li>-
+                                <li><a href="/basic/exam">考试安排</a></li>
                             </ul>
                         </div>
                         <div class="top_left">
@@ -199,31 +200,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a>
         </header>
         <div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
-        <div class="menu">
-            <ul id="menu" >
-                <li><a href="index.html"><i class="fa fa-tachometer"></i> <span>主页</span></a></li>
-                <li id="menu-academico" ><a href="#"><i class="fa fa-table"></i> <span> 课程信息</span> <span class="fa fa-angle-right" style="float: right"></span></a>
-                    <ul id="menu-academico-sub" >
-                        <li id="menu-academico-avaliacoes" ><a href="#">我的课表</a></li>
-                        <li id="menu-academico-avaliacoes" ><a href="RegistLesson.html">自主选课</a></li>
-                        <li id="menu-academico-boletim" ><a href="CoursePlan.html">培养方案</a></li>
-                        <li id="menu-academico-boletim" ><a href="#">课程搜索</a></li>
-                    </ul>
-                </li>
-                <!--<li id="menu-academico" ><a href="sunglasses.html"><i class="fa fa-file-text-o"></i> <span>作业情况</span></a></li>-->
-                <li><a href="exam.html"><i class="lnr lnr-pencil"></i> <span>考试安排</span></a></li>
-                <li id="menu-academico" ><a href="grade.html"><i class="fa fa-file-text-o"></i> <span>查看成绩</span></a></li>
-                <li id="menu-academico" ><a href="calender.html"><i class="lnr lnr-book"></i> <span>我的日程</span></a></li>
-                <li><a href="#"><i class="lnr lnr-chart-bars"></i> <span>浙大论坛</span> <span class="fa fa-angle-right" style="float: right"></span></a>
-                    <!--<ul>-->
-                        <!--<li><a href="input.html"> Input</a></li>-->
-                        <!--<li><a href="validation.html">Validation</a></li>-->
-                    <!--</ul>-->
-                </li>
-                <li><a href="personinfo.html"><i class="lnr lnr-pencil"></i> <span>个人信息</span></a></li>
+		   <div class="menu">
+                <ul id="menu" >
+                     <li><a href="/basic/student"><i class="fa fa-tachometer"></i> <span>主页</span></a></li>
+                     <li id="menu-academico" ><a href="#"><i class="fa fa-table"></i> <span> 课程信息</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                        <ul id="menu-academico-sub" >
+                                <li id="menu-academico-avaliacoes" ><a href="/basic/mycourse">我的课表</a></li>
+                                <li id="menu-academico-avaliacoes" ><a href="/basic/courseregist">自主选课</a></li>
+                                <li id="menu-academico-boletim" ><a href="/basic/courseplan">培养方案</a></li>
+                                <li id="menu-academico-boletim" ><a href="/basic/coursesearch">课程搜索</a></li>
+                       </ul>
+                    </li>
+                    <!--<li id="menu-academico" ><a href="sunglasses.html"><i class="fa fa-file-text-o"></i> <span>作业情况</span></a></li>-->
+                    <li><a href="/basic/exam"><i class="lnr lnr-pencil"></i> <span>考试安排</span></a></li>
+                    <li id="menu-academico" ><a href="/basic/grade"><i class="fa fa-file-text-o"></i> <span>查看成绩</span></a></li>
+                    <li id="menu-academico" ><a href="/basic/calender"><i class="lnr lnr-book"></i> <span>我的日程</span></a></li>
+                    <li><a href="#"><i class="lnr lnr-chart-bars"></i> <span>浙大论坛</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                        <!--<ul>-->
+                            <!--<li><a href="input.html"> Input</a></li>-->
+                            <!--<li><a href="validation.html">Validation</a></li>-->
+                        <!--</ul>-->
+                    </li>
+                    <li><a href="/basic/personalinfo"><i class="lnr lnr-pencil"></i> <span>个人信息</span></a></li>
 
-            </ul>
-        </div>
+                </ul>
+           </div>
+
     </div>
 
     <div class="clearfix"></div>

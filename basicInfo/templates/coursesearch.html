@@ -78,8 +78,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <div class="top_right">
                             <ul>
                                 <li><a href="#">浙江大学教务中心</a></li>-
-                                <li><a href="/basic/student">主页</a></li>-
-                                <li><a href="/basic/grade">成绩</a></li>
+                                <li><a href="/basic/student">首页</a></li>-
+                                <li><a href="/basic/exam">课程搜索</a></li>
                             </ul>
                         </div>
                         <div class="top_left">
@@ -88,7 +88,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down">{{ account_id }}</i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-user">
-                                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a></li>
+                                    <li><a href="/basic"><i class="fa fa-sign-out fa-fw"></i> 登出</a></li>
                                     <li><a href="#"><i class="fa fa-cog fa-fw"></i>设置</a></li>
                                 </ul>
                                 <!-- /.dropdown-user -->
@@ -115,7 +115,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div id="page-wrapper" style="min-height: 58px;">
                         <div class="row">
                             <div class="col-lg-12">
-                                <h1 class="page-header">成绩查询</h1>
+                                <h1 class="page-header">课程搜索</h1>
                             </div>
                             <!-- /.col-lg-12 -->
                         </div>
@@ -123,9 +123,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <div class="row">
                             <form role="form">
                                 <div class="col-lg-6">
-                                    <form action="/courseSelection/student/selection" method="get">
                                         <div class="form-group">
-                                            <select class="form-control" name="metric">
+                                            <select id="search1" class="form-control" name="metric">
                                                 <option value="course_title">学期</option>
                                                 <option value="course_number">课程代码</option>
                                                 <option value="instructor">上课教师</option>
@@ -135,7 +134,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </div>
                                 <div class="sidebar-search">
                                     <div class="input-group custom-search-form">
-                                        <input type="text" class="form-control" placeholder="大一上"  name="value">
+                                        <input type="text" id="search2" class="form-control" placeholder="刘玉生"  name="value">
                                         <span class="input-group-btn">
                             <button class="btn btn-default" type="submit">
                                 <i class="fa fa-search"></i>
@@ -147,86 +146,88 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </div>
                             </form>
                         </div>
-                    </div><table class="table table-hover table-condensed" id="kexuan-tab">
-                    <thead>
-                    <tr>
-                        <th>课程名称</th>
-                        <th>课程号</th>
-                        <th>课程学期</th>
-                        <th>任课老师</th>
-                        <th>成绩</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for course in courses %}
-                    <form action="/courseSelection/student/selection/result" method="get">
-                        <tr>
-                            <td>{{course.name}}</td>
-                            <td>{{course.id}}</td>
-                            <td>{{course.semester}}</td>
-                            <td>{{course.teacher}}</td>
-                            <td>{{course.grade}}</td>
-                        </tr>
-                    </form>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                                    </div><table class="table table-hover table-condensed" id="kexuan-tab">
+                                    <thead>
+                                    <tr>
+                                        <th>课程名称</th>
+                                        <th>课程号</th>
+                                        <th>课程时间</th>
+                                        <th>课程地点</th>
+                                        <th>考试时间</th>
+                                        <th>课程简介</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for course in courses %}
+                                    <form action="/courseSelection/student/selection/result" method="get">
+                                        <tr>
+                                            <td>{{course.name}}</td>
+                                            <td>{{course.id}}</td>
+                                            <td>{{course.semester}}</td>
+                                            <td>{{course.loc}}</td>
+                                            <td>{{course.position}}</td>
+                                            <td>{{course.time}}</td>
+                                        </tr>
+                                    </form>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                </div>
+
+                            </div>
+                            <!-- /#page-wrapper -->
                 </div>
+                <!-- /#wrapper -->
+
+                <!-- jQuery -->
+                <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+                <!-- Bootstrap Core JavaScript -->
+                <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+                <!-- Custom Theme JavaScript -->
+                <script src="https://cdn.bootcss.com/startbootstrap-sb-admin-2/3.3.7+1/js/sb-admin-2.js"></script>
 
             </div>
-            <!-- /#page-wrapper -->
+            <!--content-->
         </div>
-        <!-- /#wrapper -->
+    </div>
+    <!--//content-inner-->
+    <!--/sidebar-menu-->
+    <div class="sidebar-menu">
+        <header class="logo1">
+            <a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a>
+        </header>
+        <div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
+		   <div class="menu">
+                <ul id="menu" >
+                     <li><a href="/basic/student"><i class="fa fa-tachometer"></i> <span>主页</span></a></li>
+                     <li id="menu-academico" ><a href="#"><i class="fa fa-table"></i> <span> 课程信息</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                        <ul id="menu-academico-sub" >
+                                <li id="menu-academico-avaliacoes" ><a href="/basic/mycourse">我的课表</a></li>
+                                <li id="menu-academico-avaliacoes" ><a href="/basic/courseregist">自主选课</a></li>
+                                <li id="menu-academico-boletim" ><a href="/basic/courseplan">培养方案</a></li>
+                                <li id="menu-academico-boletim" ><a href="/basic/coursesearch">课程搜索</a></li>
+                       </ul>
+                    </li>
+                    <!--<li id="menu-academico" ><a href="sunglasses.html"><i class="fa fa-file-text-o"></i> <span>作业情况</span></a></li>-->
+                    <li><a href="/basic/exam"><i class="lnr lnr-pencil"></i> <span>考试安排</span></a></li>
+                    <li id="menu-academico" ><a href="/basic/grade"><i class="fa fa-file-text-o"></i> <span>查看成绩</span></a></li>
+                    <li id="menu-academico" ><a href="/basic/calender"><i class="lnr lnr-book"></i> <span>我的日程</span></a></li>
+                    <li><a href="#"><i class="lnr lnr-chart-bars"></i> <span>浙大论坛</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                        <!--<ul>-->
+                            <!--<li><a href="input.html"> Input</a></li>-->
+                            <!--<li><a href="validation.html">Validation</a></li>-->
+                        <!--</ul>-->
+                    </li>
+                    <li><a href="/basic/personalinfo"><i class="lnr lnr-pencil"></i> <span>个人信息</span></a></li>
 
-        <!-- jQuery -->
-        <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
-        <script src="https://cdn.bootcss.com/startbootstrap-sb-admin-2/3.3.7+1/js/sb-admin-2.js"></script>
+                </ul>
+           </div>
 
     </div>
-    <!--content-->
-</div>
-</div>
-<!--//content-inner-->
-<!--/sidebar-menu-->
-<div class="sidebar-menu">
-    <header class="logo1">
-        <a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a>
-    </header>
-    <div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
-   <div class="menu">
-        <ul id="menu" >
-             <li><a href="/basic/student"><i class="fa fa-tachometer"></i> <span>主页</span></a></li>
-             <li id="menu-academico" ><a href="#"><i class="fa fa-table"></i> <span> 课程信息</span> <span class="fa fa-angle-right" style="float: right"></span></a>
-                <ul id="menu-academico-sub" >
-                        <li id="menu-academico-avaliacoes" ><a href="/basic/mycourse">我的课表</a></li>
-                        <li id="menu-academico-avaliacoes" ><a href="/basic/courseregist">自主选课</a></li>
-                        <li id="menu-academico-boletim" ><a href="/basic/courseplan">培养方案</a></li>
-                        <li id="menu-academico-boletim" ><a href="/basic/coursesearch">课程搜索</a></li>
-               </ul>
-            </li>
-            <!--<li id="menu-academico" ><a href="sunglasses.html"><i class="fa fa-file-text-o"></i> <span>作业情况</span></a></li>-->
-            <li><a href="/basic/exam"><i class="lnr lnr-pencil"></i> <span>考试安排</span></a></li>
-            <li id="menu-academico" ><a href="/basic/grade"><i class="fa fa-file-text-o"></i> <span>查看成绩</span></a></li>
-            <li id="menu-academico" ><a href="/basic/calender"><i class="lnr lnr-book"></i> <span>我的日程</span></a></li>
-            <li><a href="#"><i class="lnr lnr-chart-bars"></i> <span>浙大论坛</span> <span class="fa fa-angle-right" style="float: right"></span></a>
-                <!--<ul>-->
-                    <!--<li><a href="input.html"> Input</a></li>-->
-                    <!--<li><a href="validation.html">Validation</a></li>-->
-                <!--</ul>-->
-            </li>
-            <li><a href="/basic/personalinfo"><i class="lnr lnr-pencil"></i> <span>个人信息</span></a></li>
 
-        </ul>
-   </div>
-
-</div>
-
-<div class="clearfix"></div>
+    <div class="clearfix"></div>
 </div>
 <script>
     var toggle = true;
