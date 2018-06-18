@@ -37,12 +37,21 @@ def api_account_post(request):
 
 @csrf_exempt
 def api_account_register_post(request):
+    print("regist")
     if request.method=="POST":
         username = request.POST.get("account_id", '')
         password = request.POST.get("account_pw", '')
+        password2 = request.POST.get("account_pw2", '')
+
         type=request.POST.get("accout_type",0)
 
         print(username, password,type)
+        if(password != password2):
+            return JsonResponse({
+                "success": 0,
+                "reason": "密码不一致"
+            })
+
         if (len(password) < 6 or len(password) > 18):
             return JsonResponse({
                 "success":0,
@@ -75,7 +84,7 @@ def api_account_register_post(request):
             request.session["account_id"] = username
             return JsonResponse({
                 "success": 1,
-                "reason": None
+                "reason": None,
             })
     return HttpResponseBadRequest
 

@@ -8,6 +8,7 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
     url(r"^$",views.default),
     url(r"^login$",views.login),
+    url(r"^signup$",views.signup),
     url(r"^student$",views.student),
     url(r"^teacher$",views.teacher)
 ]

@@ -4,11 +4,14 @@ from django.shortcuts import render
 
 
 def default(request):
-
     return render(request, 'login-home.html', {})
 
+
+def signup(request):
+    return render(request, "signup.html", {})
+
 def login(request):
-    return render(request,"login.html")
+    return render(request,"login.html",{})
 
 def student(request):
     sid = request.session["account_id"]
