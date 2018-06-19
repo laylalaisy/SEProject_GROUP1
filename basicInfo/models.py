@@ -107,7 +107,6 @@ class course(models.Model):
     course_id=models.AutoField(primary_key=True)
     name=models.CharField(max_length=40,null=False)
     credit=models.DecimalField(max_digits=3,decimal_places=1)
-    capacity=models.IntegerField(null=False)
     intro=models.TextField()
     type=models.CharField(max_length=40,null=False)
     semester=models.CharField(max_length=10,null=False,default="Spring")
@@ -196,7 +195,7 @@ class teacher(models.Model):
     teacher_id=models.ForeignKey(account,on_delete=models.CASCADE,related_name="teacherId",primary_key=True)
     name=models.CharField(max_length=20,null=False)
     teacher_title=models.CharField(max_length=10,null=False,default="lecturer")
-    teacher_department=models.CharField(max_length=40,null=False)
+    teacher_office=models.CharField(max_length=40,null=False)
     teacher_management=models.CharField(max_length=40,null=True)
     #teacher_department=models.ForeignKey(college,on_delete=models.CASCADE,related_name="department",default="1")
     #teacher_management=models.ForeignKey(college,on_delete=models.CASCADE,related_name="departmentManage",null=True)
@@ -268,6 +267,7 @@ class teach(models.Model):
     '''
     teacher_id=models.ForeignKey(teacher,on_delete=models.CASCADE,related_name="teacher_id_1")
     course_id=models.ForeignKey(course,on_delete=models.CASCADE,related_name="college_id_1")
+    capacity=models.IntegerField(null=False)
     class Meta:
         unique_together = ("teacher_id","course_id")
     primary = ("teacher_id","course_id")
@@ -286,7 +286,7 @@ class admin(models.Model):
     '''
     admin(admin_id int, name varchar(20) not null) //系统管理员
     '''
-    admin_id=models.AutoField(primary_key=True)
+    admin_id=models.CharField(max_length=20,primary_key=True)
     name=models.CharField(max_length=20,null=False)
 
 class operation(models.Model):
