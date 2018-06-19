@@ -104,7 +104,7 @@ class course(models.Model):
     '''
     course(course_id int, name varchar(40) not null, credit real not null, capacity int not null, intro text, type varchar(40) not null) //课程
     '''
-    course_id=models.AutoField(primary_key=True)
+    course_id=models.CharField(max_length=10,primary_key=True)
     name=models.CharField(max_length=40,null=False)
     credit=models.DecimalField(max_digits=3,decimal_places=1)
     intro=models.TextField()
