@@ -40,8 +40,8 @@ class attrib(models.Model):
     '''
     account_id=models.ForeignKey(account,on_delete=models.CASCADE,primary_key=True)
     nickname=models.CharField(max_length=40,null=False)
-    picture=models.CharField(max_length=40)
-    email=models.CharField(max_length=40)
+    picture=models.CharField(max_length=40,null=True)
+    email=models.CharField(max_length=40,null=True)
     exp=models.IntegerField(null=True)
     coin=models.IntegerField(null=True)
 class student(models.Model):
@@ -94,11 +94,11 @@ class belong(models.Model):
     '''
     belong(major_id int, college_id int) //专业所在学院 ref major, college
     '''
-    major_id=models.ForeignKey(major,on_delete=models.CASCADE)
+    descipline_id=models.ForeignKey(discipline,on_delete=models.CASCADE)
     college_id=models.ForeignKey(college,on_delete=models.CASCADE)
     class Meta:
-        unique_together = ("major_id", "college_id")
-    primary=("major_id", "college_id")
+        unique_together = ("descipline_id", "college_id")
+    primary=("descipline_id", "college_id")
 
 class course(models.Model):
     '''
@@ -197,21 +197,30 @@ class teacher(models.Model):
     teacher_title=models.CharField(max_length=10,null=False,default="lecturer")
     teacher_office=models.CharField(max_length=40,null=False)
     teacher_management=models.CharField(max_length=40,null=True)
-    #teacher_department=models.ForeignKey(college,on_delete=models.CASCADE,related_name="department",default="1")
-    #teacher_management=models.ForeignKey(college,on_delete=models.CASCADE,related_name="departmentManage",null=True)
     teacher_mail=models.EmailField(max_length=100,null=True)
+
+class teach(models.Model):
+    '''
+    teach(teacher_id int, course_id int) //讲授课程 ref teacher, course
+    '''
+    teacher_id=models.ForeignKey(teacher,on_delete=models.CASCADE,related_name="teacher_id_1")
+    course_id=models.ForeignKey(course,on_delete=models.CASCADE,related_name="college_id_1")
+    capacity=models.IntegerField(null=False)
+    class Meta:
+        unique_together = ("teacher_id","course_id")
+    primary = ("teacher_id","course_id")
 
 class takeup(models.Model):
     '''
     takeup(course_id int, time_id int, room_id int, type int not null) //课程时空信息 ref course, time, room
     '''
-    course_id=models.ForeignKey(course,on_delete=models.CASCADE)
+    teach_id=models.ForeignKey(teach,on_delete=models.CASCADE)
     time_id=models.ForeignKey(time,on_delete=models.CASCADE)
     room_id=models.ForeignKey(room,on_delete=models.CASCADE)
     teacher_id = models.ForeignKey(teacher, on_delete=models.CASCADE)
     class Meta:
-        unique_together = ("course_id", "time_id","room_id")
-    primary = ("course_id", "time_id","room_id")
+        unique_together = ("teach_id", "time_id","room_id")
+    primary = ("teach_id", "time_id","room_id")
 
 class examination(models.Model):
     '''
@@ -260,17 +269,6 @@ class master(models.Model):
     class Meta:
         unique_together = ("teacher_id","college_id")
     primary = ("teacher_id","college_id")
-
-class teach(models.Model):
-    '''
-    teach(teacher_id int, course_id int) //讲授课程 ref teacher, course
-    '''
-    teacher_id=models.ForeignKey(teacher,on_delete=models.CASCADE,related_name="teacher_id_1")
-    course_id=models.ForeignKey(course,on_delete=models.CASCADE,related_name="college_id_1")
-    capacity=models.IntegerField(null=False)
-    class Meta:
-        unique_together = ("teacher_id","course_id")
-    primary = ("teacher_id","course_id")
 
 class assist(models.Model):
     '''
