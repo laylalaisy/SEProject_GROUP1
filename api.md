@@ -53,7 +53,10 @@
 	}
 ```
 
+
+
 ##### POST /api/account/person
+
 账户信息修改
 ```doc
 @param
@@ -70,6 +73,24 @@
 		reason(string):原因
 	}
 ```
+
+
+
+##### POST /api/account/img
+
+上传头像
+
+```doc
+@param
+	account_id(string):当前的用户名
+	src(img):头像
+@return
+	json object{
+		success(bool):操作成功与否
+		reason(string):不成功的原因
+	}
+```
+
 
 
 ##### GET /api/account/person
@@ -93,26 +114,6 @@
 
 
 #### Student API
-
-##### GET /api/student/classes
-
-学生当前课程查询
-
-```doc
-@param
-	account_id(string):当前的用户名
-	semister(string):查询学期
-@return
-	(array) json object{
-		name(string):课程名称
-		credit(real):课程学分
-		teacher(string):教师姓名
-		time(time):上课时间
-		room(string):上课教室
-	}
-```
-
-
 
 ##### GET /api/student/exam
 
@@ -144,24 +145,6 @@
 		name(string):课程名称
 		credit(real):课程学分
 		grade(int):课程成绩
-	}
-```
-
-
-
-##### GET /api/student/course
-
-课程详细信息查询
-
-```doc
-@param
-	course_id(string):查询课程号
-@return
-	json object{
-		name(string):课程名称
-		credit(real):课程学分
-		intro(int):课程介绍
-		//...(还有什么别的课程信息随便加)
 	}
 ```
 
@@ -204,7 +187,7 @@
 	}
 ```
 
-
+#### 
 
 ##### POST /api/teacher/chgcourse
 
@@ -223,5 +206,44 @@
 		reason(string):不成功的原因
 	}
 ```
+
+
+
+#### Admin
+
+##### POST /api/teacher/confirmcourse
+
+同意添加课程
+
+```doc
+@param
+	id(string):课程代号
+@return
+	json object{
+		success(bool):操作成功与否
+		reason(string):不成功的原因
+	}
+```
+
+
+
+##### POST /api/teacher/rejectcourse
+
+拒绝添加课程
+
+```doc
+@param
+	id(string):课程代号
+@return
+	json object{
+		success(bool):操作成功与否
+		reason(string):不成功的原因
+	}
+```
+
+
+
+
+
 
 
