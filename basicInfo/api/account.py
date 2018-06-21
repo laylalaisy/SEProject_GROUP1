@@ -8,10 +8,10 @@ import hashlib as hash,json,time,random
 
 @csrf_exempt
 def api_account_post(request):
-    if request.method=="POST":
-        print("fuckyou")
-        username=request.POST["account_id"]
-        password=request.POST["account_pw"]
+    if request.method == "POST":
+        print("fuck you")
+        username = request.POST["account_id"]
+        password = request.POST["account_pw"]
         print(username,password)
 
         try:
@@ -20,14 +20,14 @@ def api_account_post(request):
             passwd = obj.password
             salt = obj.salt
             passwordAfter = hash.sha512((hash.sha512(password.encode()).hexdigest() + salt).encode()).hexdigest()
-            print(passwd,passwordAfter)
+            print(passwd, passwordAfter)
             if passwordAfter == passwd:
                 request.session["account_id"] = username
 
-                return JsonResponse({"success":1,"type":obj.type,"reason":None})
+                return JsonResponse({"success": 1, "type": obj.type, "reason":None})
 
             else:
-                return JsonResponse({"success":0,"type":None,"reason":'密码错误'})
+                return JsonResponse({"success": 0, "type": None, "reason": '密码错误'})
 
         except:
             print("===")
@@ -38,7 +38,7 @@ def api_account_post(request):
 @csrf_exempt
 def api_account_register_post(request):
     print("regist")
-    if request.method=="POST":
+    if request.method == "POST":
         username = request.POST.get("account_id", '')
         password = request.POST.get("account_pw", '')
         password2 = request.POST.get("account_pw2", '')
@@ -54,14 +54,14 @@ def api_account_register_post(request):
 
         if (len(password) < 6 or len(password) > 18):
             return JsonResponse({
-                "success":0,
-                "reason":"密码长度不符合要求"
+                "success": 0,
+                "reason": "密码长度不符合要求"
             })
 
         if len(username) < 6:
             return JsonResponse({
-                "success":0,
-                "reason":"用户名短于6位"
+                "success": 0,
+                "reason": "用户名短于6位"
             })
         try:
             account.objects.get(account_id=username)
@@ -109,15 +109,15 @@ def api_account_repassword_post(request):
     :return:
     '''
 
-    if request.method=="POST":
-        account_id=request.POST.get("account_id","")
-        account_pw=request.POST.get("account_pw","")
+    if request.method == "POST":
+        account_id = request.POST.get("account_id","")
+        account_pw = request.POST.get("account_pw","")
         try:
-            obj=account.objects.get(account_id=account_id)
-            if(len(account_pw)<6 or len(account_pw)>18):
+            obj = account.objects.get(account_id=account_id)
+            if(len(account_pw) < 6 or len(account_pw)>18):
                 return JsonResponse({
-                    "success":0,
-                    "reason":"密码长度不符合要求"
+                    "success": 0,
+                    "reason": "密码长度不符合要求"
                 })
 
             salt1 = int(time.time() % 100)
@@ -129,11 +129,11 @@ def api_account_repassword_post(request):
 
             print(salt)
             passwordAfter = hash.sha512((hash.sha512(account_pw.encode()).hexdigest() + salt).encode()).hexdigest()
-            obj.password=passwordAfter
+            obj.password = passwordAfter
             obj.save()
             return JsonResponse({
-                "success":1,
-                "reason":None
+                "success": 1,
+                "reason": None
             })
 
         except:
@@ -159,7 +159,7 @@ def api_account_person_post(request):
         exp=request.POST["exp"]
         coin=request.POST["coin"]
 
-        return JsonResponse({"success":1,"reason":None})
+        return JsonResponse({"success": 1, "reason": None})
 
     except:
         return HttpResponseBadRequest()
@@ -191,7 +191,7 @@ def api_account_person_get(request):
 
 @csrf_exempt
 def api_account_person(request):
-    if request.method=="POST":
+    if request.method == "POST":
         return api_account_person_post(request)
     else:
         return api_account_person_get(request)
