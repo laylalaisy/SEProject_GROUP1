@@ -211,13 +211,29 @@
 
 #### Admin
 
-##### POST /api/teacher/confirmcourse
+##### POST /api/teacher/judgecourse
 
-同意添加课程
+审批课程
 
 ```doc
 @param
 	id(string):课程代号
+@return
+	json object{
+		success(bool):同意与否
+	}
+```
+
+
+
+##### POST /api/teacher/modifycourse
+
+修改课程信息
+
+```doc
+@param
+	id(string):课程代号
+	//...(还有什么别的个人信息随便加)
 @return
 	json object{
 		success(bool):操作成功与否
@@ -227,13 +243,13 @@
 
 
 
-##### POST /api/teacher/rejectcourse
+##### POST /api/teacher/promote
 
-拒绝添加课程
+教师提升为管理员
 
 ```doc
 @param
-	id(string):课程代号
+	account_id(string):教师工号
 @return
 	json object{
 		success(bool):操作成功与否
