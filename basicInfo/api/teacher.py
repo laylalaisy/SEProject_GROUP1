@@ -45,7 +45,7 @@ def api_teacher_addcourse(request):
             return HttpResponseBadRequest()
 
 @csrf_exempt
-def api_teacher_addcourse(request):
+def api_teacher_chgcourse(request):
     if request.method == "POST":
         try:
             id = request.POST["id"]

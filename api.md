@@ -2,7 +2,7 @@
 
 #### Account API
 
-##### POST /api/account/login
+##### POST /api/account/login(finish)
 
 账户登录
 
@@ -20,7 +20,7 @@
 
 
 
-##### POST /api/account/register
+##### POST /api/account/register(finish)
 
 账户注册
 
@@ -38,7 +38,7 @@
 
 
 
-##### POST /api/account/repassword
+##### POST /api/account/repassword(finish)
 
 账户密码修改
 
@@ -76,23 +76,6 @@
 
 
 
-##### POST /api/account/img
-
-上传头像
-
-```doc
-@param
-	account_id(string):当前的用户名
-	src(img):头像
-@return
-	json object{
-		success(bool):操作成功与否
-		reason(string):不成功的原因
-	}
-```
-
-
-
 ##### GET /api/account/person
 
 账户信息查询
@@ -108,6 +91,23 @@
 		exp(int):个人经验
 		coin(int):金币数
 		//...(还有什么别的个人信息随便加)
+	}
+```
+
+
+
+##### POST /api/account/img
+
+上传头像
+
+```doc
+@param
+	account_id(string):当前的用户名
+	src(img):头像
+@return
+	json object{
+		success(bool):操作成功与否
+		reason(string):不成功的原因
 	}
 ```
 
@@ -176,10 +176,10 @@
 
 ```doc
 @param
+	id(string):课程代号
 	name(string):课程名称
 	credit(real):课程学分
 	intro(string):课程介绍
-	type(int):课程类型
 @return
 	json object{
 		success(bool):申请成功与否
@@ -199,10 +199,9 @@
 	name(string):课程名称
 	credit(real):课程学分
 	intro(string):课程介绍
-	type(int):课程类型
 @return
 	json object{
-		success(bool):申请成功与否
+		success(bool):修改成功与否
 		reason(string):不成功的原因
 	}
 ```
@@ -211,29 +210,34 @@
 
 #### Admin
 
-##### POST /api/teacher/judgecourse
+##### POST /api/admin/judgecourse
 
 审批课程
 
 ```doc
 @param
 	id(string):课程代号
+	accept(bool):同意与否
 @return
 	json object{
-		success(bool):同意与否
+		success(bool):修改成功与否
+		reason(string):不成功的原因
 	}
 ```
 
 
 
-##### POST /api/teacher/modifycourse
+##### POST /api/admin/modifycourse
 
 修改课程信息
 
 ```doc
 @param
 	id(string):课程代号
-	//...(还有什么别的个人信息随便加)
+	name(string):课程名称
+	credit(real):课程学分
+	intro(string):课程介绍
+	type(string):课程类型
 @return
 	json object{
 		success(bool):操作成功与否
@@ -243,19 +247,36 @@
 
 
 
-##### POST /api/teacher/promote
+##### POST /api/admin/promote
 
 教师提升为管理员
 
 ```doc
 @param
 	account_id(string):教师工号
+	college(string):学院名称
 @return
 	json object{
 		success(bool):操作成功与否
 		reason(string):不成功的原因
 	}
 ```
+
+
+
+##### GET /api/admin/college
+
+查询全部学院
+
+```doc
+@param
+@return
+	(array) json object{
+		name(string):学院名称
+	}
+```
+
+
 
 
 
