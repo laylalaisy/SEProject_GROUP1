@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpResponseNotFound, HttpResponseBadReque
 
 from basicInfo.models import account
 
-import hashlib as hash,json,time,random
+import hashlib as hash, json, time, random
 
 
 @csrf_exempt
