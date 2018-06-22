@@ -163,16 +163,15 @@ def api_account_person_post(request):
         coin = request.POST["coin"]
 
         obj = account.objects.get(account_id=account_id)
-        obj.name=name
-        obj.nick=nick
-        obj.email=email
-        if(exp>0):
-            obj.exp=exp
-        if(coin>0):
-            obj.coin=coin
+        obj.name = name
+        obj.nick = nick
+        obj.email = email
+        if exp > 0:
+            obj.exp = exp
+        if coin > 0:
+            obj.coin = coin
         obj.save()
         return JsonResponse({"success": 1, "reason": None})
-
     except:
         return HttpResponseBadRequest()
 

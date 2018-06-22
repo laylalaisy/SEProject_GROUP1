@@ -10,9 +10,9 @@ def api_admin_judge(request):
             id = request.POST["id"]
             accept = request.POST["accept"]
 
-            tmp_course=course.objects.get(course_id=id)
+            tmp_course = course.objects.get(course_id=id)
             if accept:
-                tmp_course.type="普通课程"
+                tmp_course.type = "普通课程"
                 tmp_course.save()
             else:
                 tmp_course.delete()
@@ -31,7 +31,7 @@ def api_admin_modify(request):
             intro = request.POST["intro"]
             type = request.POST["type"]
 
-            tmp_course=course.objects.get(course_id=id)
+            tmp_course = course.objects.get(course_id=id)
             tmp_course.name = name
             tmp_course.credit = credit
             tmp_course.intro = intro
@@ -49,9 +49,9 @@ def api_admin_promote(request):
             account_id = request.POST["account_id"]
             college_name = request.POST["college"]
 
-            new_master=master()
-            new_master.teacher_id=account_id
-            new_master.college_id=college.objects.get(name=college_name)
+            new_master = master()
+            new_master.teacher_id = account_id
+            new_master.college_id = college.objects.get(name=college_name)
             new_master.save()
             return JsonResponse({"success": 1, "reason": None})
 
@@ -62,10 +62,10 @@ def api_admin_promote(request):
 def api_admin_college(request):
     if request.method == "GET":
         try:
-            college_list=[]
+            college_list = []
             for c in college.objects.get():
-                tmp={}
-                tmp["name"]=c.name
+                tmp = {}
+                tmp["name"] = c.name
                 college_list.append(tmp)
 
             return JsonResponse(college_list)

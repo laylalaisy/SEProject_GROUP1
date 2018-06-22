@@ -33,7 +33,7 @@ def api_teacher_addcourse(request):
             credit = request.POST["credit"]
             intro = request.POST["intro"]
 
-            new_course=course()
+            new_course = course()
             new_course.id = id
             new_course.name = name
             new_course.credit = credit
