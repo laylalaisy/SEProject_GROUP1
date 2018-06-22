@@ -1,5 +1,5 @@
 from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse, HttpResponseNotFound, HttpResponseBadRequest,HttpResponse
+from django.http import JsonResponse, HttpResponseNotFound, HttpResponseBadRequest, HttpResponse
 
 from basicInfo.models import account
 
@@ -9,10 +9,10 @@ import hashlib as hash, json, time, random
 @csrf_exempt
 def api_account_post(request):
     if request.method == "POST":
-        print("fuck you")
+        print("log in")
         username = request.POST["account_id"]
         password = request.POST["account_pw"]
-        print(username,password)
+        print(username, password)
 
         try:
             obj = account.objects.get(account_id=username)
@@ -24,7 +24,7 @@ def api_account_post(request):
             if passwordAfter == passwd:
                 request.session["account_id"] = username
 
-                return JsonResponse({"success": 1, "type": obj.type, "reason":None})
+                return JsonResponse({"success": 1, "type": obj.type, "reason": None})
 
             else:
                 return JsonResponse({"success": 0, "type": None, "reason": '密码错误'})
@@ -35,6 +35,7 @@ def api_account_post(request):
 
     return HttpResponseBadRequest()
 
+
 @csrf_exempt
 def api_account_register_post(request):
     print("regist")
@@ -43,10 +44,10 @@ def api_account_register_post(request):
         password = request.POST.get("account_pw", '')
         password2 = request.POST.get("account_pw2", '')
 
-        type=request.POST.get("accout_type",0)
+        type = request.POST.get("accout_type", 0)
 
-        print(username, password,type)
-        if(password != password2):
+        print(username, password, type)
+        if (password != password2):
             return JsonResponse({
                 "success": 0,
                 "reason": "密码不一致"
@@ -88,6 +89,7 @@ def api_account_register_post(request):
             })
     return HttpResponseBadRequest
 
+
 @csrf_exempt
 def api_account_repassword_post(request):
     '''
@@ -110,11 +112,11 @@ def api_account_repassword_post(request):
     '''
 
     if request.method == "POST":
-        account_id = request.POST.get("account_id","")
-        account_pw = request.POST.get("account_pw","")
+        account_id = request.POST.get("account_id", "")
+        account_pw = request.POST.get("account_pw", "")
         try:
             obj = account.objects.get(account_id=account_id)
-            if(len(account_pw) < 6 or len(account_pw)>18):
+            if (len(account_pw) < 6 or len(account_pw) > 18):
                 return JsonResponse({
                     "success": 0,
                     "reason": "密码长度不符合要求"
@@ -139,6 +141,7 @@ def api_account_repassword_post(request):
         except:
             return HttpResponseNotFound()
 
+
 @csrf_exempt
 def api_account_person_post(request):
     '''
@@ -152,13 +155,22 @@ def api_account_person_post(request):
     :return:
     '''
     try:
-        account_id=request.POST["account_id"]
-        name=request.POST["name"]
-        nick=request.POST["nick"]
-        email=request.POST["email"]
-        exp=request.POST["exp"]
-        coin=request.POST["coin"]
+        account_id = request.POST["account_id"]
+        name = request.POST["name"]
+        nick = request.POST["nick"]
+        email = request.POST["email"]
+        exp = request.POST["exp"]
+        coin = request.POST["coin"]
 
+        obj = account.objects.get(account_id=account_id)
+        obj.name=name
+        obj.nick=nick
+        obj.email=email
+        if(exp>0):
+            obj.exp=exp
+        if(coin>0):
+            obj.coin=coin
+        obj.save()
         return JsonResponse({"success": 1, "reason": None})
 
     except:
@@ -179,15 +191,25 @@ def api_account_person_get(request):
     :param request:
     :return:
     '''
-    return JsonResponse(
-        {
-            "name":"Alan Swift",
-            "nick":"Shina Mashiro",
-            "email":"123456@163.com",
-            "exp":100,
-            "coin":90
-        }
-    )
+
+    try:
+        account_id = request.GET["account_id"]
+
+        obj = account.objects.get(account_id=account_id)
+
+        return JsonResponse(
+            {
+                "name": obj.name,
+                "nick": obj.nick,
+                "email": obj.email,
+                "exp": obj.exp,
+                "coin": obj.coin
+            }
+        )
+
+    except:
+        return HttpResponseBadRequest()
+
 
 @csrf_exempt
 def api_account_person(request):
@@ -195,4 +217,3 @@ def api_account_person(request):
         return api_account_person_post(request)
     else:
         return api_account_person_get(request)
-
