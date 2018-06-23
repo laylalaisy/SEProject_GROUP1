@@ -113,6 +113,24 @@
 
 #### Student API
 
+
+
+##### GET /api/student/info
+
+学生信息查询
+
+```doc
+@param
+	account_id(string):当前的用户名
+@return
+	json object{
+		name(string):真实姓名
+		dorm(int):寝室
+	}
+```
+
+
+
 ##### GET /api/student/exam
 
 学生当前考试查询
@@ -149,6 +167,26 @@
 
 
 #### Teacher API
+
+
+
+##### GET /api/teacher/info
+
+教师信息查询
+
+```doc
+@param
+	account_id(string):当前的用户名
+@return
+	json object{
+		name(string):真实姓名
+		teacher_title(string):职称
+		teacher_office(string):办公室
+		teacher_management(string):管理学院
+	}
+```
+
+
 
 ##### GET /api/teacher/course
 
@@ -297,35 +335,39 @@
 
 
 
-##### GET /api/admin/student
+##### POST/api/admin/student
 
-学生信息查询
+学生信息修改
 
 ```doc
 @param
-	account_id(string):当前的用户名
+	account_id(string):修改学生用户名
+	name(string):真实姓名
+	dorm(int):寝室
 @return
 	json object{
-		name(string):真实姓名
-		dorm(int):寝室
+		success(bool):操作成功与否
+		reason(string):不成功的原因
 	}
 ```
 
 
 
-##### GET /api/admin/teacher
+##### POST/api/admin/teacher
 
-教师信息查询
+教师信息修改
 
 ```doc
 @param
-	account_id(string):当前的用户名
+	account_id(string):修改教师用户名
+    name(string):真实姓名
+    title(string):职称
+    office(string):办公室
+    management(string):管理学院
 @return
 	json object{
-		name(string):真实姓名
-		title(string):职称
-		office(string):办公室
-		management(string):管理学院
+		success(bool):操作成功与否
+		reason(string):不成功的原因
 	}
 ```
 
