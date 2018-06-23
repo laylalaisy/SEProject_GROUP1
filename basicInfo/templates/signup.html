@@ -45,7 +45,7 @@
 						<div class="top_right">
 							<ul>
 								<li><a href="#">浙江大学教务中心</a></li>|
-								<li><a href="teacher_index.html">首页</a></li>|
+								<li><a href="login">首页</a></li>|
 							</ul>
 						</div>
 					    <div class="top_left">
@@ -72,6 +72,9 @@
 			<!-- Custom Fonts -->
 			<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+           {% ifequal success 0 %}
+               <p>123</p>
+           {% endifequal %}
 			
 			<!-- Custom CSS -->
 			<!-- content -->
@@ -85,17 +88,16 @@
                 		</div>
 						<div class="log">
 						<div class="login">               
-							<form id="Signin" role="form" method="POST">
-								{% csrf_token %}
-								<fieldset id="body">
-								<fieldset>
-									<label for="id">账号</label>
-									<input type="text" name="id" id="id">
-								</fieldset>
-								<fieldset>
-									<label for="password1">密码</label>
-									<input type="password" name="password1" id="password1" onkeyup="checkPasswordLength(this.value)">
-								    <div id="pwdPrompt">
+                                {% csrf_token %}
+                                <fieldset id="body">
+                                <fieldset>
+                                    <label for="id">账号</label>
+                                    <input type="text" name="id" id="id">
+                                </fieldset>
+                                <fieldset>
+                                    <label for="password1">密码</label>
+                                    <input type="password" name="password1" id="password1" onkeyup="checkPasswordLength(this.value)">
+                                    <div id="pwdPrompt">
                                          <div id="pwdLength">
                                               <span style=" background-color:#999;">弱</span>
                                               <span style=" background-color:#666;">中</span>
@@ -105,16 +107,16 @@
 
                                     </div>
                                 </fieldset>
-								<fieldset>
-									<label for="password2">再次输入密码</label>
-									<input type="password" name="password2" id="password2" >
+                                <fieldset>
+                                    <label for="password2">再次输入密码</label>
+                                    <input type="password" name="password2" id="password2" >
 
-								</fieldset>
+                                </fieldset>
 
-									<input type="submit" id="Signin" value="注册" onclick="checkSignUp()">
-									<label for="checkbox"><input type="checkbox" id="checkbox"> <i>下次登录记住我</i></label>
-								</fieldset>
-								<!-- <span><a href="#">忘记密码?</a></span> -->
+                                     <span class="btn btn-default loginbutton" onclick="doLogin()">注册</span>
+                                    <label for="checkbox"><input type="checkbox" id="checkbox"> <i>下次登录记住我</i></label>
+                                </fieldset>
+                                <!-- <span><a href="#">忘记密码?</a></span> -->
 							</div>
 						</div>
 					</div>
@@ -187,6 +189,52 @@
 			toggle = !toggle;
 		});
 </script>
+
+<script>
+        const basicUrl="http://127.0.0.1:8000/";
+        function doLogin(params) {
+            var username=document.getElementById("id").value.toString();
+            var password=document.getElementById("password1").value.toString();
+            var password2=document.getElementById("password2").value.toString();
+            console.log(username,password)
+            new Promise(function (resolve){
+               $.ajax(
+                   {
+                       method: "POST",
+                       url: basicUrl+"api/account/register",
+                       data: {
+                           account_id: username,
+                           account_pw: password,
+                           account_pw2: password2,
+                           csrfmiddlewaretoken: '{{ csrf_token }}'
+                       },
+                       success: function (data) {
+                            resolve(data);
+                           console.log(data);
+                       }
+
+                   }
+               )
+            }).then(
+                function (data) {
+                    console.log(data);
+                    if(data.success)
+                    {
+                        alert("Login success");
+                        window.location.href = basicUrl+"basic/login";
+                        window.open();
+                    }
+                    else{
+                        alert("注册失败："+data.reason);
+                    }
+
+                }
+
+            );
+
+
+        }
+    </script>
 			
 	
 <!--js -->

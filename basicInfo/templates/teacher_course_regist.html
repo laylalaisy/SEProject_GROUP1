@@ -80,82 +80,28 @@
                             <h1 class="page-header">课程申请</h1>
                         </div>
                     </div>
-                    <div class="row">
-                        <!-- <form role="form"> -->
-                            <div class="col-lg-6">
-                                <!-- <form action="/teacher/course_apply/year" method="get"> -->
-                                    <div class="form-group">
-                                        <select class="form-control" name="course_year">
-                                            <option value="2015-2016">2015-2016学年</option>
-                                            <option value="2017-2018">2017-2018学年</option>
-                                            <option value="2018-2019">2018-2019学年</option>
-                                        </select>
-                                    </div>
-                                <!-- </form> -->
-                            </div>
-                        <!-- </form> -->
-                    </div>
-                    <div class="row">
-                        <!-- <form role="form"> -->
-                            <div class="col-lg-6">
-                                <!-- <form action="/teacher/course_apply/semester" method="get"> -->
-                                    <div class="form-group">
-                                        <select class="form-control" name="course_semester">
-                                            <option value="spring">春学期</option>
-                                            <option value="summer">夏学期</option>
-                                            <option value="fall">秋学期</option>
-                                            <option value="winter">冬学期</option>
-                                            <option value="spring and summer">春夏学期</option>
-                                            <option value="fall and winter">秋冬学期</option>
-                                        </select>
-                                    </div>
-                                <!-- </form> -->
-                            </div>
-                        <!-- </form> -->
-                    </div>
-                    <div class="row">
-                        <!-- <form role="form"> -->
-                            <div class="col-lg-6">
-                                <!-- <form action="/teacher/course_apply/time" method="get"> -->
-                                    <div class="form-group">
-                                        <select class="form-control" name="course_time">
-                                            <option value="1,2">第1,2节课</option>
-                                            <option value="3,4">第3,4节课</option>
-                                            <option value="3,4,5">第3,4,5节课</option>
-                                            <option value="6,7">第6,7节课</option>
-                                            <option value="7,8">第7,8节课</option>
-                                            <option value="6,7,8">第6,7,8节课</option>
-                                            <option value="9,10">第9,10节课</option>
-                                            <option value="11,12">第11,12节课</option>
-                                            <option value="11,12,13">第11,12,13节课</option>
-                                        </select>
-                                    </div>
-                                <!-- </form> -->
-                            </div>
-                        <!-- </form> -->
-                    </div>
                     <div class="col-lg-6">
                         <!-- <form role="form" method="POST"> -->
                             {% csrf_token %}
                             <div class="form-group">
-                                <label for="disabledSelect">课程名字</label>
-                                <input name="course_name" type="text" class="form-control" aria-describedby="basic-addon2">
+                                <label for="disabledSelect">课程代号</label>
+                                <input id="id" name="id" type="text" class="form-control" aria-describedby="basic-addon2">
                             </div>
                             <div class="form-group">
-                                <label for="disabledSelect">教师名字</label>
-                                <input name="course_teacher_name" type="text" class="form-control" aria-describedby="basic-addon2">
+                                <label for="disabledSelect">课程名称</label>
+                                <input id="name" name="name" type="text" class="form-control" aria-describedby="basic-addon2">
                             </div>
                             <div class="form-group">
-                                <label for="disabledSelect">归属学院</label>
-                                <input name="course_department" type="text" class="form-control" aria-describedby="basic-addon2">
+                                <label for="disabledSelect">课程学分</label>
+                                <input id="credit" name="credit" type="number" class="form-control" aria-describedby="basic-addon2">
                             </div>
                             <div class="form-group">
-                                <label for="disabledSelect">学分</label>
-                                <input name="tpoint" type="number" class="form-control" aria-describedby="basic-addon2">
+                                <label for="disabledSelect">课程学时</label>
+                                <input id="hour" name="hour" type="number" class="form-control" aria-describedby="basic-addon2">
                             </div>
                             <div class="form-group">
-                                <label for="disabledSelect">课程简介</label>
-                                <input name="course_introduction" type="text" class="form-control" aria-describedby="basic-addon2">
+                                <label for="disabledSelect">课程介绍</label>
+                                <input id="intro" name="intro" type="text" class="form-control" aria-describedby="basic-addon2">
                             </div>
                             <button type="submit" value="Submit">确认申请</button>
                         <!-- </form> -->
@@ -188,16 +134,16 @@
         <div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
         <div class="menu">
             <ul id="menu" >
-                <li><a href="teacher_index.html"><i class="fa fa-tachometer"></i> <span>主页</span></a></li>
-                <li><a href="teacher_information.html"><i class="lnr lnr-pencil"></i> <span>个人信息</span></a></li>
-                <li><a href="teacher_comment.html"><i class="fa fa-file-text-o"></i> <span>学生评价</span></a></li>
+                <li><a href="teacher_index"><i class="fa fa-tachometer"></i> <span>主页</span></a></li>
+                <li><a href="teacher_information"><i class="lnr lnr-pencil"></i> <span>个人信息</span></a></li>
+                <li><a href="teacher_comment"><i class="fa fa-file-text-o"></i> <span>学生评价</span></a></li>
                 <li id="menu-academico" ><a href="#"><i class="fa fa-table"></i> <span> 课程信息</span> <span class="fa fa-angle-right" style="float: right"></span></a>
                     <ul id="menu-academico-sub" >
-                        <li id="menu-academico-avaliacoes" ><a href="teacher_course_regist.html">申请课程</a></li>
-                        <li id="menu-academico-boletim" ><a href="teacher_course_edit.html">修改课程</a></li>
+                        <li id="menu-academico-avaliacoes" ><a href="teacher_course_regist">申请课程</a></li>
+                        <li id="menu-academico-boletim" ><a href="teacher_course_edit">修改课程</a></li>
                     </ul>
                 </li>
-                <li><a href="school_forum.html"><i class="lnr lnr-envelope"></i> <span>浙大论坛</span></a></li>
+                <li><a href="school_forum"><i class="lnr lnr-envelope"></i> <span>浙大论坛</span></a></li>
             </ul>
         </div>
     </div>

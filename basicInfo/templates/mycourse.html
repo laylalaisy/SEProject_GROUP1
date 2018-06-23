@@ -78,7 +78,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="top_right">
 							<ul>
 								<li><a href="#">浙江大学教务中心</a></li>-
-								<li><a href="index.html">选课</a></li>
+                                <li><a href="/basic/student">主页</a></li>-
+								<li><a href="/basic/mycourse">我的课表</a></li>
 							</ul>
 						</div>
 						<div class="top_left">
@@ -87,7 +88,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down">{{ account_id }}</i>
 								</a>
 								<ul class="dropdown-menu dropdown-user">
-									<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a></li>
+									<li><a href="/basic"><i class="fa fa-sign-out fa-fw"></i> 登出</a></li>
 									<li><a href="#"><i class="fa fa-cog fa-fw"></i>设置</a></li>
 								</ul>
 								<!-- /.dropdown-user -->
@@ -114,24 +115,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div id="page-wrapper" style="min-height: 58px;">
 						<div class="row">
 							<div class="col-lg-12">
-								<h1 class="page-header">选课</h1>
+								<h1 class="page-header">我的课表</h1>
 							</div>
 							<!-- /.col-lg-12 -->
 						</div>
 						<!-- /.row -->
 						<div class="panel panel-default c_left">
 							<div class="panel-heading">
-								<h5>教学班列表</h5>
+								<h5>课程列表</h5>
 							</div><table class="table table-hover table-condensed" id="kexuan-tab">
 							<thead>
 							<tr>
-								<th>教师姓名</th>
-								<th>学期</th>
+								<th>课程代码</th>
+								<th>课程名称</th>
+                                <th>课程学分</th>
 								<th>上课时间</th>
 								<th>上课地点</th>
-								<th>余量</th>
-								<th>待定人数</th>
-								<th>选课</th>
+                                <th>考试时间</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -151,51 +151,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</tbody>
 						</table>
 						</div>
-						<div class="panel panel-default c_down">
-							<div class="panel-heading">
-								<div>
-									<h5>已选教学班</h5>
-								</div>
-							</div>
-							<div class="tbody">
-								<table class="table table-hover table-condensed" id="yxjxb-tab">
-									<thead>
-									<tr>
-										<th>教师姓名</th>
-										<th>学期</th>
-										<th>上课时间</th>
-										<th>上课地点</th>
-										<th>选课志愿</th>
-										<th>升降志愿</th>
-									</tr>
-									</thead>
-									<tbody>
-									{% for section in sections_selected %}
-									<tr>
-										<td>{{section.instructors}}</td>
-										<td>{{section.semester}}</td>
-										<td>{{section.time}}</td>
-										<td>{{section.loc}}</td>
-										<td>{{section.priority}}</td>
-										<td>
-											<button type="button" class="btn btn-default">
-												<span class="glyphicon glyphicon-arrow-up"></span>
-											</button>
-											<button type="button" class="btn btn-default">
-												<span class="glyphicon glyphicon-arrow-down"></span>
-											</button>
-										</td>
-									</tr>
-									{% endfor %}
-									</tbody>
-								</table>
-							</div>
-						</div>
-						<!-- /.row -->
-					</div>
-					<!-- /#page-wrapper -->
-				</div>
-				<!-- /#wrapper -->
+
 
 				<!-- jQuery -->
 				<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
@@ -218,30 +174,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		   </header>
 		   <div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
 		   <div class="menu">
-			   <ul id="menu" >
-				   <li><a href="index.html"><i class="fa fa-tachometer"></i> <span>主页</span></a></li>
-				   <li id="menu-academico" ><a href="#"><i class="fa fa-table"></i> <span> 课程信息</span> <span class="fa fa-angle-right" style="float: right"></span></a>
-					   <ul id="menu-academico-sub" >
-						   <li id="menu-academico-avaliacoes" ><a href="#">我的课表</a></li>
-						   <li id="menu-academico-avaliacoes" ><a href="RegistLesson.html">自主选课</a></li>
-						   <li id="menu-academico-boletim" ><a href="CoursePlan.html">培养方案</a></li>
-						   <li id="menu-academico-boletim" ><a href="s#">课程搜索</a></li>
-					   </ul>
-				   </li>
-				   <!--<li id="menu-academico" ><a href="sunglasses.html"><i class="fa fa-file-text-o"></i> <span>作业情况</span></a></li>-->
-				   <li><a href="personinfo.html"><i class="lnr lnr-pencil"></i> <span>考试安排</span></a></li>
-				   <li id="menu-academico" ><a href="catalog.html"><i class="fa fa-file-text-o"></i> <span>查看成绩</span></a></li>
-				   <li id="menu-academico" ><a href="calender.html"><i class="lnr lnr-book"></i> <span>我的日程</span></a></li>
-				   <li><a href="#"><i class="lnr lnr-chart-bars"></i> <span>浙大论坛</span> <span class="fa fa-angle-right" style="float: right"></span></a>
-					   <!--<ul>-->
-						   <!--<li><a href="input.html"> Input</a></li>-->
-						   <!--<li><a href="validation.html">Validation</a></li>-->
-					   <!--</ul>-->
-				   </li>
-				   <li><a href="personinfo.html"><i class="lnr lnr-pencil"></i> <span>个人信息</span></a></li>
+                <ul id="menu" >
+                     <li><a href="/basic/student"><i class="fa fa-tachometer"></i> <span>主页</span></a></li>
+                     <li id="menu-academico" ><a href="#"><i class="fa fa-table"></i> <span> 课程信息</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                        <ul id="menu-academico-sub" >
+                                <li id="menu-academico-avaliacoes" ><a href="/basic/mycourse">我的课表</a></li>
+                                <li id="menu-academico-avaliacoes" ><a href="/basic/courseregist">自主选课</a></li>
+                                <li id="menu-academico-boletim" ><a href="/basic/courseplan">培养方案</a></li>
+                                <li id="menu-academico-boletim" ><a href="/basic/coursesearch">课程搜索</a></li>
+                       </ul>
+                    </li>
+                    <!--<li id="menu-academico" ><a href="sunglasses.html"><i class="fa fa-file-text-o"></i> <span>作业情况</span></a></li>-->
+                    <li><a href="/basic/exam"><i class="lnr lnr-pencil"></i> <span>考试安排</span></a></li>
+                    <li id="menu-academico" ><a href="/basic/grade"><i class="fa fa-file-text-o"></i> <span>查看成绩</span></a></li>
+                    <li id="menu-academico" ><a href="/basic/calender"><i class="lnr lnr-book"></i> <span>我的日程</span></a></li>
+                    <li><a href="#"><i class="lnr lnr-chart-bars"></i> <span>浙大论坛</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                        <!--<ul>-->
+                            <!--<li><a href="input.html"> Input</a></li>-->
+                            <!--<li><a href="validation.html">Validation</a></li>-->
+                        <!--</ul>-->
+                    </li>
+                    <li><a href="/basic/personalinfo"><i class="lnr lnr-pencil"></i> <span>个人信息</span></a></li>
 
-			   </ul>
-		   </div>
+                </ul>
+           </div>
+
 	   </div>
 
 	   <div class="clearfix"></div>
