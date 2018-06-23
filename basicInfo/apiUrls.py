@@ -20,6 +20,9 @@ urlpatterns = [
     url(r"^student/exam$",api_student.api_student_exam),
     url(r"^student/grade$",api_student.api_student_grade),
 
+    url(r"^student/update$", api_student.api_student_update),
+    url(r"^student/updateimage$", api_student.api_student_updateImage),
+
     url(r"^teacher/info$",api_teacher.api_teacher_info),
     url(r"^teacher/course$",api_teacher.api_teacher_course),
     url(r"^teacher/addcourse$",api_teacher.api_teacher_addcourse),

@@ -64,3 +64,32 @@ def api_student_grade(request):
 
         except:
             return HttpResponseBadRequest()
+
+
+#个人信息更新
+@csrf_exempt
+def api_student_update(request):
+    if request.method == "POST":
+        sid = request.POST["account_id"]
+        email = request.POST["account_email"]
+        nickname = request.POST["account_nickname"]
+        print(sid+":")
+        print(email)
+        print(nickname)
+        return JsonResponse({"success": 1, "reason": None})
+
+    return JsonResponse({"success": 0, "reason": "Invalid Access"})
+
+#个人头像
+@csrf_exempt
+def api_student_updateImage(request):
+    if request.method == "POST":
+        print("123445")
+        files = request.FILES.get('file')  # 获取图片
+        # 图片存放路径
+        filename = files.content_type.split('/')[1]
+        print(filename)
+
+        return JsonResponse({"success": 1, "reason": None})
+
+    return JsonResponse({"success": 0, "reason": "Invalid Access"})
