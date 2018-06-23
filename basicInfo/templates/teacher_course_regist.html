@@ -103,7 +103,7 @@
                                 <label for="disabledSelect">课程介绍</label>
                                 <input id="intro" name="intro" type="text" class="form-control" aria-describedby="basic-addon2">
                             </div>
-                            <button type="submit" value="Submit">确认申请</button>
+                            <button type="button" class="btn btn-default loginbutton" onClick="doApply()">确认申请</button>
                         <!-- </form> -->
                     </div>
                     <!-- /.row -->
@@ -151,7 +151,52 @@
     
     <div class="clearfix"></div>        
 </div>
+<script>
+	const basicUrl="http://127.0.0.1:8000/";
+    function doApply() {
+		var id=document.getElementById("id").value.toString();
+        var name=document.getElementById("name").value.toString();
+		var credit=parseFloat(document.getElementById("credit").value.toString());
+		var hour=parseFloat(document.getElementById("hour").value.toString());
+		var intro=document.getElementById("intro").value.toString();
+		console.log(id, name, credit, hour, intro);
+		new Promise(function (resolve){
+		   $.ajax(
+			   {
+				   method: "POST",
+				   url: basicUrl+"api/teacher/addcourse",
+				   data: {
+					   id: id,
+					   name: name,
+					   credit: credit,
+					   hour: hour,
+					   intro: intro,
+					   csrfmiddlewaretoken: '{{ csrf_token }}'
+				   },
+				   async : false,
+				   success: function (data) {
+					   resolve(data);
+					   console.log(data);
+				   }
 
+			   }
+		   )
+		}).then(
+			function (data) {
+				console.log(data);
+				if(data.success)
+				{
+					{#alert("Apply success");#}
+				}
+				else{
+					alert("fail");
+				}
+
+			}
+
+		);
+	}
+</script>
 <script>
     var toggle = true;
                                         
