@@ -190,7 +190,7 @@ class teach(models.Model):
     teach(teacher_id int, course_id int) //讲授课程 ref teacher, course
     '''
 
-    teach_id=models.IntegerField(primary_key=True)
+    teach_id=models.AutoField(primary_key=True)
     teacher_id = models.ManyToManyField(teacher)
     duplicate=models.IntegerField()
     course_id=models.ForeignKey(course,on_delete=models.CASCADE,related_name="college_id_1")
