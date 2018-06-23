@@ -126,6 +126,12 @@
                                 <h5>修改课程信息</h5>
                             </div>
                         </div>
+                        <form action="/teacher/course_apply/edit" method="get">
+                            <div class="form-group">
+                                <label for="disabledSelect">课程代号</label>
+                                <input id="intro" name="intro" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={id}}>
+                            </div>
+                        </form>
                         <form role="form" method="POST">
                             {% csrf_token %}
                             <div class="form-group">

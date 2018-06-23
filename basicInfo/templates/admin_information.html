@@ -49,7 +49,7 @@
 					    <div class="top_left">
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-									<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down">{{ account_id }}</i>
+									<i class="fa fa-user fa-fw"></i> <i id="account_id" class="fa fa-caret-down">{{ account_id }}</i>
 								</a>
 								<ul class="dropdown-menu dropdown-user">
 									<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a></li>
@@ -98,8 +98,8 @@
 								<input name="ttitle" id="teacher_title" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_title}}>
 							</div>
 							<div class="form-group">
-								<label for="disabledSelect">归属学院</label>
-								<input name="tdepartment" id="teacher_department" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_college}}>
+								<label for="disabledSelect">办公室</label>
+								<input name="tdepartment" id="teacher_office" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_college}}>
 							</div>
 							<div class="form-group">
 								<label for="disabledSelect">管理学院</label>
@@ -109,7 +109,7 @@
 								<label for="disabledSelect">邮箱</label>
 								<input name="temail" id="teacher_email" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_mail}}>
 							</div>
-							<button type="submit" value="Submit">确认修改</button>
+							<button type="button" onclick="push()">确认修改</button>
 						</form>
 					</div>
 					<!-- /.row -->
@@ -165,7 +165,75 @@
 	
 	<div class="clearfix"></div>		
 </div>
-<script></script>
+<script>
+    const basicUrl="http://127.0.0.1:8000/";
+    function push() {
+        var tid=teacher_id.value;
+        var office=teacher_office.value;
+        var email=teacher_email.value;
+
+        new Promise(function (resolve){
+            $.ajax(
+                {
+                    method: "POST",
+                    url: basicUrl+"api/teacher/info",
+                    data: {
+                        account_id: tid,
+                        account_email: email,
+                        teacher_office: office,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    async : false,
+                    success: function (data) {
+                        resolve(data);
+                        console.log(data);
+                    }
+
+                }
+            )
+        }).then(
+            function (data) {
+                console.log(data);
+				if(data.success)
+				{
+					alert("success");
+                }
+				else{
+					alert("fail");
+				}
+            }
+
+        );
+    }
+</script>
+<script>
+	new Promise(function (resolve){
+		   $.ajax(
+			   {
+				   method: "GET",
+				   url: basicUrl+"api/teacher/info?account_id=" + account_id.innerText,
+				   async : false,
+				   success: function (data) {
+					   resolve(data);
+					   console.log(data);
+				   }
+
+			   }
+		   )
+		}).then(
+			function (data) {
+				console.log(data);
+				document.getElementById("teacher_id").value = account_id.innerText;
+				document.getElementById("teacher_name").value = data.name;
+				document.getElementById("teacher_title").value = data.teacher_title;
+				document.getElementById("teacher_office").value = data.teacher_office;
+				document.getElementById("teacher_manage").value = data.teacher_management;
+				document.getElementById("teacher_email").value = data.email;
+
+			}
+
+		);
+</script>
 <script>
 	var toggle = true;
 										

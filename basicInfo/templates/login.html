@@ -8,41 +8,14 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="../../static/css/main1.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
     <script src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
     <title>浙江大学教务中心</title>
 </head>
 
 <body>
 
-    <!--<div class="navbar navbar-transparent">-->
-        <!--<div class="container">-->
-            <!--<a href="main.html"  class="navbar-brand"></a>-->
-
-            <!--<label for="toggle-checkbox" class="menulable visible-xs-inline-block">MENU</label>-->
-            <!--<input type="checkbox" class="hidden" id="toggle-checkbox">-->
-
-            <!--&lt;!&ndash;<div class="nav navbar-nav nav-link hidden-xs">&ndash;&gt;-->
-                <!--&lt;!&ndash;<div class="space"></div>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li><a href="main.html" class="menu-item text-left">首页</a></li>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li><a href="study.html" class="menu-item text-left">单词</a></li>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li><a href="test.html" class="menu-item text-left">测试</a></li>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li><a href="vocabulary.html" class="menu-item text-left">词本</a></li>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li><a href="user.html" class="menu-item text-left">我的</a></li>&ndash;&gt;-->
-            <!--&lt;!&ndash;</div> &ndash;&gt;-->
-
-            <!--<div class="nav navbar-nav navbar-right nav-link hidden-xs">-->
-                    <!--&lt;!&ndash;<div class="navbar-form hidden-xs hidden-sm" role="search">&ndash;&gt;-->
-                            <!--&lt;!&ndash;<div class="input-group">&ndash;&gt;-->
-                            <!--&lt;!&ndash;<input type="text" class="form-control"><span class="input-group-addon btn btn-primary"><i class="fa fa-search"></i></span>&ndash;&gt;-->
-                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-
-                    <!--&lt;!&ndash;<li><a href="helpdocument.html" calss="menu-item">帮助</a></li>&ndash;&gt;-->
-                    <!--<li><a href="signup.html" calss="menu-item">注册</a></li>-->
-                    <!--<li><a href="login.html" calss="menu-item">登录</a></li>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
 
     <div class="blurbanner">
             <div class="blurherit">
@@ -66,7 +39,7 @@
                         <input type="password" class="form-control" id="login-password" placeholder="请输入密码" name="password">
                        <p>{{ errorPassword }}</p>
                     </div>
-                    <span class="btn btn-default loginbutton" onclick="doLogin()">确定</span>
+                    <span class="btn btn-default loginbutton" onclick="doLogin()">登  录</span>
 {#                    <button type="submit" class="btn btn-default loginbutton" onclick="doLogin()">登录</button>#}
                 </form>
                 
@@ -83,6 +56,56 @@
                 <!--</div>-->
             </div> 
     </div>
+    <footer>
+		<div class="wrapper footer">
+			<ul>
+				<li class="links">
+					<ul>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Support</a></li>
+						<li><a href="#">Terms</a></li>
+						<li><a href="#">Policy</a></li>
+						<li><a href="#">Contact</a></li>
+					</ul>
+				</li>
+
+				<li class="links">
+					<ul>
+						<li><a href="#">Appartements</a></li>
+						<li><a href="#">Houses</a></li>
+						<li><a href="#">Villas</a></li>
+						<li><a href="#">Mansions</a></li>
+						<li><a href="#">...</a></li>
+					</ul>
+				</li>
+
+				<li class="links">
+					<ul>
+						<li><a href="#">New York</a></li>
+						<li><a href="#">Los Anglos</a></li>
+						<li><a href="#">Miami</a></li>
+						<li><a href="#">Washington</a></li>
+						<li><a href="#">...</a></li>
+					</ul>
+				</li>
+
+				<li class="about">
+					<p>La Casa is real estate minimal html5 website template, designed and coded by pixelhint, tellus varius, dictum erat vel, maximus tellus. Sed vitae auctor ipsum</p>
+					<ul>
+						<li><a href="http://facebook.com/pixelhint" class="facebook" target="_blank"></a></li>
+						<li><a href="http://twitter.com/pixelhint" class="twitter" target="_blank"></a></li>
+						<li><a href="http://plus.google.com/+Pixelhint" class="google" target="_blank"></a></li>
+						<li><a href="#" class="skype"></a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+		<div class="copyrights wrapper">
+			Copyright © 2015 <a href="http://pixelhint.com" target="_blank" class="ph_link" title="Download more free Templates">Pixelhint.com</a>. All Rights Reserved.
+		</div>
+	</footer><!--  end footer  -->
+
     <script>
         const basicUrl="http://127.0.0.1:8000/";
         function doLogin(params) {
