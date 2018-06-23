@@ -107,6 +107,7 @@ class course(models.Model):
     course_id=models.CharField(max_length=10,primary_key=True)
     name=models.CharField(max_length=40,null=False)
     credit=models.DecimalField(max_digits=3,decimal_places=1)
+    hour=models.FloatField()
     intro=models.TextField()
     type=models.CharField(max_length=40,null=False)
     semester=models.CharField(max_length=10,null=False,default="Spring")
@@ -197,7 +198,6 @@ class teacher(models.Model):
     teacher_title=models.CharField(max_length=10,null=False,default="lecturer")
     teacher_office=models.CharField(max_length=40,null=False)
     teacher_management=models.CharField(max_length=40,null=True)
-    teacher_mail=models.EmailField(max_length=100,null=True)
 
 class teach(models.Model):
     '''
@@ -205,7 +205,6 @@ class teach(models.Model):
     '''
     teach_id=models.IntegerField(primary_key=True)
     duplicate=models.IntegerField()
-    teacher_id=models.ForeignKey(teacher,on_delete=models.CASCADE,related_name="teacher_id_1")
     course_id=models.ForeignKey(course,on_delete=models.CASCADE,related_name="college_id_1")
     capacity=models.IntegerField(null=False)
     exam_date=models.DateField(null=True)

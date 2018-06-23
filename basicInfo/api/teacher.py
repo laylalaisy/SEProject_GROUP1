@@ -1,7 +1,20 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponseNotFound, HttpResponseBadRequest, HttpResponse
 
-from basicInfo.models import account, examination, takeup, teach, course, room, learn
+from basicInfo.models import account, examination, takeup, teach, course, room, learn, teacher, student
+
+@csrf_exempt
+def api_teacher_info(request):
+    if request.method == "GET":
+        try:
+            account_id = request.GET["account_id"]
+
+            teacher_info=teacher.objects.get(teacher_id=account_id)
+
+            return JsonResponse(teacher_info)
+
+        except:
+            return HttpResponseBadRequest()
 
 @csrf_exempt
 def api_teacher_course(request):

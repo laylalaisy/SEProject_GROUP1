@@ -61,7 +61,6 @@
 ```doc
 @param
 	account_id(string):当前的用户名
-	name(string):真实姓名
     nick(string):昵称
     email(string):电子邮箱
     exp(int):个人经验
@@ -85,7 +84,6 @@
 	account_id(string):当前的用户名
 @return
 	json object{
-		name(string):真实姓名
 		nick(string):昵称
 		email(string):电子邮箱
 		exp(int):个人经验
@@ -179,6 +177,7 @@
 	id(string):课程代号
 	name(string):课程名称
 	credit(real):课程学分
+	hour(real):课程学时
 	intro(string):课程介绍
 @return
 	json object{
@@ -277,6 +276,58 @@
 ```
 
 
+
+##### POST /api/admin/addteach
+
+新增开课
+
+```doc
+@param
+	duplicate(int):开课次数
+	teacher(string):教师工号
+	course(string):课程代号
+	capacity(int):课程容量
+	exam(date):考试日期
+@return
+	json object{
+		success(bool):操作成功与否
+		reason(string):不成功的原因
+	}
+```
+
+
+
+##### GET /api/admin/student
+
+学生信息查询
+
+```doc
+@param
+	account_id(string):当前的用户名
+@return
+	json object{
+		name(string):真实姓名
+		dorm(int):寝室
+	}
+```
+
+
+
+##### GET /api/admin/teacher
+
+教师信息查询
+
+```doc
+@param
+	account_id(string):当前的用户名
+@return
+	json object{
+		name(string):真实姓名
+		title(string):职称
+		office(string):办公室
+		management(string):管理学院
+	}
+```
 
 
 

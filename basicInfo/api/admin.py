@@ -73,4 +73,66 @@ def api_admin_college(request):
         except:
             return HttpResponseBadRequest()
 
+@csrf_exempt
+def api_admin_addteach(request):
+    if request.method == "POST":
+        try:
+            duplicate = request.POST["duplicate"]
+            teacher_id = request.POST["teacher"]
+            course_id = request.POST["course"]
+            capacity = request.POST["capacity"]
+            exam = request.POST["exam"]
+
+            new_teach=teach()
+            new_teach.duplicate = duplicate
+            new_teach.teacher = teacher_id
+            new_teach.course = course_id
+            new_teach.capacity = capacity
+            new_teach.exam = exam
+            new_teach.save()
+            return JsonResponse({"success": 1, "reason": None})
+
+        except:
+            return HttpResponseBadRequest()
+
+@csrf_exempt
+def api_student_info(request):
+    if request.method == "POST":
+        try:
+            account_id = request.POST["account_id"]
+            name=request.POST["name"]
+            dorm=request.POST["dorm"]
+
+            info=student.objects.get(student_id=account_id)
+            info.name = name
+            info.dorm = dorm
+            info.save()
+
+            return JsonResponse({"success": 1, "reason": None})
+
+        except:
+            return HttpResponseBadRequest()
+
+@csrf_exempt
+def api_teacher_info(request):
+    if request.method == "POST":
+        try:
+            account_id = request.POST["account_id"]
+            name=request.POST["name"]
+            title=request.POST["title"]
+            office=request.POST["office"]
+            management=request.POST["management"]
+
+            info=teacher.objects.get(teacher_id=account_id)
+            info.name = name
+            info.title = title
+            info.office = office
+            info.management = management
+            info.save()
+
+            return JsonResponse({"success": 1, "reason": None})
+
+        except:
+            return HttpResponseBadRequest()
+
 

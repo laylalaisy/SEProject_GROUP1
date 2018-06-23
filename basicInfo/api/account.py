@@ -1,7 +1,7 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponseNotFound, HttpResponseBadRequest, HttpResponse
 
-from basicInfo.models import account
+from basicInfo.models import account, attrib
 
 import hashlib as hash, json, time, random
 
@@ -144,26 +144,14 @@ def api_account_repassword_post(request):
 
 @csrf_exempt
 def api_account_person_post(request):
-    '''
-    account_id(string):当前的用户名
-	name(string):真实姓名
-    nick(string):昵称
-    email(string):电子邮箱
-    exp(int):个人经验
-    coin(int):金币数
-    :param request:
-    :return:
-    '''
     try:
         account_id = request.POST["account_id"]
-        name = request.POST["name"]
         nick = request.POST["nick"]
         email = request.POST["email"]
         exp = request.POST["exp"]
         coin = request.POST["coin"]
 
-        obj = account.objects.get(account_id=account_id)
-        obj.name=name
+        obj = attrib.objects.get(account_id=account_id)
         obj.nick=nick
         obj.email=email
         if(exp>0):
@@ -179,27 +167,13 @@ def api_account_person_post(request):
 
 @csrf_exempt
 def api_account_person_get(request):
-    '''
-    json object{
-		name(string):真实姓名
-		nick(string):昵称
-		email(string):电子邮箱
-		exp(int):个人经验
-		coin(int):金币数
-		//...(还有什么别的个人信息随便加)
-	}
-    :param request:
-    :return:
-    '''
-
     try:
         account_id = request.GET["account_id"]
 
-        obj = account.objects.get(account_id=account_id)
+        obj = attrib.objects.get(account_id=account_id)
 
         return JsonResponse(
             {
-                "name": obj.name,
                 "nick": obj.nick,
                 "email": obj.email,
                 "exp": obj.exp,
