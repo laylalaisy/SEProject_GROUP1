@@ -49,7 +49,7 @@
 					    <div class="top_left">
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-									<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down">{{ account_id }}</i>
+									<i class="fa fa-user fa-fw"></i> <i id="account_id" class="fa fa-caret-down">{{ account_id }}</i>
 								</a>
 								<ul class="dropdown-menu dropdown-user">
 									<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a></li>
@@ -157,7 +157,6 @@
 	<div class="clearfix"></div>		
 </div>
 <script>
-<<<<<<< HEAD
     const basicUrl="http://127.0.0.1:8000/";
     function push() {
         var tid=document.getElementsByName("teacher_id")[0].value.toString();
@@ -193,14 +192,11 @@
     }
 </script>
 <script>
-=======
->>>>>>> cb19006e6af7e9d37607c284777d0fa6bf3ba541
-	const basicUrl="http://127.0.0.1:8000/";
 	new Promise(function (resolve){
 		   $.ajax(
 			   {
 				   method: "GET",
-				   url: basicUrl+"api/teacher/info",
+				   url: basicUrl+"api/teacher/info?account_id=" + account_id.innerText,
 				   async : false,
 				   success: function (data) {
 					   resolve(data);
@@ -214,9 +210,6 @@
 				console.log(data);
 				if(data.success)
 				{
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 					document.getElementById("teacher_id").innerText = document.getElementById("account_id").value.toString();
                     document.getElementById("teacher_name").innerText = data.name;
                     document.getElementById("teacher_title").innerText = data.teacher_title;
@@ -224,17 +217,6 @@
                     document.getElementById("teacher_manage").innerText = data.teacher_management;
                     document.getElementById("teacher_email").innerText = data.email;
                 }
-=======
-=======
->>>>>>> parent of 4bf1519... 1
-					{#alert("Apply success");#}
-				}
->>>>>>> parent of 4bf1519... 1
-=======
-					document.getElementById("teacher_id").innerText = data.account_id;
-
-				}
->>>>>>> parent of c1bfcc4... 1
 				else{
 					console.log("fail");
 				}
