@@ -89,30 +89,26 @@
                         <table class="table table-hover table-condensed" id="kexuan-tab">
                             <thead>
                                 <tr>
-                                    <th>教师姓名</th>
-                                    <th>课程名字</th>
-                                    <th>课程代码</th>
+                                    <th>课程代号</th>
+                                    <th>课程名称</th>
                                     <th>课程学分</th>
-                                    <th>课程简介</th>
-                                    <th>学年</th>
-                                    <th>学期</th>
+                                    <th>课程学时</th>
                                     <th>上课时间</th>
-                                    <th>上课地点</th>
+                                    <th>上课教室</th>
+                                    <th>课程介绍</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for course in courses %}
                                 <form action="/teacher/course_apply/edit" method="get">
                                     <tr>
-                                        <td>{{course.tname}}</td>
-                                        <td>{{course.name}}</td>
-                                        <td>{{course.id}}</td>
-                                        <td>{{course.point}}</td>
-                                        <td>{{course.inf}}</td>
-                                        <td>{{course.year}}</td>
-                                        <td>{{course.semester}}</td>
-                                        <td>{{course.time}}</td>
-                                        <td>{{course.room}}</td>
+                                        <td>{{id}}</td>
+                                        <td>{{name}}</td>
+                                        <td>{{credit}}</td>
+                                        <td>{{hour}}</td>
+                                        <td>{{time}}</td>
+                                        <td>{{room}}</td>
+                                        <td>{{intro}}</td>
                                     </tr>
                                 </form>
                                 <form role="form" method="POST">
@@ -133,8 +129,8 @@
                         <form role="form" method="POST">
                             {% csrf_token %}
                             <div class="form-group">
-                                <label for="disabledSelect">课程简介</label>
-                                <input name="Course_inf" type="text" class="form-control" aria-describedby="basic-addon2">
+                                <label for="disabledSelect">课程介绍</label>
+                                <input id="intro" name="intro" type="text" class="form-control" aria-describedby="basic-addon2">
                                 </div>
                             <button type="submit" value="Submit">确认修改</button>
                         </form>
