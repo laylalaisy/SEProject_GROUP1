@@ -10,10 +10,16 @@ def api_admin_judge(request):
             id = request.POST["id"]
             accept = request.POST["accept"]
 
+
+
             tmp_course = course.objects.get(course_id=id)
             if accept:
                 tmp_course.type = "普通课程"
                 tmp_course.save()
+                duplicate=request.POST["duplicate"]
+                teacher_id=request.POST["teacher"]
+                exam=request.POST["exam"]
+
             else:
                 tmp_course.delete()
             return JsonResponse({"success": 1, "reason": None})

@@ -53,6 +53,8 @@ class student(models.Model):
     student_id=models.CharField(max_length=20,primary_key=True)
     name=models.CharField(max_length=20,null=False)
     dorm=models.CharField(max_length=40)
+    grade=models.IntegerField(default=1)
+
 
 
 class college(models.Model):
