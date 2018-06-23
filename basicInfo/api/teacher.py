@@ -7,6 +7,7 @@ from basicInfo.models import account, examination, takeup, teach, course, room, 
 def api_teacher_info(request):
     if request.method == "GET":
         try:
+            print("------")
             account_id = request.GET["account_id"]
 
             teacher_info=teacher.objects.get(teacher_id=account_id)
@@ -24,6 +25,8 @@ def api_teacher_info(request):
 
         except:
             return HttpResponseBadRequest()
+
+
 
 @csrf_exempt
 def api_teacher_course(request):
