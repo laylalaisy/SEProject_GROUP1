@@ -26,10 +26,9 @@ urlpatterns = [
     url(r"^teacher/chgcourse$",api_teacher.api_teacher_chgcourse),
 
     url(r"^admin/judgecourse",api_admin.api_admin_judge),
-    url(r"^admin/modifycourse",api_admin.api_admin_modify),
+    url(r"^admin/modifycourse",api_admin.api_admin_modify_course),
+    url(r"^admin/modifyteach",api_admin.api_admin_modify_teach),
     url(r"^admin/promote",api_admin.api_admin_promote),
-    url(r"^admin/college",api_admin.api_admin_college),
-    url(r"^admin/addteach",api_admin.api_admin_addteach),
     url(r"^admin/student",api_admin.api_student_info),
     url(r"^admin/teacher",api_admin.api_teacher_info),
     
