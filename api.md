@@ -65,7 +65,6 @@
     email(string):电子邮箱
     exp(int):个人经验
     coin(int):金币数
-    //...(还有什么别的个人信息随便加)
 @return
 	json object{
 		success(bool):是否修改成功，
@@ -88,7 +87,6 @@
 		email(string):电子邮箱
 		exp(int):个人经验
 		coin(int):金币数
-		//...(还有什么别的个人信息随便加)
 	}
 ```
 
@@ -125,9 +123,9 @@
 @return
 	json object{
 		name(string):真实姓名
-        nick(string):昵称
-        major(string):专业
-        grade(string):年级
+		nick(string):昵称
+		major(string):专业
+		grade(string):年级
 		email(string):邮箱
 	}
 ```
@@ -186,7 +184,7 @@
 		teacher_title(string):职称
 		teacher_office(string):办公室
 		teacher_management(string):管理学院
-        email(string):邮箱
+		email(string):邮箱
 	}
 ```
 
@@ -198,9 +196,10 @@
 
 ```doc
 @param
-	account_id(string):当前的用户名
+	account_id(string):上课老师(默认当前用户)
 @return
 	(array) json object{
+		teach_id(int):编号
 		name(string):课程名称
 		credit(real):课程学分
 		time(time):上课时间
@@ -216,7 +215,6 @@
 
 ```doc
 @param
-    account_id(string):当前的用户名
 	id(string):课程代号
 	name(string):课程名称
 	credit(real):课程学分
@@ -237,11 +235,10 @@
 
 ```doc
 @param
-    account_id(string):当前的用户名
 	id(string):课程代号
 	name(string):课程名称
 	credit(real):课程学分
-    hour(real):课程学时
+	hour(real):课程学时
 	intro(string):课程介绍
 @return
 	json object{
@@ -262,11 +259,10 @@
 @param
 	id(string):课程代号
 	accept(bool):同意与否
-    duplicate(int):开课次数
-	teacher(string):教师工号
-	course(string):课程代号
+	duplicate(int):开课次数
 	exam(date):考试日期
-    (array)capacity(int):课程容量
+	(array)teacher(string):教师工号(many to many)
+	(array)capacity(int):课程容量
 @return
 	json object{
 		success(bool):修改成功与否
@@ -282,11 +278,30 @@
 
 ```doc
 @param
-	id(string):课程代号
+	pre_id(string):原课程代号
+	post_id(string):新课程代号
 	name(string):课程名称
 	credit(real):课程学分
 	intro(string):课程介绍
 	type(string):课程类型
+@return
+	json object{
+		success(bool):操作成功与否
+		reason(string):不成功的原因
+	}
+```
+
+
+
+##### POST /api/admin/modifyteach
+
+修改授课信息
+
+```doc
+@param
+	teach_id(int):编号
+	teacher(string):教师工号(many to many)
+	capacity(int):课程容量
 @return
 	json object{
 		success(bool):操作成功与否

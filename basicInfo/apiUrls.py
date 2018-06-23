@@ -20,16 +20,18 @@ urlpatterns = [
     url(r"^student/exam$",api_student.api_student_exam),
     url(r"^student/grade$",api_student.api_student_grade),
 
+    url(r"^student/update$", api_student.api_student_update),
+    url(r"^student/updateimage$", api_student.api_student_updateImage),
+
     url(r"^teacher/info$",api_teacher.api_teacher_info),
     url(r"^teacher/course$",api_teacher.api_teacher_course),
     url(r"^teacher/addcourse$",api_teacher.api_teacher_addcourse),
     url(r"^teacher/chgcourse$",api_teacher.api_teacher_chgcourse),
 
     url(r"^admin/judgecourse",api_admin.api_admin_judge),
-    url(r"^admin/modifycourse",api_admin.api_admin_modify),
+    url(r"^admin/modifycourse",api_admin.api_admin_modify_course),
+    url(r"^admin/modifyteach",api_admin.api_admin_modify_teach),
     url(r"^admin/promote",api_admin.api_admin_promote),
-    url(r"^admin/college",api_admin.api_admin_college),
-    url(r"^admin/addteach",api_admin.api_admin_addteach),
     url(r"^admin/student",api_admin.api_student_info),
     url(r"^admin/teacher",api_admin.api_teacher_info),
     
