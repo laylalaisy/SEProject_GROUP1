@@ -99,7 +99,7 @@
 ```doc
 @param
 	account_id(string):当前的用户名
-	src(img):头像
+	file(img):头像
 @return
 	json object{
 		success(bool):操作成功与否
@@ -188,6 +188,22 @@
 	}
 ```
 
+#### POST /api/teacher/info
+
+教师信息修改
+```doc
+@param
+    	account_id(string):当前的用户名
+	account_email(string):邮箱
+	teacher_office(string):办公室
+@return
+	json object{
+		success(bool):修改成功与否
+		reason(string):不成功的原因
+	}
+```
+
+
 
 
 ##### GET /api/teacher/course
@@ -235,10 +251,8 @@
 
 ```doc
 @param
+	account_id(string):当前的用户名
 	id(string):课程代号
-	name(string):课程名称
-	credit(real):课程学分
-	hour(real):课程学时
 	intro(string):课程介绍
 @return
 	json object{
