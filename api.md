@@ -215,7 +215,6 @@
 
 ```doc
 @param
-    account_id(string):当前的用户名
 	id(string):课程代号
 	name(string):课程名称
 	credit(real):课程学分
@@ -236,11 +235,10 @@
 
 ```doc
 @param
-    account_id(string):当前的用户名
 	id(string):课程代号
 	name(string):课程名称
 	credit(real):课程学分
-    hour(real):课程学时
+	hour(real):课程学时
 	intro(string):课程介绍
 @return
 	json object{
