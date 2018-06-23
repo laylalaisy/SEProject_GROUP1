@@ -23,7 +23,7 @@ class account(models.Model):
 
     observers=[OperationObserver(),TeacherObserver()]  # observer list
     account_id=models.CharField(max_length=20,primary_key=True)
-    password=models.CharField(max_length=20,null=False)
+    password=models.CharField(max_length=200,null=False)
     salt=models.CharField(max_length=8,null=False,default="12345678")
     type=models.IntegerField(null=False,default=0)
 
@@ -80,11 +80,11 @@ class major(models.Model):
     major(student_id int, discipline_id int) //主修 ref student, discipline
     '''
 
-    studnet_id=models.IntegerField()
+    student_id=models.CharField(max_length=20,primary_key=True)
     discipline_id=models.IntegerField()
     class Meta:
-        unique_together = ("studnet_id", "discipline_id")
-    primary = ("studnet_id", "discipline_id")
+        unique_together = ("student_id", "discipline_id")
+    primary = ("student_id", "discipline_id")
 
 
 class minor(models.Model):
@@ -92,11 +92,11 @@ class minor(models.Model):
     minor(student_id int, discipline_id int) //辅修 ref student, discipline
     '''
 
-    studnet_id = models.IntegerField()
+    student_id=models.CharField(max_length=20,primary_key=True)
     discipline_id = models.IntegerField()
     class Meta:
-        unique_together = ("studnet_id", "discipline_id")
-    primary = ("studnet_id", "discipline_id")
+        unique_together = ("student_id", "discipline_id")
+    primary = ("student_id", "discipline_id")
 
 
 class belong(models.Model):
