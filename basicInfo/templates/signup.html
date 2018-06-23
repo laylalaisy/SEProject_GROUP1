@@ -196,7 +196,12 @@
             var username=document.getElementById("id").value.toString();
             var password=document.getElementById("password1").value.toString();
             var password2=document.getElementById("password2").value.toString();
-            console.log(username,password)
+
+            if(password != password2){
+                alert("密码不一致，请重新输入");
+                return;
+            }
+
             new Promise(function (resolve){
                $.ajax(
                    {
