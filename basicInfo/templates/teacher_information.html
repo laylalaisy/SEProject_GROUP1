@@ -49,7 +49,7 @@
 					    <div class="top_left">
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-									<i class="fa fa-user fa-fw"></i> <i  id="account_id" class="fa fa-caret-down">{{ account_id }}</i>
+									<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down">{{ account_id }}</i>
 								</a>
 								<ul class="dropdown-menu dropdown-user">
 									<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a></li>
@@ -109,7 +109,7 @@
 								<label for="disabledSelect">邮箱</label>
 								<input name="temail" id="teacher_email" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_mail}}>
 							</div>
-							<button type="button" value="Submit" onclick="">确认修改</button>
+							<button type="submit" value="Submit">确认修改</button>
 						</form>
 					</div>
 					<!-- /.row -->
@@ -157,43 +157,6 @@
 	<div class="clearfix"></div>		
 </div>
 <script>
-    const basicUrl="http://127.0.0.1:8000/";
-    function push() {
-        var sid=document.getElementsByName("sid")[0].value.toString();
-        var nickname=document.getElementsByName("snick")[0].value.toString();
-        var email=document.getElementsByName("semail")[0].value.toString();
-
-        new Promise(function (resolve){
-            $.ajax(
-                {
-                    method: "POST",
-                    url: basicUrl+"api/student/update",
-                    data: {
-                        account_id: sid,
-                        account_email: email,
-                        account_nickname:nickname,
-                        csrfmiddlewaretoken: '{{ csrf_token }}'
-                    },
-                    async : false,
-                    success: function (data) {
-                        resolve(data);
-                        console.log(data);
-                    }
-
-                }
-            )
-        }).then(
-            function (data) {
-                console.log(data);
-
-            }
-
-        );
-
-
-    }
-</script>
-<script>
 	const basicUrl="http://127.0.0.1:8000/";
 	new Promise(function (resolve){
 		   $.ajax(
@@ -215,6 +178,7 @@
 				{
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 					document.getElementById("teacher_id").innerText = document.getElementById("account_id").value.toString();
                     document.getElementById("teacher_name").innerText = data.name;
                     document.getElementById("teacher_title").innerText = data.teacher_title;
@@ -228,6 +192,11 @@
 					{#alert("Apply success");#}
 				}
 >>>>>>> parent of 4bf1519... 1
+=======
+					document.getElementById("teacher_id").innerText = data.account_id;
+
+				}
+>>>>>>> parent of c1bfcc4... 1
 				else{
 					console.log("fail");
 				}
