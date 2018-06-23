@@ -8,6 +8,7 @@ import hashlib as hash,json,time,random
 
 @csrf_exempt
 def api_account_post(request):
+    print("111")
     if request.method=="POST":
         print("fuckyou")
         username=request.POST["account_id"]
