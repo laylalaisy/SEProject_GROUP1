@@ -22,7 +22,28 @@ def api_admin_judge(request):
             return HttpResponseBadRequest()
 
 @csrf_exempt
-def api_admin_modify(request):
+def api_admin_modify_course(request):
+    if request.method == "POST":
+        try:
+            id = request.POST["id"]
+            name = request.POST["name"]
+            credit = request.POST["credit"]
+            intro = request.POST["intro"]
+            type = request.POST["type"]
+
+            tmp_course = course.objects.get(course_id=id)
+            tmp_course.name = name
+            tmp_course.credit = credit
+            tmp_course.intro = intro
+            tmp_course.type = type
+            tmp_course.save()
+            return JsonResponse({"success": 1, "reason": None})
+
+        except:
+            return HttpResponseBadRequest()
+
+@csrf_exempt
+def api_admin_modify_teach(request):
     if request.method == "POST":
         try:
             id = request.POST["id"]
@@ -53,43 +74,6 @@ def api_admin_promote(request):
             new_master.teacher_id = account_id
             new_master.college_id = college.objects.get(name=college_name)
             new_master.save()
-            return JsonResponse({"success": 1, "reason": None})
-
-        except:
-            return HttpResponseBadRequest()
-
-@csrf_exempt
-def api_admin_college(request):
-    if request.method == "GET":
-        try:
-            college_list = []
-            for c in college.objects.get():
-                tmp = {}
-                tmp["name"] = c.name
-                college_list.append(tmp)
-
-            return JsonResponse(college_list)
-
-        except:
-            return HttpResponseBadRequest()
-
-@csrf_exempt
-def api_admin_addteach(request):
-    if request.method == "POST":
-        try:
-            duplicate = request.POST["duplicate"]
-            teacher_id = request.POST["teacher"]
-            course_id = request.POST["course"]
-            capacity = request.POST["capacity"]
-            exam = request.POST["exam"]
-
-            new_teach=teach()
-            new_teach.duplicate = duplicate
-            new_teach.teacher = teacher_id
-            new_teach.course = course_id
-            new_teach.capacity = capacity
-            new_teach.exam = exam
-            new_teach.save()
             return JsonResponse({"success": 1, "reason": None})
 
         except:
