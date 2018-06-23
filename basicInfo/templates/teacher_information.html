@@ -159,19 +159,19 @@
 <script>
     const basicUrl="http://127.0.0.1:8000/";
     function push() {
-        var sid=document.getElementsByName("sid")[0].value.toString();
-        var nickname=document.getElementsByName("snick")[0].value.toString();
-        var email=document.getElementsByName("semail")[0].value.toString();
+        var tid=document.getElementsByName("teacher_id")[0].value.toString();
+        var office=document.getElementsByName("teacher_office")[0].value.toString();
+        var email=document.getElementsByName("teacher_email")[0].value.toString();
 
         new Promise(function (resolve){
             $.ajax(
                 {
                     method: "POST",
-                    url: basicUrl+"api/student/update",
+                    url: basicUrl+"api/teacher/update",
                     data: {
-                        account_id: sid,
+                        account_id: tid,
                         account_email: email,
-                        account_nickname:nickname,
+                        teacher_office: office,
                         csrfmiddlewaretoken: '{{ csrf_token }}'
                     },
                     async : false,
@@ -189,8 +189,6 @@
             }
 
         );
-
-
     }
 </script>
 <script>

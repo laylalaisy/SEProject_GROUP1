@@ -98,27 +98,44 @@
                                     <th>课程介绍</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {% for course in courses %}
-                                <form action="/teacher/course_apply/edit" method="get">
-                                    <tr>
-                                        <td>{{id}}</td>
-                                        <td>{{name}}</td>
-                                        <td>{{credit}}</td>
-                                        <td>{{hour}}</td>
-                                        <td>{{time}}</td>
-                                        <td>{{room}}</td>
-                                        <td>{{intro}}</td>
-                                    </tr>
-                                </form>
-                                <form role="form" method="POST">
-                                    {% csrf_token %}
+                            <tbody id="body">
                                     <td><button type="submit" name="edit" value={{course.id}}>修改</button></td>
-                                </form>
-                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
+                    <script>
+                        const basicUrl="http://127.0.0.1:8000/";
+                        var p = "<tr>"
+                        new Promise(function (resolve){
+                           $.ajax(
+                               {
+                                   method: "GET",
+                                   url: basicUrl+"api/teacher/course",
+                                   async : false,
+                                   success: function (data) {
+                                       resolve(data);
+                                       console.log(data);
+                                   }
+
+                               }
+                           )
+                        }).then(
+                            function (data) {
+                                console.log(data);
+                                data.forEach((item, index)=>{
+                                    p+="<td>"+item.teach_id+"</td>";
+                                    p+="<td>"+item.name+"</td>";
+                                    p+="<td>"+item.credit+"</td>";
+                                    p+="<td>"+item.hour+"</td>";
+                                    p+="<td>"+item.time+"</td>";
+                                    p+="<td>"+item.room+"</td>";
+                                    p+="<td>"+item.intro+"</td></tr>";
+                                });
+                                body.innerHtml = p;
+                            }
+
+                        );
+                    </script>
 
                     <div class="panel panel-default c_down">
                         <div class="panel-heading">
@@ -179,7 +196,10 @@
     
     <div class="clearfix"></div>        
 </div>
+<script>
+	const basicUrl="http://127.0.0.1:8000/";
 
+</script>
 <script>
     var toggle = true;
                                         
