@@ -22,19 +22,19 @@ def api_student_exam(request):
         try:
             account_id = request.GET["account_id"]
 
-            exam=examination.objects.filter(student_id=account_id)
+            exam = examination.objects.filter(student_id=account_id)
 
-            exam_list=[]
+            exam_list = []
             for e in exam:
-                tmp={}
-                takeup_id=takeup.objects.get(id=e.takeup_id)
-                teach_id=teach.objects.get(id=takeup_id.teach_id)
-                course_id=course.objects.get(course_id=teach_id.course_id)
-                tmp["name"]=course_id.name
-                tmp["time"]=teach_id.exam_date
-                room_id=room.objects.get(room_id=takeup_id.room_id)
-                tmp["room"]=room_id.location
-                tmp["seat"]=e.position
+                tmp = {}
+                takeup_id = takeup.objects.get(id=e.takeup_id)
+                teach_id = teach.objects.get(id=takeup_id.teach_id)
+                course_id = course.objects.get(course_id=teach_id.course_id)
+                tmp["name"] = course_id.name
+                tmp["time"] = teach_id.exam_date
+                room_id = room.objects.get(room_id=takeup_id.room_id)
+                tmp["room"] = room_id.location
+                tmp["seat"] = e.position
                 exam_list.append(tmp)
 
             return JsonResponse(exam_list)
@@ -48,15 +48,15 @@ def api_student_grade(request):
         try:
             account_id = request.GET["account_id"]
 
-            student_learn=learn.objects.filter(student_id=account_id)
+            student_learn = learn.objects.filter(student_id=account_id)
 
-            course_list=[]
+            course_list = []
             for l in student_learn:
-                tmp={}
-                course_id=course.objects.get(course_id=l.course_id)
-                tmp["name"]=course_id.name
-                tmp["credit"]=course_id.credit
-                tmp["grade"]=l.grade
+                tmp = {}
+                course_id = course.objects.get(course_id=l.course_id)
+                tmp["name"] = course_id.name
+                tmp["credit"] = course_id.credit
+                tmp["grade"] = l.grade
                 if l.grade!=None:
                     course_list.append(tmp)
 
