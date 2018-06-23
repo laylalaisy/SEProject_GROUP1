@@ -89,8 +89,48 @@ def coursesearch(request):
 
 
 def teacher(request):
-    tid=request.session["account_id"]
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "teacher_index.html", feedDict)
+
+
+def teacher_information(request):
+    tid = request.session["account_id"]
     feedDict={
         "account_id": tid
     }
     return render(request, "teacher_information.html", feedDict)
+
+
+def teacher_comment(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "teacher_comment.html", feedDict)
+
+
+def teacher_course_regist(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "teacher_course_regist.html", feedDict)
+
+
+def teacher_course_edit(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "teacher_course_edit.html", feedDict)
+
+
+def school_forum(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "school_forum.html", feedDict)
