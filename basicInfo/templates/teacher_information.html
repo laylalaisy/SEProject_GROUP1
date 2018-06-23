@@ -176,7 +176,8 @@
 				console.log(data);
 				if(data.success)
 				{
-					{#alert("Apply success");#}
+					document.getElementById("teacher_id").innerText = data.account_id;
+
 				}
 				else{
 					console.log("fail");
