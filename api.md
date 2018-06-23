@@ -265,6 +265,20 @@
 
 #### Admin
 
+##### GET /api/admin/courselist
+
+待审批课程
+
+```doc
+@param
+@return
+	(array) json object{
+		id(string):课程号
+	}
+```
+
+
+
 ##### POST /api/admin/judgecourse
 
 审批课程
