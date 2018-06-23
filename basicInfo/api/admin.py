@@ -4,6 +4,27 @@ from django.http import JsonResponse, HttpResponseNotFound, HttpResponseBadReque
 from basicInfo.models import account, examination, takeup, teach, course, room, learn, master, college,student,teacher
 
 @csrf_exempt
+def api_admin_suspend(request):
+    if request.method == "GET":
+        try:
+            course_list = course.objects.filter(student_id=account_id)
+
+            course_list = []
+            for l in student_learn:
+                tmp = {}
+                course_id = course.objects.get(course_id=l.course_id)
+                tmp["name"] = course_id.name
+                tmp["credit"] = course_id.credit
+                tmp["grade"] = l.grade
+                if l.grade!=None:
+                    course_list.append(tmp)
+
+            return JsonResponse(course_list)
+
+        except:
+            return HttpResponseBadRequest()
+
+@csrf_exempt
 def api_admin_judge(request):
     if request.method == "POST":
         try:
