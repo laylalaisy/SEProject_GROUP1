@@ -23,6 +23,7 @@ urlpatterns = [
     url(r"^teacher_comment$", views.teacher_comment),
     url(r"^teacher_course_regist$", views.teacher_course_regist),
     url(r"^teacher_course_edit$", views.teacher_course_edit),
+    url(r"^admin$", views.admin),
     url(r"^admin_information$", views.admin_information),
     url(r"^admin_comment$", views.admin_comment),
     url(r"^admin_course_regist$", views.admin_course_regist),
