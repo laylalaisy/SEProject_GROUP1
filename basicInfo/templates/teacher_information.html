@@ -213,6 +213,7 @@
 				console.log(data);
 				if(data.success)
 				{
+<<<<<<< HEAD
 					document.getElementById("teacher_id").innerText = document.getElementById("account_id").value.toString();
                     document.getElementById("teacher_name").innerText = data.name;
                     document.getElementById("teacher_title").innerText = data.teacher_title;
@@ -220,6 +221,10 @@
                     document.getElementById("teacher_manage").innerText = data.teacher_management;
                     document.getElementById("teacher_email").innerText = data.email;
                 }
+=======
+					{#alert("Apply success");#}
+				}
+>>>>>>> parent of 4bf1519... 1
 				else{
 					console.log("fail");
 				}
