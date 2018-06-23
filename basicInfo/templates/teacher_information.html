@@ -109,7 +109,7 @@
 								<label for="disabledSelect">邮箱</label>
 								<input name="temail" id="teacher_email" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_mail}}>
 							</div>
-							<button type="submit" value="Submit">确认修改</button>
+							<button type="button" onClick="push()">确认修改</button>
 						</form>
 					</div>
 					<!-- /.row -->
@@ -159,15 +159,15 @@
 <script>
     const basicUrl="http://127.0.0.1:8000/";
     function push() {
-        var tid=document.getElementsByName("teacher_id")[0].value.toString();
-        var office=document.getElementsByName("teacher_office")[0].value.toString();
-        var email=document.getElementsByName("teacher_email")[0].value.toString();
+        var tid=teacher_id.value;
+        var office=teacher_office.value;
+        var email=teacher_email.value;
 
         new Promise(function (resolve){
             $.ajax(
                 {
                     method: "POST",
-                    url: basicUrl+"api/teacher/update",
+                    url: basicUrl+"api/teacher/info",
                     data: {
                         account_id: tid,
                         account_email: email,
@@ -185,7 +185,13 @@
         }).then(
             function (data) {
                 console.log(data);
-
+				if(data.success)
+				{
+					alert("success");
+                }
+				else{
+					alert("fail");
+				}
             }
 
         );
@@ -208,18 +214,12 @@
 		}).then(
 			function (data) {
 				console.log(data);
-				if(data.success)
-				{
-					document.getElementById("teacher_id").innerText = document.getElementById("account_id").value.toString();
-                    document.getElementById("teacher_name").innerText = data.name;
-                    document.getElementById("teacher_title").innerText = data.teacher_title;
-                    document.getElementById("teacher_office").innerText = data.teacher_office;
-                    document.getElementById("teacher_manage").innerText = data.teacher_management;
-                    document.getElementById("teacher_email").innerText = data.email;
-                }
-				else{
-					console.log("fail");
-				}
+				document.getElementById("teacher_id").value = account_id.innerText;
+				document.getElementById("teacher_name").value = data.name;
+				document.getElementById("teacher_title").value = data.teacher_title;
+				document.getElementById("teacher_office").value = data.teacher_office;
+				document.getElementById("teacher_manage").value = data.teacher_management;
+				document.getElementById("teacher_email").value = data.email;
 
 			}
 

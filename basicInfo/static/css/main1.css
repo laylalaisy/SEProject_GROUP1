@@ -106,8 +106,8 @@ abbr[title]{
 /*banner*/
 .banner{
     width:100%;
-    height:800px;
-    background-image: url(../images/zjubuilding.jpeg);
+    height:100%;
+    background-image: url(../images/zjubuilding.png);
     background-size: cover;
 }
 
@@ -262,7 +262,7 @@ abbr[title]{
 .blurbanner{
     width:100%;
     height:900px;
-    background-image: url(../images/zjubuilding.jpeg);
+    background-image: url(../images/zjubuilding.png);
     background-size:cover;
     background-attachment:fixed;
     background-repeat: no-repeat;
@@ -296,7 +296,7 @@ abbr[title]{
 }
 
 .signup-box .logo img{
-    width: 132px;
+    width: 70%;
     margin-top:60px;
     margin-bottom:50px;
 }
@@ -371,15 +371,15 @@ abbr[title]{
     width: 290px;    
     height:40px;
     border-radius: 25px;
-    border: #4657D9;
-    background:#4657D9;
-    box-shadow: 0px 3px 8px #4657D9;
+    border: #9d1b1a;
+    background:#9d1b1a;
+    box-shadow: 0px 3px 8px #9d1b1a;
 }
 
 .loginbutton:hover{
     background:transparent;
-    border: 2px solid #4657D9;
-    color:#4657D9;
+    border: 2px solid #9d1b1a;
+    color:#9d1b1a;
     font-weight: bolder;
     box-shadow: none;
     transform: 400ms;
