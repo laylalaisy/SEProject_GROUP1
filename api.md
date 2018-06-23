@@ -8,7 +8,7 @@
 
 ```doc
 @param
-	account_id(string):要查询的用户名
+    account_id(string):要查询的用户名
 	account_pw(string):要查询的密码
 @return
 	json object{
@@ -125,7 +125,10 @@
 @return
 	json object{
 		name(string):真实姓名
-		dorm(int):寝室
+        nick(string):昵称
+        major(string):专业
+        grade(string):年级
+		email(string):邮箱
 	}
 ```
 
@@ -183,6 +186,7 @@
 		teacher_title(string):职称
 		teacher_office(string):办公室
 		teacher_management(string):管理学院
+        email(string):邮箱
 	}
 ```
 
@@ -212,6 +216,7 @@
 
 ```doc
 @param
+    account_id(string):当前的用户名
 	id(string):课程代号
 	name(string):课程名称
 	credit(real):课程学分
@@ -232,9 +237,11 @@
 
 ```doc
 @param
+    account_id(string):当前的用户名
 	id(string):课程代号
 	name(string):课程名称
 	credit(real):课程学分
+    hour(real):课程学时
 	intro(string):课程介绍
 @return
 	json object{
@@ -255,6 +262,11 @@
 @param
 	id(string):课程代号
 	accept(bool):同意与否
+    duplicate(int):开课次数
+	teacher(string):教师工号
+	course(string):课程代号
+	exam(date):考试日期
+    (array)capacity(int):课程容量
 @return
 	json object{
 		success(bool):修改成功与否
@@ -299,39 +311,6 @@
 	}
 ```
 
-
-
-##### GET /api/admin/college
-
-查询全部学院
-
-```doc
-@param
-@return
-	(array) json object{
-		name(string):学院名称
-	}
-```
-
-
-
-##### POST /api/admin/addteach
-
-新增开课
-
-```doc
-@param
-	duplicate(int):开课次数
-	teacher(string):教师工号
-	course(string):课程代号
-	capacity(int):课程容量
-	exam(date):考试日期
-@return
-	json object{
-		success(bool):操作成功与否
-		reason(string):不成功的原因
-	}
-```
 
 
 
