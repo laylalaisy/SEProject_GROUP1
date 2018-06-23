@@ -93,7 +93,7 @@
                $.ajax(
                    {
                        method: "POST",
-                       url: basicUrl+"api/account/login/",
+                       url: basicUrl+"api/account/login",
                        data: {
                            account_id: username,
                            account_pw: password,
@@ -122,7 +122,11 @@
                             window.location.href = basicUrl+"basic/teacher";
                             window.open();
                         }
-
+						else if (data.type==2)
+						{
+							window.location.href = basicUrl+"basic/admin";
+                            window.open();
+						}
                     }
                     else{
                         alert("fail");
