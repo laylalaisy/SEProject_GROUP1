@@ -134,3 +134,81 @@ def school_forum(request):
         "account_id": tid
     }
     return render(request, "school_forum.html", feedDict)
+
+def admin(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "admin_index.html", feedDict)
+
+
+def admin_information(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "admin_information.html", feedDict)
+
+def admin_comment(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "admin_comment.html", feedDict)
+
+
+def admin_course_regist(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "admin_course_regist.html", feedDict)
+
+
+def admin_course_edit(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "admin_course_edit.html", feedDict)
+
+def admin_course_approve(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "admin_course_approve.html", feedDict)
+
+def admin_course_adjust(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "admin_course_adjust.html", feedDict)
+
+
+def admin_apply_approve_s(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "admin_apply_approve_s.html", feedDict)
+
+def admin_apply_approve_t(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "admin_apply_approve_t.html", feedDict)
+
+
+def admin_select_adjust(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "admin_select_adjust.html", feedDict)
+
+
+
