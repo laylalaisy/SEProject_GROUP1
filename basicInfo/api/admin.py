@@ -10,8 +10,6 @@ def api_admin_judge(request):
             id = request.POST["id"]
             accept = request.POST["accept"]
 
-
-
             tmp_course = course.objects.get(course_id=id)
             if accept:
                 tmp_course.type = "普通课程"
@@ -29,10 +27,6 @@ def api_admin_judge(request):
                     teach_ele.exam_date=exam
                     teach_ele.course_id_id=id
                     teach_ele.save()
-
-
-
-
 
             else:
                 tmp_course.delete()
