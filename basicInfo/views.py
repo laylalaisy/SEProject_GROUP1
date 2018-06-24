@@ -20,7 +20,7 @@ def student(request):
     feedDict={
         "account_id": sid
     }
-    return render(request, "basicInfo/student_student.html", feedDict)
+    return render(request, "basicInfo/student_homepage.html", feedDict)
 
 
 def exam(request):
