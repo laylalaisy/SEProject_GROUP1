@@ -39,7 +39,7 @@ class attrib(models.Model):
 
     account_id=models.ForeignKey(account,on_delete=models.CASCADE,primary_key=True)
     nickname=models.CharField(max_length=40,null=False)
-    picture=models.CharField(max_length=40,null=True)
+    picture=models.ImageField(upload_to="pic",null=True)
     email=models.CharField(max_length=40,null=True)
     exp=models.IntegerField(null=True)
     coin=models.IntegerField(null=True)
@@ -54,7 +54,6 @@ class student(models.Model):
     name=models.CharField(max_length=20,null=False)
     dorm=models.CharField(max_length=40)
     grade=models.IntegerField(default=1)
-
 
 
 class college(models.Model):

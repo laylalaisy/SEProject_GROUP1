@@ -188,7 +188,9 @@
 	}
 ```
 
-#### POST /api/teacher/info
+
+
+##### POST /api/teacher/info
 
 教师信息修改
 ```doc
