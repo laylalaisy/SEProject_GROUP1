@@ -76,8 +76,11 @@ def api_account_register_post(request):
 
             print(salt)
             passwordAfter = hash.sha512((hash.sha512(password.encode()).hexdigest() + salt).encode()).hexdigest()
-            account.objects.create(account_id=username, password=passwordAfter, salt=salt)
+            account_info=account.objects.create(account_id=username, password=passwordAfter, salt=salt)
+            print(account_info)
 
+            attrib.objects.create(account_id=account_info, nickname=username, picture="null",
+                                  email=username + "@zju.edu.cn", exp=0, coin=0)
             request.session["account_id"] = username
             return JsonResponse({
                 "success": 1,
