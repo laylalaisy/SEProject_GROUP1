@@ -191,8 +191,8 @@ class teach(models.Model):
     '''
 
     teach_id=models.AutoField(primary_key=True)
-    teacher_id = models.ManyToManyField(teacher)
     duplicate=models.IntegerField()
+    teacher_id = models.ForeignKey(teacher,on_delete=models.CASCADE)
     course_id=models.ForeignKey(course,on_delete=models.CASCADE,related_name="college_id_1")
     capacity=models.IntegerField(null=False)
     exam_date=models.DateField(null=True)
