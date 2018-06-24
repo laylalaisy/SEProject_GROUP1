@@ -49,7 +49,7 @@
                         <div class="top_left">
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down">{{ account_id }}</i>
+                                    <i class="fa fa-user fa-fw"></i> <i id="account_id" class="fa fa-caret-down">{{ account_id }}</i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-user">
                                     <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a></li>
@@ -129,7 +129,7 @@
                         <form action="/teacher/course_apply/edit" method="get">
                             <div class="form-group">
                                 <label for="disabledSelect">课程代号</label>
-                                <input id="intro" name="intro" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={id}}>
+                                <input id="course_id" name="course_id" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={id}}>
                             </div>
                         </form>
                         <form action="/teacher/course_apply/edit" method="POST">
@@ -138,7 +138,7 @@
                                 <label for="disabledSelect">课程介绍</label>
                                 <input id="intro" name="intro" type="text" class="form-control" aria-describedby="basic-addon2">
                             </div>
-                            <button type="submit" value="Submit">确认修改</button>
+                            <button type="button" onclick="push()">确认修改</button>
                         </form>
                     </div>
                     <!-- /.row -->
@@ -185,7 +185,48 @@
     
     <div class="clearfix"></div>        
 </div>
+<script>
+	const basicUrl="http://127.0.0.1:8000/";
+	function push() {
+		var tid=account_id.innerText;
+		var cid=document.getElementById("course_id").value.toString();
+		var intro=document.getElementById("intro").value.toString();
+		console.log(cid, intro);
+		new Promise(function (resolve){
+		   $.ajax(
+			   {
+				   method: "POST",
+				   url: basicUrl+"api/teacher/chgcourse",
+				   data: {
+				       account_id: tid,
+					   id: cid,
+					   intro: intro,
+					   csrfmiddlewaretoken: '{{ csrf_token }}'
+				   },
+				   async : false,
+				   success: function (data) {
+					   resolve(data);
+					   console.log(data);
+				   }
 
+			   }
+		   )
+		}).then(
+			function (data) {
+				console.log(data);
+				if(data.success)
+				{
+					{#alert("alter success");#}
+				}
+				else{
+					alert("fail");
+				}
+
+			}
+
+		);
+	}
+</script>
 <script>
     var toggle = true;
                                         
