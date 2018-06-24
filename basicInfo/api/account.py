@@ -1,7 +1,7 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponseNotFound, HttpResponseBadRequest, HttpResponse
 
-from basicInfo.models import account, attrib
+from basicInfo.models import account, attrib, teacher,student
 
 import hashlib as hash, json, time, random
 
@@ -81,6 +81,19 @@ def api_account_register_post(request):
 
             attrib.objects.create(account_id=account_info, nickname=username, picture="null",
                                   email=username + "@zju.edu.cn", exp=0, coin=0)
+            if account_info.type==0:
+                student_info=student()
+                student_info.student_id=account_info.account_id
+                student_info.name="用户"
+                student_info.save()
+            elif account_info.type==1:
+                teacher_info=teacher()
+                teacher_info.teacher_id=account_info
+                teacher_info.name="用户"
+                teacher_info.office="Null"
+                teacher_info.save()
+
+
             request.session["account_id"] = username
             return JsonResponse({
                 "success": 1,
