@@ -192,7 +192,7 @@ class teach(models.Model):
 
     teach_id=models.AutoField(primary_key=True)
     duplicate=models.IntegerField()
-    teacher_id = models.ForeignKey(teacher,on_delete=models.CASCADE)
+    teacher_id=models.ForeignKey(teacher,on_delete=models.CASCADE,related_name="teacher_id_1")
     course_id=models.ForeignKey(course,on_delete=models.CASCADE,related_name="college_id_1")
     capacity=models.IntegerField(null=False)
     exam_date=models.DateField(null=True)
