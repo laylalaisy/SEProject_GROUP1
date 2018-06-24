@@ -4,15 +4,15 @@ from django.shortcuts import render
 
 
 def default(request):
-    return render(request, 'login-home.html', {})
+    return render(request, 'basicInfo/login-home.html', {})
 
 
 def signup(request):
-    return render(request, "signup.html", {})
+    return render(request, "basicInfo/signup.html", {})
 
 
 def login(request):
-    return render(request, "login.html", {})
+    return render(request, "basicInfo/login.html", {})
 
 
 def student(request):
@@ -20,7 +20,7 @@ def student(request):
     feedDict={
         "account_id": sid
     }
-    return render(request, "student.html", feedDict)
+    return render(request, "basicInfo/student.html", feedDict)
 
 
 def exam(request):
@@ -28,7 +28,7 @@ def exam(request):
     feedDict={
         "account_id": sid
     }
-    return render(request, "exam.html", feedDict)
+    return render(request, "basicInfo/exam.html", feedDict)
 
 
 def calendar(request):
@@ -36,7 +36,7 @@ def calendar(request):
     feedDict={
         "account_id": sid
     }
-    return render(request, "calender.html", feedDict)
+    return render(request, "basicInfo/calender.html", feedDict)
 
 
 def courseplan(request):
@@ -44,7 +44,7 @@ def courseplan(request):
     feedDict={
         "account_id": sid
     }
-    return render(request, "courseplan.html", feedDict)
+    return render(request, "basicInfo/courseplan.html", feedDict)
 
 
 def personalinfo(request):
@@ -52,7 +52,7 @@ def personalinfo(request):
     feedDict={
         "account_id": sid
     }
-    return render(request, "personinfo.html", feedDict)
+    return render(request, "basicInfo/personinfo.html", feedDict)
 
 
 def courseregist(request):
@@ -60,7 +60,7 @@ def courseregist(request):
     feedDict={
         "account_id": sid
     }
-    return render(request, "courseregist.html", feedDict)
+    return render(request, "basicInfo/courseregist.html", feedDict)
 
 
 
@@ -69,7 +69,7 @@ def mycourse(request):
     feedDict={
         "account_id": sid
     }
-    return render(request, "mycourse.html", feedDict)
+    return render(request, "basicInfo/mycourse.html", feedDict)
 
 
 def grade(request):
@@ -77,7 +77,7 @@ def grade(request):
     feedDict={
         "account_id": sid
     }
-    return render(request, "grade.html", feedDict)
+    return render(request, "basicInfo/grade.html", feedDict)
 
 
 def coursesearch(request):
@@ -85,7 +85,7 @@ def coursesearch(request):
     feedDict={
         "account_id": sid
     }
-    return render(request, "coursesearch.html", feedDict)
+    return render(request, "basicInfo/coursesearch.html", feedDict)
 
 
 def teacher(request):
@@ -93,7 +93,7 @@ def teacher(request):
     feedDict={
         "account_id": tid
     }
-    return render(request, "teacher_index.html", feedDict)
+    return render(request, "basicInfo/teacher_index.html", feedDict)
 
 
 def teacher_information(request):
@@ -101,7 +101,7 @@ def teacher_information(request):
     feedDict={
         "account_id": tid
     }
-    return render(request, "teacher_information.html", feedDict)
+    return render(request, "basicInfo/teacher_information.html", feedDict)
 
 
 def teacher_comment(request):
@@ -109,7 +109,7 @@ def teacher_comment(request):
     feedDict={
         "account_id": tid
     }
-    return render(request, "teacher_comment.html", feedDict)
+    return render(request, "basicInfo/teacher_comment.html", feedDict)
 
 
 def teacher_course_regist(request):
@@ -117,7 +117,7 @@ def teacher_course_regist(request):
     feedDict={
         "account_id": tid
     }
-    return render(request, "teacher_course_regist.html", feedDict)
+    return render(request, "basicInfo/teacher_course_regist.html", feedDict)
 
 
 def teacher_course_edit(request):
@@ -125,7 +125,7 @@ def teacher_course_edit(request):
     feedDict={
         "account_id": tid
     }
-    return render(request, "teacher_course_edit.html", feedDict)
+    return render(request, "basicInfo/teacher_course_edit.html", feedDict)
 
 
 def school_forum(request):
@@ -133,14 +133,14 @@ def school_forum(request):
     feedDict={
         "account_id": tid
     }
-    return render(request, "school_forum.html", feedDict)
+    return render(request, "basicInfo/school_forum.html", feedDict)
 
 def admin(request):
     tid = request.session["account_id"]
     feedDict={
         "account_id": tid
     }
-    return render(request, "admin_index.html", feedDict)
+    return render(request, "basicInfo/admin_index.html", feedDict)
 
 
 def admin_information(request):
@@ -148,14 +148,14 @@ def admin_information(request):
     feedDict={
         "account_id": tid
     }
-    return render(request, "admin_information.html", feedDict)
+    return render(request, "basicInfo/admin_information.html", feedDict)
 
 def admin_comment(request):
     tid = request.session["account_id"]
     feedDict={
         "account_id": tid
     }
-    return render(request, "admin_comment.html", feedDict)
+    return render(request, "basicInfo/admin_comment.html", feedDict)
 
 
 def admin_course_regist(request):
@@ -163,7 +163,7 @@ def admin_course_regist(request):
     feedDict={
         "account_id": tid
     }
-    return render(request, "admin_course_regist.html", feedDict)
+    return render(request, "basicInfo/admin_course_regist.html", feedDict)
 
 
 def admin_course_edit(request):
@@ -171,21 +171,21 @@ def admin_course_edit(request):
     feedDict={
         "account_id": tid
     }
-    return render(request, "admin_course_edit.html", feedDict)
+    return render(request, "basicInfo/admin_course_edit.html", feedDict)
 
 def admin_course_approve(request):
     tid = request.session["account_id"]
     feedDict={
         "account_id": tid
     }
-    return render(request, "admin_course_approve.html", feedDict)
+    return render(request, "basicInfo/admin_course_approve.html", feedDict)
 
 def admin_course_adjust(request):
     tid = request.session["account_id"]
     feedDict={
         "account_id": tid
     }
-    return render(request, "admin_course_adjust.html", feedDict)
+    return render(request, "basicInfo/admin_course_adjust.html", feedDict)
 
 
 def admin_apply_approve_s(request):
@@ -193,14 +193,14 @@ def admin_apply_approve_s(request):
     feedDict={
         "account_id": tid
     }
-    return render(request, "admin_apply_approve_s.html", feedDict)
+    return render(request, "basicInfo/admin_apply_approve_s.html", feedDict)
 
 def admin_apply_approve_t(request):
     tid = request.session["account_id"]
     feedDict={
         "account_id": tid
     }
-    return render(request, "admin_apply_approve_t.html", feedDict)
+    return render(request, "basicInfo/admin_apply_approve_t.html", feedDict)
 
 
 def admin_select_adjust(request):
@@ -208,7 +208,7 @@ def admin_select_adjust(request):
     feedDict={
         "account_id": tid
     }
-    return render(request, "admin_select_adjust.html", feedDict)
+    return render(request, "basicInfo/admin_select_adjust.html", feedDict)
 
 
 

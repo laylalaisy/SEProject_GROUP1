@@ -105,11 +105,11 @@ class belong(models.Model):
     belong(major_id int, college_id int) //专业所在学院 ref major, college
     '''
 
-    descipline_id=models.ForeignKey(discipline,on_delete=models.CASCADE)
+    discipline_id=models.ForeignKey(discipline,on_delete=models.CASCADE)
     college_id=models.ForeignKey(college,on_delete=models.CASCADE)
     class Meta:
-        unique_together = ("descipline_id", "college_id")
-    primary=("descipline_id", "college_id")
+        unique_together = ("discipline_id", "college_id")
+    primary=("discipline_id", "college_id")
 
 
 class course(models.Model):

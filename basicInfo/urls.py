@@ -1,11 +1,9 @@
-from django.conf.urls import include, url
-from django.contrib import admin
+from django.conf.urls import url, include
 from . import views
 
+
 urlpatterns = [
-    # Examples:
-    # url(r'^$', 'teachSystem.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+    # url(r'^$', views.?, name='?'),
     url(r"^$", views.default),
     url(r"^login$", views.login),
     url(r"^signup$", views.signup),
