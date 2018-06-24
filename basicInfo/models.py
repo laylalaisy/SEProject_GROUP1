@@ -205,7 +205,7 @@ class takeup(models.Model):
     teach_id=models.ForeignKey(teach,on_delete=models.CASCADE)
     time_id=models.ForeignKey(time,on_delete=models.CASCADE)
     room_id=models.ForeignKey(room,on_delete=models.CASCADE)
-    teacher_id = models.ManyToManyField(teacher)
+    teacher_id=models.ForeignKey(teacher,on_delete=models.CASCADE)
     class Meta:
         unique_together = ("teach_id", "time_id","room_id")
     primary = ("teach_id", "time_id","room_id")

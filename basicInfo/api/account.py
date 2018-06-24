@@ -192,10 +192,14 @@ def api_account_person(request):
 def api_account_img(request):
     if request.method == "POST":
         print("123445")
+        account_id=request.POST["account_id"]
         files = request.FILES.get('file')  # 获取图片
         # 图片存放路径
-        filename = files.content_type.split('/')[1]
-        print(filename)
+        print(files)
+
+        attrib_info=attrib.objects.get(account_id=account_id)
+        attrib_info.picture=files
+        attrib_info.save()
 
         return JsonResponse({"success": 1, "reason": None})
 
