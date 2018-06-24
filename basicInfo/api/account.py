@@ -1,7 +1,7 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponseNotFound, HttpResponseBadRequest, HttpResponse
 
-from basicInfo.models import account, attrib
+from basicInfo.models import account, attrib, teacher,student
 
 import hashlib as hash, json, time, random
 
@@ -76,7 +76,23 @@ def api_account_register_post(request):
 
             print(salt)
             passwordAfter = hash.sha512((hash.sha512(password.encode()).hexdigest() + salt).encode()).hexdigest()
-            account.objects.create(account_id=username, password=passwordAfter, salt=salt)
+            account_info=account.objects.create(account_id=username, password=passwordAfter, salt=salt)
+            print(account_info)
+
+            attrib.objects.create(account_id=account_info, nickname=username, picture="null",
+                                  email=username + "@zju.edu.cn", exp=0, coin=0)
+            if account_info.type==0:
+                student_info=student()
+                student_info.student_id=account_info.account_id
+                student_info.name="用户"
+                student_info.save()
+            elif account_info.type==1:
+                teacher_info=teacher()
+                teacher_info.teacher_id=account_info
+                teacher_info.name="用户"
+                teacher_info.office="Null"
+                teacher_info.save()
+
 
             request.session["account_id"] = username
             return JsonResponse({
@@ -192,10 +208,14 @@ def api_account_person(request):
 def api_account_img(request):
     if request.method == "POST":
         print("123445")
+        account_id=request.POST["account_id"]
         files = request.FILES.get('file')  # 获取图片
         # 图片存放路径
-        filename = files.content_type.split('/')[1]
-        print(filename)
+        print(files)
+
+        attrib_info=attrib.objects.get(account_id=account_id)
+        attrib_info.picture=files
+        attrib_info.save()
 
         return JsonResponse({"success": 1, "reason": None})
 

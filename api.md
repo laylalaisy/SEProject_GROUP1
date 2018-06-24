@@ -208,7 +208,7 @@
 
 
 
-##### GET /api/teacher/course
+##### GET /api/teacher/course (untested)
 
 讲授课程查询
 
@@ -217,11 +217,13 @@
 	account_id(string):上课老师(默认当前用户)
 @return
 	(array) json object{
-		teach_id(int):编号
+		teach_id(int):课程代号
 		name(string):课程名称
 		credit(real):课程学分
+		hour(read):课程学时
 		time(time):上课时间
 		room(string):上课教室
+		intro(string):课程简介
 	}
 ```
 
