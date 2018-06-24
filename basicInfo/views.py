@@ -28,7 +28,7 @@ def exam(request):
     feedDict={
         "account_id": sid
     }
-    return render(request, "basicInfo/student_exam.html", feedDict)
+    return render(request, "basicInfo/student_examarrange.html", feedDict)
 
 
 def calendar(request):
