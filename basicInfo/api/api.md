@@ -107,6 +107,21 @@
 	}
 ```
 
+##### GET /api/account/img
+
+下载图像
+
+返回的是一个可以访问的url:"http://127.0.0.1:8000/static/img/1.jpg"
+
+```doc
+@param
+    account_id(string):要查询的用户名
+@return
+	json object{
+		success(bool):登录成功与否
+		image(String):该学生的头像，如果没有传一个默认图片
+		reason(string):不成功的原因
+	}
 
 
 #### Student API

@@ -3,7 +3,9 @@ from django.http import JsonResponse, HttpResponseNotFound, HttpResponseBadReque
 
 from basicInfo.models import account, attrib, teacher,student
 
-import hashlib as hash, json, time, random
+import hashlib as hash, json, time, random,re
+
+basicUrl="http://127.0.0.1:8000/static/basicInfo/"
 
 
 @csrf_exempt
@@ -218,5 +220,15 @@ def api_account_img(request):
         attrib_info.save()
 
         return JsonResponse({"success": 1, "reason": None})
+    else:
 
-    return JsonResponse({"success": 0, "reason": "Invalid Access"})
+        account_id=request.GET["account_id"]
+        try:
+            attrib_info=attrib.objects.get(account_id=account_id)
+        except:
+
+            return JsonResponse({"success": 0, "image": None, "reason": "没有该用户"})
+        filename=re.split("/",attrib_info.picture.name)[-1] if attrib_info.picture.name!="null" else "null.jpg"
+        url=basicUrl+"picture/"+filename
+        return JsonResponse({"success":1,"image":url,"reason":None})
+

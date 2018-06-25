@@ -39,7 +39,7 @@ class attrib(models.Model):
 
     account_id=models.ForeignKey(account,on_delete=models.CASCADE,primary_key=True)
     nickname=models.CharField(max_length=40,null=False)
-    picture=models.ImageField(upload_to="pic",null=True)
+    picture=models.ImageField(upload_to="basicInfo/static/basicInfo/picture",null=True)
     email=models.CharField(max_length=40,null=True)
     exp=models.IntegerField(null=True)
     coin=models.IntegerField(null=True)
