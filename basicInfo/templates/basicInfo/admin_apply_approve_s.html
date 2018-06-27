@@ -1,117 +1,45 @@
 {% extends 'basicInfo/admin_base.html' %}
 {% load staticfiles %}
 {% block body %}
-    <div class="left-content">
-       <div class="inner-content">
 
-            <!-- header-starts -->
-            <div class="header-section">
-            <!-- top_bg -->
-                <div class="top_bg">            
-                    <div class="header_top">
-                        <div class="top_right">
-                            <ul>
-                                <li><a href="#">浙江大学教务中心</a></li>|
-                                <li><a href="teacher_index.html">首页</a></li>|
-                            </ul>
-                        </div>
-                        <div class="top_left">
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down">{{ account_id }}</i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user">
-                                    <li><a href="basic_login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a></li>
-                                    <li><a href="#"><i class="fa fa-cog fa-fw"></i>设置</a></li>
-                                </ul>
-                                <!-- /.dropdown-user -->
-                            </li>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-
-            <div class="content">
-                <div id="wrapper">
-                    <div id="page-wrapper" style="min-height: 58px;">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <h1 class="page-header">申请申请</h1>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <form role="form">
-                                <div class="col-lg-6">
-                                    <form action="/api/admin/promote" method="get">
-                                        <div class="form-group">
-                                            <select class="form-control" name="metric">
-                                                <option value="account_id">学号</option>
-                                            </select>
-                                        </div>
-                                    </form>
-                                </div>
-                            </form>
-                        </div>
-                        <table class="table table-hover table-condensed" id="kexuan-tab">
-                            <thead>
-                                <tr>
-                                    <th>真实姓名</th>
-                                    <th>寝室</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for comment in comments %}
-                                <form action="/api/admin/student" method="get">
-                                    <tr>
-                                        <td>{{name}}</td>
-                                        <td>{{dorm}}</td>
-                                    </tr>
-                                </form>
-                                <form role="form" action="/api/admin/student" method="POST">
-                                    {% csrf_token %}
-                                    <td>
-                                        <button type="submit" name="accept" value={{accept}}>同意与否</button>
-                                    </td>
-                                </form>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /#page-wrapper -->
+<div class="content">
+    <div id="wrapper">
+        <div id="page-wrapper" style="min-height: 58px;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">学生申请</h1>
                 </div>
             </div>
-            <!--content-ends-->
+            <table class="table table-hover table-condensed" id="kexuan-tab">
+                <thead>
+                    <tr>
+                        <th>学号</th>
+                        <th>真实姓名</th>
+                        <th>寝室</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for comment in comments %}
+                    <form action="/api/admin/student" method="get">
+                        <tr>
+                            <td>{{id}}</td>
+                            <td>{{name}}</td>
+                            <td>{{dorm}}</td>
+                        </tr>
+                    </form>
+                    <form role="form" action="/api/admin/student" method="POST">
+                        {% csrf_token %}
+                        <td>
+                            <button type="submit" name="accept" value={{accept}}>同意与否</button>
+                        </td>
+                    </form>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-        <!--content-inner-ends-->
+        <!-- /#page-wrapper -->
     </div>
-    <!--content-left-ends-->
-
-
-    
-
-<script>
-    var toggle = true;
-                                        
-    $(".sidebar-icon").click(function() 
-    {                
-        if (toggle)
-        {
-            $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
-            $("#menu span").css({"position":"absolute"});
-        }
-        else
-        {
-            $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
-            setTimeout(function() 
-            {
-                $("#menu span").css({"position":"relative"});
-                    }, 400);
-            }
-                                            
-            toggle = !toggle;
-        });
-</script>
+</div>
+<!--content-ends-->
             
 {% endblock %}

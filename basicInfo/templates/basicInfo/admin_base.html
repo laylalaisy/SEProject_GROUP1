@@ -29,12 +29,45 @@
     <link href="{% static 'basicInfo/css/owl.carousel.css' %}" rel="stylesheet">
 	<script src="{% static 'basicInfo/js/owl.carousel.js' %}"></script>
 	<script src="{% static 'basicInfo/js/pie.js' %}"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-   <div class="page-container">
-        {% include 'basicInfo/admin_menu.html' %}
-        {% block body %}
-        {% endblock %}
-   </div>
+
+<body>
+    <div class="page-container">
+        <div class="left-content">
+            <div class="inner-content">
+            {% include 'basicInfo/admin_head.html' %}  
+            {% include 'basicInfo/admin_menu.html' %}
+            {% block body %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var toggle = true;
+
+        $(".sidebar-icon").click(function() {
+            if (toggle)
+            {
+                $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+                $("#menu span").css({"position":"absolute"});
+            }
+            else
+            {
+                $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+                setTimeout(function() {
+                    $("#menu span").css({"position":"relative"});
+                }, 400);
+            }
+
+            toggle = !toggle;
+        });
+    </script>
+
+</body>
 
 </html>

@@ -2,96 +2,53 @@
 {% load staticfiles %}
 {% block body %}
 
-   	<div class="left-content">
-	   <div class="inner-content">
-
-			<!-- header-starts -->
-			<div class="header-section">
-			<!-- top_bg -->
-				<div class="top_bg">			
-					<div class="header_top">
-						<div class="top_right">
-							<ul>
-								<li><a href="#">浙江大学教务中心</a></li>|
-								<li><a href="teacher_index.html">首页</a></li>|
-							</ul>
-						</div>
-					    <div class="top_left">
-							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-									<i class="fa fa-user fa-fw"></i> <i id="account_id" class="fa fa-caret-down">{{ account_id }}</i>
-								</a>
-								<ul class="dropdown-menu dropdown-user">
-									<li><a href="basic_login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a></li>
-									<li><a href="#"><i class="fa fa-cog fa-fw"></i>设置</a></li>
-								</ul>
-								<!-- /.dropdown-user -->
-							</li>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
+<!-- content -->
+<div class="content">
+	<div id="page-wrapper">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">个人信息</h1>
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+		<!-- /.row -->
+		<div class="col-lg-6">
+			<form role="form" method="POST">
+				{% csrf_token %}
+				<div class="form-group">
+					<label for="disabledSelect">工号</label>
+					<input class="form-control" id="teacher_id" type="text"  disabled placeholder={{teacher_id}} >
 				</div>
 				<div class="clearfix"></div>
-			</div>
-
-			<!-- content -->
-			<div class="content">
-				<div id="page-wrapper">
-					<div class="row">
-						<div class="col-lg-12">
-							<h1 class="page-header">个人信息</h1>
-						</div>
-						<!-- /.col-lg-12 -->
-					</div>
-					<!-- /.row -->
-					<div class="col-lg-6">
-						<form role="form" method="POST">
-							{% csrf_token %}
-							<div class="form-group">
-								<label for="disabledSelect">工号</label>
-								<input class="form-control" id="teacher_id" type="text"  disabled placeholder={{teacher_id}} >
-							</div>
-							<div class="clearfix"></div>
-							<div class="form-group">
-								<label for="disabledSelect">姓名</label>
-								<input name="tname" id="teacher_name" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_name}}>
-							</div>
-							<div class="form-group">
-								<label for="disabledSelect">职称</label>
-								<input name="ttitle" id="teacher_title" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_title}}>
-							</div>
-							<div class="form-group">
-								<label for="disabledSelect">办公室</label>
-								<input name="tdepartment" id="teacher_office" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_college}}>
-							</div>
-							<div class="form-group">
-								<label for="disabledSelect">管理学院</label>
-								<input class="form-control" id="teacher_manage" type="text" disabled placeholder={{college_name}} >
-							</div>
-							<div class="form-group">
-								<label for="disabledSelect">邮箱</label>
-								<input name="temail" id="teacher_email" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_mail}}>
-							</div>
-							<button type="button" onclick="push()">确认修改</button>
-						</form>
-					</div>
-					<!-- /.row -->
+				<div class="form-group">
+					<label for="disabledSelect">姓名</label>
+					<input name="tname" id="teacher_name" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_name}}>
 				</div>
-
-
-			</div>
-			<!--content-ends-->
+				<div class="form-group">
+					<label for="disabledSelect">职称</label>
+					<input name="ttitle" id="teacher_title" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_title}}>
+				</div>
+				<div class="form-group">
+					<label for="disabledSelect">办公室</label>
+					<input name="tdepartment" id="teacher_office" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_college}}>
+				</div>
+				<div class="form-group">
+					<label for="disabledSelect">管理学院</label>
+					<input class="form-control" id="teacher_manage" type="text" disabled placeholder={{college_name}} >
+				</div>
+				<div class="form-group">
+					<label for="disabledSelect">邮箱</label>
+					<input name="temail" id="teacher_email" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_mail}}>
+				</div>
+				<button type="button" onclick="push()">确认修改</button>
+			</form>
 		</div>
-		<!--content-inner-ends-->
+		<!-- /.row -->
 	</div>
-	<!--content-left-ends-->
-
-	<!--sidebar-menu-->
-
-	<!--sidebar-menu-ends-->
-	
-	<div class="clearfix"></div>		
 </div>
+<!--content-ends-->
+
+
 <script>
     const basicUrl="http://127.0.0.1:8000/";
     function push() {
@@ -133,6 +90,7 @@
         );
     }
 </script>
+
 <script>
 	new Promise(function (resolve){
 		   $.ajax(
@@ -161,27 +119,5 @@
 
 		);
 </script>
-<script>
-	var toggle = true;
-										
-	$(".sidebar-icon").click(function() 
-	{                
-		if (toggle)
-		{
-			$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
-			$("#menu span").css({"position":"absolute"});
-		}
-		else
-		{
-			$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
-			setTimeout(function() 
-			{
-				$("#menu span").css({"position":"relative"});
-					}, 400);
-			}
-											
-			toggle = !toggle;
-		});
-</script>
-			
+
 {% endblock %}

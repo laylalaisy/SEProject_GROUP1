@@ -156,6 +156,13 @@ def admin(request):
     }
     return render(request, "basicInfo/admin_index.html", feedDict)
 
+def admin_index(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "basicInfo/admin_index.html", feedDict)
+
 
 def admin_information(request):
     tid = request.session["account_id"]
@@ -179,6 +186,13 @@ def admin_course_regist(request):
     }
     return render(request, "basicInfo/admin_course_regist.html", feedDict)
 
+def admin_course_open(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "basicInfo/admin_course_open.html", feedDict)
+
 
 def admin_course_edit(request):
     tid = request.session["account_id"]
@@ -193,6 +207,13 @@ def admin_course_approve(request):
         "account_id": tid
     }
     return render(request, "basicInfo/admin_course_approve.html", feedDict)
+
+def admin_teach_approve(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "basicInfo/admin_teach_approve.html", feedDict)
 
 def admin_course_adjust(request):
     tid = request.session["account_id"]
