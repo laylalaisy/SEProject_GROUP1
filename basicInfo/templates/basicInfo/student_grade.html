@@ -21,7 +21,7 @@
                         <div class="top_left">
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down">{{ account_id }}</i>
+                                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down" id="id">{{ account_id }}</i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-user">
                                     <li><a href="basic_login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a></li>
@@ -51,9 +51,7 @@
                         </div>
                         <!-- /.row -->
                         <div class="row">
-                            <form role="form">
                                 <div class="col-lg-6">
-                                    <form action="/courseSelection/student/selection" method="get">
                                         <div class="form-group">
                                             <select class="form-control" name="metric">
                                                 <option value="course_title">学期</option>
@@ -80,16 +78,13 @@
                     </div><table class="table table-hover table-condensed" id="kexuan-tab">
                     <thead>
                     <tr>
+                        <th style="width: 20%">课程号</th>
                         <th>课程名称</th>
-                        <th>课程号</th>
-                        <th>课程学期</th>
-                        <th>任课老师</th>
+                        <th>学分</th>
                         <th>成绩</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    {% for course in courses %}
-                    <form action="/courseSelection/student/selection/result" method="get">
+                    <tbody id="tbody">
                         <tr>
                             <td>{{course.name}}</td>
                             <td>{{course.id}}</td>
@@ -97,8 +92,6 @@
                             <td>{{course.teacher}}</td>
                             <td>{{course.grade}}</td>
                         </tr>
-                    </form>
-                    {% endfor %}
                     </tbody>
                 </table>
                 </div>
@@ -108,7 +101,47 @@
     </div>
 
 
+<script>
+        $(document).ready(function () {
+            requestGrade();
+        });
 
+        const basicUrl="http://127.0.0.1:8000/";
+        function requestGrade() {
+            var sid=document.getElementById("id").innerHTML;
+            new Promise(function (resolve){
+               $.ajax(
+                   {
+                       method: "GET",
+                       url: basicUrl+"api/student/grade",
+                       data: {
+                           account_id: sid,
+                       },
+                       async : false,
+                       success: function (data) {
+                            resolve(data);
+                       }
+
+                   }
+               )
+                }).then(
+                    function (data) {
+                        console.log(data);
+                        for(var i=0;i<data.length;i++){
+                            var text = "<tr>\n" +
+                                "                            <td>undefine</td>\n" +
+                            "                            <td>"+data[i].name+"</td>\n" +
+                            "                            <td>"+data[i].credit+"</td>\n" +
+                            "                            <td>"+data[i].grade+"</td>\n" +
+                            "                        </tr>";
+                            console.log(text);
+                            $("#tbody").append(text);
+                        }
+
+                    }
+                );
+        }
+    </script>
 
 
 <script>
