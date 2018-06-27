@@ -35,18 +35,15 @@
                     {% for course in courses %}
                     <form action="/teacher/course_apply/edit" method="get">
                         <tr>
-                            <td>{{id}}</td>
-                            <td>{{name}}</td>
-                            <td>{{credit}}</td>
-                            <td>{{hour}}</td>
-                            <td>{{time}}</td>
-                            <td>{{room}}</td>
-                            <td>{{intro}}</td>
+                            <td>{{course.id}}</td>
+                            <td>{{course.name}}</td>
+                            <td>{{course.credit}}</td>
+                            <td>{{course.hour}}</td>
+                            <td>{{course.time}}</td>
+                            <td>{{course.room}}</td>
+                            <td>{{course.intro}}</td>
+                            <td><button type="submit" name="edit" value={{course.id}}>修改</button></td>
                         </tr>
-                    </form>
-                    <form role="form" method="POST">
-                        {% csrf_token %}
-                        <td><button type="submit" name="edit" value={{course.id}}>修改</button></td>
                     </form>
                     {% endfor %}
                 </tbody>
