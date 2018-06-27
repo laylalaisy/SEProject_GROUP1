@@ -169,36 +169,40 @@
     const basicUrl="http://127.0.0.1:8000/";
 
     function push() {
-        var sid=document.getElementsByName("sid")[0].value.toString();
-        var nickname=document.getElementsByName("snick")[0].value.toString();
-        var email=document.getElementsByName("semail")[0].value.toString();
+
+        var sid = $("#sid").attr("value");
+        var nickname = $("#snick").val();
+        var email = $("#semail").val();
+        var coin = $("#scoin").attr("value");
+        var exp = $("#sexp").attr("value");
+
+        console.log("AAA",nickname);
 
         new Promise(function (resolve){
            $.ajax(
                {
                    method: "POST",
-                   url: basicUrl+"api/student/update",
+                   url: basicUrl+"api/account/person",
                    data: {
                        account_id: sid,
-                       account_email: email,
-                       account_nickname:nickname,
+                       email: email,
+                       nick:nickname,
+                       coin:coin,
+                       exp:exp,
                        csrfmiddlewaretoken: '{{ csrf_token }}'
                    },
                    async : false,
                    success: function (data) {
                         resolve(data);
-                       console.log(data);
                    }
 
                }
            )
-        }).then(
-            function (data) {
-                console.log(data);
-
-            }
-
-        );
+            }).then(
+                function (data) {
+                    console.log(data);
+                }
+            );
 
     }
 
@@ -234,7 +238,7 @@
             }
         );
     }
-    
+
     function getinfo() {
         var id=document.getElementById("account_id").innerHTML;
         $('#sid').attr("value",id);

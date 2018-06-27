@@ -162,16 +162,24 @@ def api_account_person_post(request):
         account_id = request.POST["account_id"]
         nick = request.POST["nick"]
         email = request.POST["email"]
-        exp = request.POST["exp"]
-        coin = request.POST["coin"]
+        exp = int(request.POST["exp"])
+        coin = int(request.POST["coin"])
+
+        print(account_id,nick,email,exp,coin)
 
         obj = attrib.objects.get(account_id=account_id)
-        obj.nick=nick
+        obj.nickname=nick
         obj.email=email
+
+        print(obj.nickname)
+
+        print(1)
+
         if(exp>0):
             obj.exp=exp
         if(coin>0):
             obj.coin=coin
+        print(2)
         obj.save()
         return JsonResponse({"success": 1, "reason": None})
 
