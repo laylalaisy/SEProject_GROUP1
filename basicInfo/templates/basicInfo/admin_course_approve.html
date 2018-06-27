@@ -74,7 +74,6 @@
                 </div>
                 <!-- /#wrapper -->
                 
-                <button id="test"></button>
 
             </div>
             <!--content-ends-->
@@ -137,6 +136,31 @@
         });
         function agree(id,name,tid) {
             console.log(id,name,tid);
+            var basicUrl="http://127.0.0.1:8000/";
+            new Promise(function (resolve){
+           $.ajax(
+               {
+                   method: "POST",
+                   url: basicUrl+"api/admin/agreecourse",
+                   data: {
+                       courseid:id,
+                       teacherid:tid,
+                       csrfmiddlewaretoken: '{{ csrf_token }}'
+                   },
+                   async : false,
+                   success: function (data) {
+                        resolve(data);
+                   }
+
+               }
+           )
+            }).then(
+                function (data) {
+                    console.log(data);
+                    alert("成功！批准课程："+name+", 教师工号:"+tid)
+                    window.location.reload();
+                }
+            );
         }
     </script>
 
