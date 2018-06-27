@@ -27,6 +27,7 @@ def api_admin_coursewaitlist(request):
                 ret["num"]=str(wait_course.course_id.duplicate)
                 #ret["examdate"]=
                 ret["tid"]=str(wait_course.teacher_id.teacher_id.account_id)
+                ret["name"] = wait_course.course_id.name
                 ret["capacity"]=str(wait_course.capacity)
                 allret.append(ret)
             sorted(allret,key=lambda x:int(x["id"]))

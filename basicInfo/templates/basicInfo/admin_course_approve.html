@@ -58,20 +58,15 @@
                             <thead>
                                 <tr>
                                     <th>课程代号</th>
+                                    <th>课程名称</th>
                                     <th>开课次数</th>
-                                    <th>考试日期</th>
                                     <th>教师工号</th>
                                     <th>课程容量</th>
+                                    <th>批复</th>
                                 </tr>
                             </thead>
-                            <tbody id="waitapprove">
-{#                                    <tr>#}
-{#                                        <td>{{id}}</td>#}
-{#                                        <td>{{duplicate}}</td>#}
-{#                                        <td>{{exam}}</td>#}
-{#                                        <td>{{teacher}}</td>#}
-{#                                        <td>{{capacity}}</td>#}
-{#                                    </tr>#}
+                            <tbody id="tbody">
+
                             </tbody>
                         </table>
                     </div>
@@ -79,7 +74,7 @@
                 </div>
                 <!-- /#wrapper -->
                 
-
+                <button id="test"></button>
 
             </div>
             <!--content-ends-->
@@ -87,9 +82,65 @@
         <!--content-inner-ends-->
     </div>
 
-<script>
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-</script>
+   <script>
+        $(document).ready(function () {
+            courselit();
+        });
+
+        const basicUrl="http://127.0.0.1:8000/";
+        function courselit() {
+            var url = basicUrl + "api/admin/coursewaitlist";
+            new Promise(function (resolve){
+               $.ajax(
+                   {
+                       method: "GET",
+                       url: url,
+                       data: {
+                       },
+                       async : false,
+                       success: function (data) {
+                            resolve(data);
+                       }
+
+                   }
+               )
+                }).then(
+                    function (data) {
+                        {#console.log(data);#}
+                        for(var i=0;i<data.length;i++){
+                            var text = "<tr>\n" +
+                             "                            <td>"+data[i].id+"</td>\n" +
+                                "                            <td>"+data[i].num+"</td>\n" +
+                            "                            <td>"+data[i].name+"</td>\n" +
+                            "                            <td>"+data[i].tid+"</td>\n" +
+                            "                            <td>"+data[i].capacity+"</td>\n" +
+                             "                           <td><button onclick=\"agree(\'"+data[i].id+"\',\'"+data[i].name+"\',\'"+data[i].tid+"\')\" id=\"b"+i+"\" type=\"button\" style=\"background-color: #1A9F00\" class=\"btn btn-primary\">同意</button></td>\n" +
+                            "                        </tr>";
+                            {#console.log(text);#}
+                            $("#tbody").append(text);
+                        }
+
+                    }
+                );
+        }
+    </script>
+    
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                console.log("ASS");
+            });
+        });
+        function agree(id,name,tid) {
+            console.log(id,name,tid);
+        }
+    </script>
+
+
 
 <script>
     var toggle = true;
