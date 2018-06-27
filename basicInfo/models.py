@@ -197,16 +197,6 @@ class teach(models.Model):
     exam_date=models.DateField(null=True)
 
 
-class readyteach(models.Model):
-    '''
-    readyteach(teacher_id int, course_id int) //讲授课程 ref teacher, course
-    '''
-
-    teacher_id=models.ForeignKey(teacher,on_delete=models.CASCADE)
-    course_id=models.ForeignKey(course,on_delete=models.CASCADE)
-    capacity=models.IntegerField(null=False)
-
-
 class takeup(models.Model):
     '''
     takeup(course_id int, time_id int, room_id int, type int not null) //课程时空信息 ref course, time, room
