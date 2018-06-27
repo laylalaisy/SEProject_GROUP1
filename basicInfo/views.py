@@ -126,6 +126,13 @@ def teacher_course_regist(request):
     }
     return render(request, "basicInfo/teacher_course_regist.html", feedDict)
 
+def teacher_course_open(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "basicInfo/teacher_course_open.html", feedDict)
+
 
 def teacher_course_edit(request):
     tid = request.session["account_id"]
