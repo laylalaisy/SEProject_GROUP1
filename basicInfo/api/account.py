@@ -183,12 +183,11 @@ def api_account_person_post(request):
 def api_account_person_get(request):
     try:
         account_id = request.GET["account_id"]
-
         obj = attrib.objects.get(account_id=account_id)
 
         return JsonResponse(
             {
-                "nick": obj.nick,
+                "nick": obj.nickname,
                 "email": obj.email,
                 "exp": obj.exp,
                 "coin": obj.coin
@@ -211,9 +210,11 @@ def api_account_img(request):
     if request.method == "POST":
         print("123445")
         account_id=request.POST["account_id"]
+        # print(account_id)
         files = request.FILES.get('file')  # 获取图片
         # 图片存放路径
         print(files)
+        print(account_id)
 
         attrib_info=attrib.objects.get(account_id=account_id)
         attrib_info.picture=files
@@ -226,7 +227,6 @@ def api_account_img(request):
         try:
             attrib_info=attrib.objects.get(account_id=account_id)
         except:
-
             return JsonResponse({"success": 0, "image": None, "reason": "没有该用户"})
         filename=re.split("/",attrib_info.picture.name)[-1] if attrib_info.picture.name!="null" else "null.jpg"
         url=basicUrl+"picture/"+filename

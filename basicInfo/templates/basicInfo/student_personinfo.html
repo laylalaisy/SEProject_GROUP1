@@ -20,7 +20,7 @@
 						<div class="top_left">
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-									<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down">{{ account_id }}</i>
+									<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down" id="account_id">{{ account_id }}</i>
 								</a>
 								<ul class="dropdown-menu dropdown-user">
 									<li><a href="basic_login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a></li>
@@ -54,32 +54,28 @@
 {#						<form role="form" method="POST">#}
 							{% csrf_token %}
 							<div class="form-group">
-								<label for="disabledSelect">学号</label>
-								<input name="sid" type="text" class="form-control" readonly="readonly" aria-describedby="basic-addon2">
-							</div>
-							<div class="form-group">
-								<label for="disabledSelect">姓名</label>
-								<input name="sname" type="text" class="form-control" readonly="readonly" aria-describedby="basic-addon2">
+								<label for="disabledSelect">账号</label>
+								<input id="sid" type="text" class="form-control" readonly="readonly" aria-describedby="basic-addon2">
 							</div>
 							<div class="form-group">
 								<label for="disabledSelect">昵称</label>
-								<input name="snick" type="text" class="form-control" aria-describedby="basic-addon2">
+								<input id="snick" type="text" class="form-control" aria-describedby="basic-addon2">
 							</div>
 							<div class="form-group">
 								<label for="disabledSelect">专业</label>
-								<input name="smajor" type="text" class="form-control" readonly="readonly" aria-describedby="basic-addon2">
+								<input id="smajor" type="text" class="form-control" readonly="readonly" aria-describedby="basic-addon2" value="计算机科学与技术">
 							</div>
 							<div class="form-group">
 								<label for="disabledSelect">金币</label>
-								<input name="coin" type="text" class="form-control" readonly="readonly" aria-describedby="basic-addon2">
+								<input id="scoin" type="text" class="form-control" readonly="readonly" aria-describedby="basic-addon2">
 							</div>
                             <div class="form-group">
 								<label for="disabledSelect">经验</label>
-								<input name="exp" type="text" class="form-control" readonly="readonly" aria-describedby="basic-addon2">
+								<input id="sexp" type="text" class="form-control" readonly="readonly" aria-describedby="basic-addon2">
 							</div>
 							<div class="form-group">
 								<label for="disabledSelect">邮箱</label>
-								<input name="semail" type="text" class="form-control" aria-describedby="basic-addon2">
+								<input id="semail" type="text" class="form-control" aria-describedby="basic-addon2">
 							</div>
 							<button id="pushinfo">确认修改</button>
 {#						</form>#}
@@ -161,6 +157,8 @@
 <script>
 
     $(document).ready(function () {
+        getimage();
+        getinfo();
         $("#pushinfo").click(function () {
             push();
         }
@@ -206,15 +204,18 @@
 
     function pushimage() {
         var formData = new FormData();
+        var id=document.getElementById("account_id").innerHTML;
         formData.append("file",$("#fileToUpload")[0].files[0]);
+        formData.append("account_id",id);
         console.log($("#fileToUpload")[0].files[0]);
         new Promise(function (resolve){
            $.ajax(
                {
                    method: "POST",
-                   url: basicUrl+"api/student/updateimage",
+                   url: basicUrl+"api/account/img",
                    type : 'POST',
-                    data : formData,
+                   data : formData,
+                       {# "account_id":id#}
                     // 告诉jQuery不要去处理发送的数据
                     processData : false,
                     // 告诉jQuery不要去设置Content-Type请求头
@@ -232,95 +233,66 @@
                 console.log(data);
             }
         );
+    }
+    
+    function getinfo() {
+        var id=document.getElementById("account_id").innerHTML;
+        $('#sid').attr("value",id);
+        new Promise(function (resolve){
+           $.ajax(
+               {
+                   method: "GET",
+                   url: basicUrl+"api/account/person",
+                   data:{
+                       "account_id":id
+                   },
+                   success: function (data) {
+                       resolve(data);
+                       console.log(data);
+                   }
+               }
+           )
+        }).then(
+            function (data) {
+                console.log(data.image);
+                $("#semail").attr("value", data.email);
+                $("#sexp").attr("value", data.exp);
+                $("#scoin").attr("value", data.coin);
+                $("#snick").attr("value", data.nick);
+            }
+        );
+    }
+
+    var originimageurl;
+    function getimage() {
+        var id=document.getElementById("account_id").innerHTML;
+        console.log(id);
+        new Promise(function (resolve){
+           $.ajax(
+               {
+                   method: "GET",
+                   url: basicUrl+"api/account/img",
+                   data:{
+                       "account_id":id
+                   },
+                   success: function (data) {
+                       resolve(data);
+                       console.log(data);
+                   }
+               }
+           )
+        }).then(
+            function (data) {
+                console.log(data.image);
+                $("#headPic").attr("src", data.image);
+                originimageurl = data.image;
+            }
+        );
 
     }
+
+
 </script>
 
-<script type="text/javascript">
-
-    $(function() {
-
-        // We use an inline data source in the example, usually data would
-        // be fetched from a server
-
-        var data = [],
-            totalPoints = 300;
-
-        function getRandomData() {
-
-            if (data.length > 0)
-                data = data.slice(1);
-
-            // Do a random walk
-
-            while (data.length < totalPoints) {
-
-                var prev = data.length > 0 ? data[data.length - 1] : 50,
-                    y = prev + Math.random() * 10 - 5;
-
-                if (y < 0) {
-                    y = 0;
-                } else if (y > 100) {
-                    y = 100;
-                }
-
-                data.push(y);
-            }
-
-            // Zip the generated y values with the x values
-
-            var res = [];
-            for (var i = 0; i < data.length; ++i) {
-                res.push([i, data[i]])
-            }
-
-            return res;
-        }
-
-        // Set up the control widget
-        var updateInterval = 30;
-        $("#updateInterval").val(updateInterval).change(function () {
-            var v = $(this).val();
-            if (v && !isNaN(+v)) {
-                updateInterval = +v;
-                if (updateInterval < 1) {
-                    updateInterval = 1;
-                } else if (updateInterval > 2000) {
-                    updateInterval = 2000;
-                }
-                $(this).val("" + updateInterval);
-            }
-        });
-
-        var plot = $.plot("#placeholder", [ getRandomData() ], {
-            series: {
-                shadowSize: 0	// Drawing is faster without shadows
-            },
-            yaxis: {
-                min: 0,
-                max: 100
-            },
-            xaxis: {
-                show: false
-            }
-        });
-
-        function update() {
-
-            plot.setData([getRandomData()]);
-
-            // Since the axes don't change, we don't need to call plot.setupGrid()
-
-            plot.draw();
-            setTimeout(update, updateInterval);
-        }
-
-        update();
-
-        // Add the Flot version string to the footer
-
-        $("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
-    });
-</script>
 
 {% endblock %}
