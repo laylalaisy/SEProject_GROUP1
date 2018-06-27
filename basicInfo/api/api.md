@@ -410,8 +410,49 @@
 		success(bool):操作成功与否
 		reason(string):不成功的原因
 	}
+
 ```
 
+
+######### 需要
+##### GET /api/admin/coursewaitlist
+待审批课程
+
+```doc
+@param
+@return
+	(array) json object{
+	    {
+            id(string):课程号
+            num(string):开课次数
+            examdate(string):考试日期
+            tid(string):教师工号
+            capacity(string):课程容量
+		}
+		...
+		{
+            id(string):课程号
+            num(string):开课次数
+            examdate(string):考试日期
+            tid(string):教师工号
+            capacity(string):课程容量
+		}
+		## 按课程号排序
+	}
+```
+
+##### POST /api/admin/coursewaitlist
+待审批课程 同意审批
+
+```doc
+@param
+    courseid(string):课程号
+@return
+	json object{
+		success(bool):操作成功与否
+		reason(string):不成功的原因
+	}
+```
 
 
 

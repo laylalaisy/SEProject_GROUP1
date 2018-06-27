@@ -26,6 +26,7 @@ def api_admin_suspend(request):
 
 @csrf_exempt
 def api_admin_judge(request):
+    print("judge")
     if request.method == "POST":
         try:
             id = request.POST["id"]
