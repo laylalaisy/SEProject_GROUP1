@@ -95,6 +95,13 @@ def teacher(request):
     }
     return render(request, "basicInfo/teacher_index.html", feedDict)
 
+def teacher_index(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "basicInfo/teacher_index.html", feedDict)
+
 
 def teacher_information(request):
     tid = request.session["account_id"]
