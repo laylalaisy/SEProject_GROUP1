@@ -17,6 +17,7 @@ urlpatterns = [
     url(r"^courseregist$", views.courseregist),
     url(r"^mycourse$", views.mycourse),
     url(r"^coursesearch$", views.coursesearch),
+    url(r"^teacher_index$", views.teacher_index),
     url(r"^teacher_information$", views.teacher_information),
     url(r"^teacher_comment$", views.teacher_comment),
     url(r"^teacher_course_regist$", views.teacher_course_regist),
