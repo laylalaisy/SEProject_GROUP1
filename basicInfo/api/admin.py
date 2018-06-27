@@ -1,62 +1,72 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponseNotFound, HttpResponseBadRequest, HttpResponse
 
-from basicInfo.models import account, examination, takeup, teach, course, room, learn, master, college,student,teacher
+from basicInfo.models import account, examination, takeup, teach, course, room, learn, master, college,student,teacher,readyteach
+
+import traceback
 
 @csrf_exempt
-def api_admin_suspend(request):
-    if request.method == "GET":
+def api_admin_coursewaitlist(request):
+
+    if request.method=="GET":
         try:
-            global course
-            course_list = course.objects.filter(type="0")
-
-            for course in course_list:
-                tmp = {}
-
-                tmp["name"] = course.name
-                tmp["credit"] = course.credit
-                tmp["examDate"]=course
-
-
-                course_list.append(tmp)
-
-            return JsonResponse(course_list,safe=False)
-
-        except:
-            return HttpResponseBadRequest()
+            allret=[]
+            wait_courses=readyteach.objects.all()
+            for wait_course in wait_courses:
+                '''
+                id(string):课程号
+                num(string):开课次数
+                examdate(string):考试日期
+                tid(string):教师工号
+                capacity(string):课程容量
+                '''
+                print("------")
+                ret = {}
+                ret["id"]=str(wait_course.course_id.course_id)
+                print("id",ret)
+                ret["num"]=str(wait_course.course_id.duplicate)
+                #ret["examdate"]=
+                ret["tid"]=str(wait_course.teacher_id.teacher_id.account_id)
+                ret["capacity"]=str(wait_course.capacity)
+                allret.append(ret)
+            sorted(allret,key=lambda x:int(x["id"]))
+            return JsonResponse(allret,safe=False)
+        except Exception as e:
+            print(e)
+            traceback.print_exc()
+            return HttpResponseBadRequest
+    return HttpResponseNotFound()
+    pass
 
 @csrf_exempt
-def api_admin_judge(request):
-    print("judge")
-    if request.method == "POST":
+def api_admin_agreecourse(request):
+    if request.method=="POST":
+        course_id=request.POST["courseid"]
+        teacher_id=request.POST["teacherid"]
+        ret={"success":0,
+             "reason":None
+             }
         try:
-            id = request.POST["id"]
-            accept = request.POST["accept"]
+            waitCourse=readyteach.objects.get(course_id=course_id,teacher_id=teacher_id)
+            teachobj=teach()
+            teachobj.course_id=waitCourse.course_id
+            teachobj.teacher_id=waitCourse.teacher_id
+            teachobj.capacity=waitCourse.capacity
+            teachobj.save()
+            waitCourse.course_id.duplicate+=1
+            waitCourse.course_id.save()
+            waitCourse.delete()
+            ret["success"]=1
 
-            tmp_course = course.objects.get(course_id=id)
-            if accept:
-                tmp_course.type = "普通课程"
-                tmp_course.save()
+            return JsonResponse(ret)
+        except Exception as e:
+            print(e)
+            traceback.print_exc()
+            ret["reason"]="没有改课"
+            return JsonResponse(ret)
+    return HttpResponseNotFound()
 
-                duplicate=request.POST["duplicate"]
-                teachers=request.POST["teacher"]
-                exam=request.POST["exam"]
-                capacitys=request.POST["capacity"]
-                for i in range(duplicate):
-                    teach_ele=teach()
-                    teach_ele.duplicate=duplicate
-                    teach_ele.capacity=capacitys[i]
-                    teach_ele.teacher_id=teachers[i]
-                    teach_ele.exam_date=exam
-                    teach_ele.course_id_id=id
-                    teach_ele.save()
 
-            else:
-                tmp_course.delete()
-            return JsonResponse({"success": 1, "reason": None})
-
-        except:
-            return HttpResponseBadRequest()
 
 @csrf_exempt
 def api_admin_modify_course(request):

@@ -241,7 +241,21 @@
 		intro(string):课程简介
 	}
 ```
+##### POST /api/teacher/opencourse
 
+申请开课程
+
+```doc
+@param
+	account_id(string):当前的用户名
+	id(string):课程代号
+	capacity(int):课程容量
+@return
+	json object{
+		success(bool):修改成功与否
+		reason(string):不成功的原因
+	}
+```
 
 
 ##### POST /api/teacher/addcourse
@@ -283,40 +297,6 @@
 
 
 #### Admin
-
-##### GET /api/admin/courselist
-
-待审批课程
-
-```doc
-@param
-@return
-	(array) json object{
-		id(string):课程号
-	}
-```
-
-
-
-##### POST /api/admin/judgecourse
-
-审批课程
-
-```doc
-@param
-	id(string):课程代号
-	accept(bool):同意与否
-	duplicate(int):开课次数
-	exam(date):考试日期
-	(array)teacher(string):教师工号(many to many)
-	(array)capacity(int):课程容量
-@return
-	json object{
-		success(bool):修改成功与否
-		reason(string):不成功的原因
-	}
-```
-
 
 
 ##### POST /api/admin/modifycourse
@@ -441,12 +421,13 @@
 	}
 ```
 
-##### POST /api/admin/coursewaitlist
+##### POST /api/admin/agreecourse
 待审批课程 同意审批
 
 ```doc
 @param
     courseid(string):课程号
+    teacherid(string):老师id
 @return
 	json object{
 		success(bool):操作成功与否
