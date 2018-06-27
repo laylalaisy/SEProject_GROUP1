@@ -7,19 +7,20 @@ from basicInfo.models import account, examination, takeup, teach, course, room, 
 def api_admin_suspend(request):
     if request.method == "GET":
         try:
-            course_list = course.objects.filter(student_id=account_id)
+            global course
+            course_list = course.objects.filter(type="0")
 
-            course_list = []
-            for l in student_learn:
+            for course in course_list:
                 tmp = {}
-                course_id = course.objects.get(course_id=l.course_id)
-                tmp["name"] = course_id.name
-                tmp["credit"] = course_id.credit
-                tmp["grade"] = l.grade
-                if l.grade!=None:
-                    course_list.append(tmp)
 
-            return JsonResponse(course_list)
+                tmp["name"] = course.name
+                tmp["credit"] = course.credit
+                tmp["examDate"]=course
+
+
+                course_list.append(tmp)
+
+            return JsonResponse(course_list,safe=False)
 
         except:
             return HttpResponseBadRequest()

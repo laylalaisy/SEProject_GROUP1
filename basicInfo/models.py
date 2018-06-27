@@ -1,4 +1,5 @@
 from django.db import models
+from basicInfo.config import course_type
 
 class observer:
     def __init__(self):
@@ -122,7 +123,8 @@ class course(models.Model):
     credit=models.DecimalField(max_digits=3,decimal_places=1)
     hour=models.FloatField()
     intro=models.TextField()
-    type=models.CharField(max_length=40,null=False)
+    duplicate = models.IntegerField(default=1)
+    type=models.CharField(max_length=40,null=False,choices=course_type,default="0")
     semester=models.CharField(max_length=10,null=False,default="Spring")
 
 
