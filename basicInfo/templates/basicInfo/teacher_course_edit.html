@@ -59,17 +59,11 @@
                     <h5>修改课程信息</h5>
                 </div>
             </div>
-            <form action="/teacher/course_apply/edit" method="get">
-                <div class="form-group">
-                    <label for="disabledSelect">课程代号</label>
-                    <input id="course_id" name="course_id" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={id}}>
-                </div>
-            </form>
             <form action="/teacher/course_apply/edit" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="disabledSelect">课程介绍</label>
-                    <input id="intro" name="intro" type="text" class="form-control" aria-describedby="basic-addon2">
+                    <input id="intro" name="intro" type="text" class="form-control" aria-describedby="basic-addon2" palceholder={{course.intro}}>
                 </div>
                 <button type="button" onclick="push()">确认修改</button>
             </form>
@@ -122,3 +116,5 @@
 		);
 	}
 </script>
+
+{% endblock %}
