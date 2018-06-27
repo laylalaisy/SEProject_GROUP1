@@ -14,8 +14,7 @@
 		</div>
 		<!-- /.row -->
 		<div class="col-lg-6">
-			<form role="form" method="POST">
-				{% csrf_token %}
+			<form id="form1" role="form">
 				<div class="form-group">
 					<label for="disabledSelect">工号</label>
 					<input class="form-control" id="teacher_id" type="text"  disabled placeholder={{teacher_id}} >
@@ -47,15 +46,6 @@
 		<!-- /.row -->
 	</div>
 	<!-- wrapper -->
-
-	<!-- jQuery -->
-	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-
-	<!-- Bootstrap Core JavaScript -->
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-	<!-- Custom Theme JavaScript -->
-	<script src="https://cdn.bootcss.com/startbootstrap-sb-admin-2/3.3.7+1/js/sb-admin-2.js"></script>
 </div>
 <!--content-ends-->
 
@@ -124,9 +114,7 @@
 				document.getElementById("teacher_office").value = data.teacher_office;
 				document.getElementById("teacher_management").value = data.teacher_management;
 				document.getElementById("teacher_email").value = data.email;
-
 			}
-
 		);
 </script>
 
