@@ -20,6 +20,10 @@
                     <label for="disabledSelect">课程代号</label>
                     <input name="id" id="id" type="text" class="form-control" aria-describedby="basic-addon2" value={{id}}>
                 </div>
+                <div class="form-group">
+                    <label for="disabledSelect">课程容量</label>
+                    <input name="capacity" id="capacity" type="number" class="form-control" aria-describedby="basic-addon2" value={{capacity}}>
+                </div>
                 <div class="clearfix"></div>
                 <button type="button" class="btn btn-default loginbutton" onClick="doApply()">确认申请</button>
                 <div class="clearfix"></div>
@@ -35,7 +39,8 @@
 	const basicUrl="http://127.0.0.1:8000/";
     function doApply() {
 		var id=document.getElementById("id").value.toString();
-		console.log(id, name, credit, hour, intro);
+		var capacity=document.getElementById("capacity").value.toString();
+		console.log(id, capacity);
 		new Promise(function (resolve){
 		   $.ajax(
 			   {
@@ -43,6 +48,7 @@
 				   url: basicUrl+"api/teacher/opencourse",
 				   data: {
 					   id: id,
+					   capacity: capacity,
 					   csrfmiddlewaretoken: '{{ csrf_token }}'
 				   },
 				   async : false,
