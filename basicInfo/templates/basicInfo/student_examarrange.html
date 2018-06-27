@@ -21,7 +21,7 @@
                         <div class="top_left">
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down">{{ account_id }}</i>
+                                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down" id="id">{{ account_id }}</i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-user">
                                     <li><a href="basic_login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a></li>
@@ -76,26 +76,13 @@
                         <thead>
                         <tr>
                             <th>课程名称</th>
-                            <th>课程号</th>
-                            <th>课程学期</th>
+                            <th>考试时间</th>
                             <th>考试地点</th>
                             <th>考试座位</th>
-                            <th>考试时间</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        {% for course in courses %}
-                        <form action="/courseSelection/student/selection/result" method="get">
-                            <tr>
-                                <td>{{course.name}}</td>
-                                <td>{{course.id}}</td>
-                                <td>{{course.semester}}</td>
-                                <td>{{course.loc}}</td>
-                                <td>{{course.position}}</td>
-                                <td>{{course.time}}</td>
-                            </tr>
-                        </form>
-                        {% endfor %}
+                        <tbody id="tbody">
+
                         </tbody>
 
                 </table>
@@ -104,6 +91,49 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            examArrange();
+        });
+
+        const basicUrl="http://127.0.0.1:8000/";
+        function examArrange() {
+            var sid=document.getElementById("id").innerHTML;
+            new Promise(function (resolve){
+               $.ajax(
+                   {
+                       method: "GET",
+                       url: basicUrl+"api/student/exam",
+                       data: {
+                           account_id: sid,
+                       },
+                       async : false,
+                       success: function (data) {
+                            resolve(data);
+                       }
+
+                   }
+               )
+                }).then(
+                    function (data) {
+                        console.log(data);
+                        for(var i=0;i<data.length;i++){
+                            var text = "<tr>\n" +
+                             "                            <td>"+data[i].name+"</td>\n" +
+                                "                            <td>"+data[i].time+"</td>\n" +
+                            "                            <td>"+data[i].room+"</td>\n" +
+                            "                            <td>"+data[i].seat+"</td>\n" +
+                            "                        </tr>";
+                            console.log(text);
+                            $("#tbody").append(text);
+                        }
+
+                    }
+                );
+        }
+    </script>
+
 
 <script>
     var toggle = true;
