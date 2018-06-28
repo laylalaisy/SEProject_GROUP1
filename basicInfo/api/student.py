@@ -31,6 +31,7 @@ def api_student_info(request):
             ret["major"]=dis_info.name
             ret["grade"]=student_info.grade
             ret["email"]=student_attrib_info.email
+            ret["dorm"]=student_info.dorm
 
 
 
@@ -39,7 +40,16 @@ def api_student_info(request):
 
         except Exception as e:
             print(e)
-            return HttpResponseBadRequest()
+            ret = {}
+
+            ret["name"] = "获取失败"
+            ret["nick"] = "获取失败"
+            ret["major"] = "获取失败"
+            ret["grade"] = "获取失败"
+            ret["email"] = "获取失败"
+            ret["dorm"] = "获取失败"
+            return JsonResponse(ret)
+    return HttpResponseBadRequest()
 
 @csrf_exempt
 def api_student_exam(request):
@@ -67,7 +77,8 @@ def api_student_exam(request):
         except Exception as e:
             print(e)
             traceback.print_exc()
-            return HttpResponseBadRequest()
+            return JsonResponse([], safe=False)
+    return HttpResponseBadRequest()
 
 @csrf_exempt
 def api_student_grade(request):
@@ -92,5 +103,6 @@ def api_student_grade(request):
         except Exception as e:
             print(e)
             traceback.print_exc()
-            return HttpResponseBadRequest()
+            return JsonResponse([], safe=False)
+    return HttpResponseBadRequest()
 

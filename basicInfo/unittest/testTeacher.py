@@ -4,8 +4,8 @@ import requests
 def testOpenCourse():
     api="http://127.0.0.1:8000/api/teacher/opencourse"
     postdata={
-        "account_id":"000456",
-        "id":"00010001",
+        "account_id":"000123",
+        "id":"00010000",
         "capacity":50
 
     }

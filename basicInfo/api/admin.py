@@ -19,6 +19,7 @@ def api_admin_coursewaitlist(request):
                 examdate(string):考试日期
                 tid(string):教师工号
                 capacity(string):课程容量
+                name(string)
                 '''
                 print("------")
                 ret = {}
@@ -29,14 +30,15 @@ def api_admin_coursewaitlist(request):
                 ret["tid"]=str(wait_course.teacher_id.teacher_id.account_id)
                 ret["name"] = wait_course.course_id.name
                 ret["capacity"]=str(wait_course.capacity)
+                ret["name"]=wait_course.course_id.name
                 allret.append(ret)
             sorted(allret,key=lambda x:int(x["id"]))
             return JsonResponse(allret,safe=False)
         except Exception as e:
             print(e)
             traceback.print_exc()
-            return HttpResponseBadRequest
-    return HttpResponseNotFound()
+            return JsonResponse([],safe=False)
+    return HttpResponseBadRequest()
     pass
 
 @csrf_exempt
@@ -65,7 +67,7 @@ def api_admin_agreecourse(request):
             traceback.print_exc()
             ret["reason"]="没有改课"
             return JsonResponse(ret)
-    return HttpResponseNotFound()
+    return HttpResponseBadRequest()
 
 
 
@@ -154,7 +156,8 @@ def api_student_info(request):
             return JsonResponse({"success": 1, "reason": None})
 
         except:
-            return HttpResponseBadRequest()
+            return JsonResponse({"success": 0, "reason": "没有这个学生"})
+    return HttpResponseBadRequest()
 
 @csrf_exempt
 def api_teacher_info(request):
@@ -176,6 +179,7 @@ def api_teacher_info(request):
             return JsonResponse({"success": 1, "reason": None})
 
         except:
-            return HttpResponseBadRequest()
+            return JsonResponse({"success": 0, "reason": "没有这个老师"})
+    return HttpResponseBadRequest()
 
 
