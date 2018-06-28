@@ -2,7 +2,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponseNotFound, HttpResponseBadRequest, HttpResponse
 
 from basicInfo.models import account, examination, takeup, teach, course, room, learn, master, college,student,teacher,readyteach
-
+import datetime,time
 import traceback
 
 @csrf_exempt
@@ -77,30 +77,35 @@ def api_admin_agreecourse(request):
 def api_admin_modify_course(request):
     if request.method == "POST":
         try:
-            pre_id = request.POST["pre_id"]
-            post_id=request.POST["post_id"]
+            id = request.POST["id"]
 
             name = request.POST["name"]
+            hour=request.POST["hour"]
             credit = request.POST["credit"]
             intro = request.POST["intro"]
             type = request.POST["type"]
-
-            if pre_id==post_id:
-                tmp_course = course.objects.get(course_id=pre_id)
-            else:
-                tmp_course=course.objects.get(course_id=pre_id)
-                tmp_course.delete()
-                tmp_course=course()
-                tmp_course.course_id_1=post_id
+            examDate=request.POST["exam_date"]
+            tmp_course = course.objects.get(course_id=id)
             tmp_course.name = name
+            tmp_course.hour=hour
             tmp_course.credit = credit
             tmp_course.intro = intro
             tmp_course.type = type
+
+
+            tmp_course.exam_date.strptime(examDate,"%Y-%m-%d %H:%M")
+            #tmp_course.exam_date= datetime.datetime(2018,1,1,11,20)
             tmp_course.save()
+
+            # a=tmp_course.exam_date.strftime("%Y-%m-%d %H:%M")
+            # print(a)
             return JsonResponse({"success": 1, "reason": None})
 
-        except:
-            return HttpResponseBadRequest()
+        except Exception as e:
+            print(e)
+            traceback.print_exc()
+            return JsonResponse({"success": 0, "reason": "修改失败"})
+    return HttpResponseBadRequest()
 
 @csrf_exempt
 def api_admin_modify_teach(request):

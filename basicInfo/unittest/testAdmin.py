@@ -37,5 +37,20 @@ def testTeacherInfoUpdate():
     response = requests.post(url=api, data=postdata)
     print(response.text)
 
+def testUpdateCourse():
+    api="http://127.0.0.1:8000/api/admin/modifycourse"
+    postdata={
+        "id":"00010000",
+        "name":"程序sheji",
+        "hour":2.5,
+        "credit":3,
+        "intro":"a course very head",
+        "type":"0",
+        "exam_date":"2018-10-25 14:30",
+
+    }
+    response=requests.post(url=api,data=postdata)
+    print(response.text)
+
 if __name__=="__main__":
-    testAgreeCourse()
+    testUpdateCourse()

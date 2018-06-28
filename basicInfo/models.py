@@ -126,7 +126,7 @@ class course(models.Model):
     duplicate = models.IntegerField(default=0)
     type=models.CharField(max_length=40,null=False,choices=course_type,default="0")
     semester=models.CharField(max_length=10,null=False,default="Spring")
-    exam_date = models.DateField(null=True)
+    exam_date = models.DateTimeField(null=True)
 
 class pre(models.Model):
     '''

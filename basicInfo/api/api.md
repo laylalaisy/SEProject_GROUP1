@@ -307,12 +307,13 @@
 
 ```doc
 @param
-	pre_id(string):原课程代号
-	post_id(string):新课程代号
+	id(string):课程代号
 	name(string):课程名称
+	hour(real): 课程学时
 	credit(real):课程学分
 	intro(string):课程介绍
 	type(string):课程类型
+	exam_date(string): 考试时间
 @return
 	json object{
 		success(bool):操作成功与否
