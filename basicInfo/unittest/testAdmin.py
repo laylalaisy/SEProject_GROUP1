@@ -16,4 +16,4 @@ def testAgreeCourse():
 
 
 if __name__=="__main__":
-    testAgreeCourse()
+    testWaitCourseList()

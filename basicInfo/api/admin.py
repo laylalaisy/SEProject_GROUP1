@@ -19,6 +19,7 @@ def api_admin_coursewaitlist(request):
                 examdate(string):考试日期
                 tid(string):教师工号
                 capacity(string):课程容量
+                name(string)
                 '''
                 print("------")
                 ret = {}
@@ -29,6 +30,7 @@ def api_admin_coursewaitlist(request):
                 ret["tid"]=str(wait_course.teacher_id.teacher_id.account_id)
                 ret["name"] = wait_course.course_id.name
                 ret["capacity"]=str(wait_course.capacity)
+                ret["name"]=wait_course.course_id.name
                 allret.append(ret)
             sorted(allret,key=lambda x:int(x["id"]))
             return JsonResponse(allret,safe=False)

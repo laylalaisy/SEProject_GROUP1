@@ -408,6 +408,7 @@
             examdate(string):考试日期
             tid(string):教师工号
             capacity(string):课程容量
+            name(string):课程名称
 		}
 		...
 		{
@@ -416,6 +417,7 @@
             examdate(string):考试日期
             tid(string):教师工号
             capacity(string):课程容量
+            name(string):课程名称
 		}
 		## 按课程号排序
 	}
