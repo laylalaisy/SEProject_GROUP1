@@ -176,8 +176,10 @@
 @return
 	(array) json object{
 		name(string):课程名称
+		course_id(string):课程id
 		credit(real):课程学分
 		grade(int):课程成绩
+		
 	}
 ```
 
