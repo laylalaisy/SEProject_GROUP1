@@ -62,11 +62,11 @@
                     for(var i=0;i<data.length;i++){
                         var text = "<tr>\n" +
                          "<td>"+data[i].course+"</td>\n" +
-                         "<td>"+data[i].cname+"</td>\n" +
+                         "<td>"+data[i].course_name+"</td>\n" +
                          "<td>"+data[i].capacity+"</td>\n" +
                          "<td>"+data[i].tid+"</td>\n" +
                          "<td>"+data[i].name+"</td>\n" +
-                         "<td><button onclick=\"agree(\'"+data[i].course+"\',\'"+data[i].cname+"\',\'"+data[i].tid+"\',\'"+data[i].capacity+"\',\'"+data[i].tid+"\',\'"+data[i].name+"\')\" id=\"b"+i+"\" type=\"button\" style=\"background-color: #1A9F00\" class=\"btn btn-primary\">同意</button></td>\n" +
+                         "<td><button onclick=\"agree(\'"+data[i].course+"\',\'"+data[i].course_name+"\',\'"+data[i].tid+"\',\'"+data[i].capacity+"\',\'"+data[i].tid+"\',\'"+data[i].name+"\')\" id=\"b"+i+"\" type=\"button\" style=\"background-color: #1A9F00\" class=\"btn btn-primary\">同意</button></td>\n" +
                          "</tr>";
                         {#console.log(text);#}
                         $("#tbody").append(text);
@@ -83,7 +83,7 @@
             console.log("ASS");
         });
     });
-    function agree(id,name,tid) {
+    function agree(id,name,tid, cap) {
         console.log(id,name,tid);
         var basicUrl="http://127.0.0.1:8000/";
         new Promise(function (resolve){
@@ -92,8 +92,10 @@
                method: "POST",
                url: basicUrl+"api/admin/teach",
                data: {
-                   courseid: id,
-                   teacherid: tid,
+                   course: id,
+                   tid: tid,
+				   capacity: cap,
+				   permit: 1,
                    csrfmiddlewaretoken: '{{ csrf_token }}'
                },
                async : false,
@@ -106,7 +108,7 @@
         }).then(
             function (data) {
 				if(data.success){
-                    alert("成功！批准课程："+name+", 教师工号:"+tid)
+                    alert("成功！批准课程："+id+", 教师工号:"+tid)
                 }
                 else{
                     alert(data.reason)
