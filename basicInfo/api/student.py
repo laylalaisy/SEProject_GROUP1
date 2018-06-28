@@ -66,7 +66,7 @@ def api_student_exam(request):
                 teach_id = takeup_id.teach_id
                 course_id = teach_id.course_id
                 tmp["name"] = course_id.name
-                tmp["time"] = teach_id.exam_date
+                tmp["time"] = course_id.exam_date.strftime("%Y-%m-%d %H:%M")
                 room_id = takeup_id.room_id
                 tmp["room"] = room_id.location
                 tmp["seat"] = e.position
