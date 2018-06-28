@@ -38,6 +38,7 @@
 <script>
 	const basicUrl="http://127.0.0.1:8000/";
     function doApply() {
+		var tid=account_id.innerText;
 		var id=document.getElementById("id").value.toString();
 		var capacity=document.getElementById("capacity").value.toString();
 		console.log(id, capacity);
@@ -47,6 +48,7 @@
 				   method: "POST",
 				   url: basicUrl+"api/teacher/opencourse",
 				   data: {
+					   account_id: tid,
 					   id: id,
 					   capacity: capacity,
 					   csrfmiddlewaretoken: '{{ csrf_token }}'
