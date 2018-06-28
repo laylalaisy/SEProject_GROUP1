@@ -142,6 +142,7 @@
 		major(string):专业
 		grade(string):年级
 		email(string):邮箱
+		dorm(string):寝室
 	}
 ```
 
@@ -364,7 +365,7 @@
 @param
 	account_id(string):修改学生用户名
 	name(string):真实姓名
-	dorm(int):寝室
+	dorm(string):寝室
 @return
 	json object{
 		success(bool):操作成功与否

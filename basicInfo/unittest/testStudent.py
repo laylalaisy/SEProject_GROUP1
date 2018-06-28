@@ -26,4 +26,4 @@ def testStudentGrade():
 
 
 if __name__=="__main__":
-    testStudentGrade()
+    testStudentInfo()
