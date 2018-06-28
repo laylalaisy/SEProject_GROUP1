@@ -1,7 +1,40 @@
 {% extends 'basicInfo/admin_base.html' %}
 {% load staticfiles %}
 {% block body %}
-    
+ <script>
+	function c_change(){
+		var course_select=document.getElementById("course_list");
+		var c_id=course_select.value;
+		var url = basicUrl + "api/admin/acceptedCourse?course_id=" + c_id;
+        new Promise(function (resolve){
+           $.ajax(
+               {
+                   method: "GET",
+                   url: url,
+                   data: {
+                   },
+                   async : false,
+                   success: function (data) {
+                        resolve(data);
+                   }
+
+               }
+           )
+            }).then(
+                function (data) {
+                    console.log(data);
+					cour_id.value = data.course_id;
+					cour_name.value = data.name;
+					credit.value = data.credit;
+					hour.value = data.hour;
+					intro.value = data.intro;
+					cour_type.value = data.type;
+					exam_time.value = data.exam_date;
+                }
+            );
+	}
+	
+</script>  
 <div class="content">
     <div id="wrapper">
         <div id="page-wrapper" style="min-height: 58px;">
@@ -15,7 +48,7 @@
                     <div class="col-lg-6">
                         <form action="/teacher/student_comment" method="get">
                             <div class="form-group">
-                                <select class="form-control" name="metric" id="course_list" onchange="change()">
+                                <select class="form-control" name="metric" id="course_list" onChange="c_change()">
 								
                                 </select>
                             </div>
@@ -71,7 +104,7 @@
 
     const basicUrl="http://127.0.0.1:8000/";
     function course_id_list() {
-        var url = basicUrl + "api/admin/getcourseid";
+        var url = basicUrl + "api/admin/listCourseAcceptedId";
         new Promise(function (resolve){
            $.ajax(
                {
@@ -91,7 +124,7 @@
                     console.log(data);
 					var text = "<option value=\"-1\" selected=\"true\" disabled=\"true\">课程代号</option>\n";
                     for(var i=0;i<data.length;i++){
-                        text = text + "<option value=\""+i.toString()+"\">"+data[i].course_id+"</option>\n"
+                        text = text + "<option value=\""+data[i].course_id+"\">"+data[i].course_id+"</option>\n"
                     }
 					var cour_list=document.getElementById("course_list");
 					cour_list.innerHTML = text;
@@ -99,42 +132,7 @@
             );
     }
 </script>
-<script>
-	function change(){
-		var course_select=document.getElementById("course_list");
-		var c_id=course_select.value;
-		var url = basicUrl + "api/admin/getcourse";
-        new Promise(function (resolve){
-           $.ajax(
-               {
-                   method: "POST",
-                   url: url,
-                   data: {
-						course_id: c_id,
-						csrfmiddlewaretoken: '{{ csrf_token }}'
-                   },
-                   async : false,
-                   success: function (data) {
-                        resolve(data);
-                   }
 
-               }
-           )
-            }).then(
-                function (data) {
-                    console.log(data);
-					cour_id.value = data.course_id;
-					cour_name.value = dara.name;
-					credit.value = data.credit;
-					hour.value = data.hour;
-					intro.value = data.intro;
-					cour_type.value = data.type;
-					exam_time.value = data.exam_date;
-                }
-            );
-	}
-	
-</script>
 <script>
     function submitApply() {
 		var c_id = cour_id.value;
@@ -150,9 +148,9 @@
        $.ajax(
            {
                method: "POST",
-               url: basicUrl+"api/admin/modifycourse",
+               url: basicUrl+"api/admin/acceptedCourse",
                data: {
-					course_id: c_id,
+					id: c_id,
 					name: c_name,
 					credit: c_credit,
 					hour: c_hour,
@@ -170,12 +168,11 @@
         }).then(
             function (data) {
 				if(data.success){
-                    alert("成功！)
+                    alert("成功")
                 }
                 else{
                     alert(data.reason)
                 }
-                window.location.reload();
             }
         );
     }
