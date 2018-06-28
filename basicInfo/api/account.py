@@ -191,7 +191,9 @@ def api_account_person_post(request):
 def api_account_person_get(request):
     try:
         account_id = request.GET["account_id"]
+
         obj = attrib.objects.get(account_id=account_id)
+
 
         return JsonResponse(
             {
