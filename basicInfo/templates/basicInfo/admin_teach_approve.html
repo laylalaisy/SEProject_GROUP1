@@ -41,7 +41,7 @@
 
     const basicUrl="http://127.0.0.1:8000/";
     function courselit() {
-        var url = basicUrl + "api/admin/coursewaitlist";
+        var url = basicUrl + "api/admin/teach";
         new Promise(function (resolve){
            $.ajax(
                {
@@ -90,7 +90,7 @@
        $.ajax(
            {
                method: "POST",
-               url: basicUrl+"api/admin/agreecourse",
+               url: basicUrl+"api/admin/teach",
                data: {
                    courseid:id,
                    teacherid:tid,
