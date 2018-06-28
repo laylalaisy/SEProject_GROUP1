@@ -122,11 +122,11 @@
 		image(String):该学生的头像，如果没有传一个默认图片
 		reason(string):不成功的原因
 	}
+```
+
 
 
 #### Student API
-
-
 
 ##### GET /api/student/info
 

@@ -7,54 +7,45 @@
         <div id="page-wrapper" style="min-height: 58px;">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">教师申请</h1>
+                    <h1 class="page-header">教师信息修改</h1>
                 </div>
             </div>
-            <div class="row">
-                <form role="form">
-                    <div class="col-lg-6">
-                        <form action="/api/admin/promote" method="get">
-                            <div class="form-group">
-                                <select class="form-control" name="metric">
-                                    <option value="account_id">教师工号</option>
-                                </select>
-                            </div>
-                        </form>
+            <div class="col-lg-6">
+                <form role="form" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="disabledSelect">工号</label>
+                        <input class="form-control" id="teacher_id" type="text" placeholder={{teacher_id}} >
                     </div>
+                    <button type="button" onclick="search()">查询</button>
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        <label for="disabledSelect">新工号</label>
+                        <input name="tid" id="teacher_newid" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_newid}}>
+                    </div>
+                    <div class="form-group">
+                        <label for="disabledSelect">姓名</label>
+                        <input name="tname" id="teacher_name" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_name}}>
+                    </div>
+                    <div class="form-group">
+                        <label for="disabledSelect">职称</label>
+                        <input name="ttitle" id="teacher_title" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_title}}>
+                    </div>
+                    <div class="form-group">
+                        <label for="disabledSelect">办公室</label>
+                        <input name="tdepartment" id="teacher_office" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_office}}>
+                    </div>
+                    <div class="form-group">
+                        <label for="disabledSelect">管理学院</label>
+                        <input class="form-control" id="teacher_manage" type="text" placeholder={{teacher_manage}} >
+                    </div>
+                    <div class="form-group">
+                        <label for="disabledSelect">邮箱</label>
+                        <input class="form-control" id="teacher_email" type="text" placeholder={{college_name}} >
+                    </div>
+                    <button type="button" onclick="push()">确认修改</button>
                 </form>
             </div>
-            <table class="table table-hover table-condensed" id="kexuan-tab">
-                <thead>
-                    <tr>
-                        <th>教师工号</th>
-                        <th>学院名称</th>
-                        <th>真实姓名</th>
-                        <th>职称</th>
-                        <th>办公室</th>
-                        <th>管理学院</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for comment in comments %}
-                    <form action="/api/admin/promote" method="get">
-                        <tr>
-                            <td>{{account_id}}</td>
-                            <td>{{college}}</td>
-                            <td>{{name}}</td>
-                            <td>{{title}}</td>
-                            <td>{{office}}</td>
-                            <td>{{management}}</td>
-                        </tr>
-                    </form>
-                    <form role="form" action="/api/admin/promote" method="POST">
-                        {% csrf_token %}
-                        <td>
-                            <button type="submit" name="accept" value={{accept}}>同意与否</button>
-                        </td>
-                    </form>
-                    {% endfor %}
-                </tbody>
-            </table>
         </div>
         <!-- /#page-wrapper -->
     </div>
