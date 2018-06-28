@@ -95,6 +95,7 @@ def api_student_grade(request):
                 tmp["name"] = course_id.name
                 tmp["credit"] = course_id.credit
                 tmp["grade"] = l.grade
+                tmp["course_id"]=l.course_id.course_id
                 if l.grade!=None:
                     course_list.append(tmp)
 

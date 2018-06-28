@@ -15,10 +15,11 @@
                     <tr>
                         <th>课程代号</th>
                         <th>课程名称</th>
-                        <th>课程容量</th>
-                        <th>课程时间</th>
-                        <th>教师工号</th>
-                        <th>教师姓名</th>
+                        <th>课程学分</th>
+                        <th>课程课时</th>
+                        <th>课程介绍</th>
+                        <th>课程学期</th>
+                        <th>考试时间</th>
                         <th>批复</th>
                     </tr>
                 </thead>
@@ -67,11 +68,11 @@
                                 <th>教师姓名</th>
                          "<td>"+data[i].id+"</td>\n" +
                          "<td>"+data[i].name+"</td>\n" +
-                         "<td>"+data[i].time+"</td>\n" +
-                         "<td>"+data[i].capacity+"</td>\n" +
-                         "<td>"+data[i].tid+"</td>\n" +
-                         "<td>"+data[i].tname+"</td>\n" +
-                         "<td><button onclick=\"agree(\'"+data[i].id+"\',\'"+data[i].name+"\',\'"+data[i].tid+"\')\" id=\"b"+i+"\" type=\"button\" style=\"background-color: #1A9F00\" class=\"btn btn-primary\">同意</button></td>\n" +
+                         "<td>"+data[i].credit+"</td>\n" +
+                         "<td>"+data[i].hour+"</td>\n" +
+                         "<td>"+data[i].intro+"</td>\n" +
+                         "<td>"+data[i].semester+"</td>\n" +
+                         "<td><button onclick=\"agree(\'"+data[i].id+"\')\" id=\"b"+i+"\" type=\"button\" style=\"background-color: #1A9F00\" class=\"btn btn-primary\">同意</button></td>\n" +
                          "</tr>";
                         {#console.log(text);#}
                         $("#tbody").append(text);
@@ -88,8 +89,8 @@
             console.log("ASS");
         });
     });
-    function agree(id,name,tid) {
-        console.log(id,name,tid);
+    function agree(id,exam_date) {
+        console.log(id,examdate);
         var basicUrl="http://127.0.0.1:8000/";
         new Promise(function (resolve){
        $.ajax(
@@ -98,7 +99,8 @@
                url: basicUrl+"api/admin/course",
                data: {
                    courseid:id,
-                   teacherid:tid,
+                   examdate:exam_date,
+                   permit:true,
                    csrfmiddlewaretoken: '{{ csrf_token }}'
                },
                async : false,
@@ -111,7 +113,7 @@
         }).then(
             function (data) {
                 console.log(data);
-                alert("成功！批准课程："+name+", 教师工号:"+tid)
+                alert("成功！批准课程")
                 window.location.reload();
             }
         );
