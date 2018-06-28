@@ -259,6 +259,7 @@
 ```
 
 
+
 ##### POST /api/teacher/addcourse
 
 申请新增课程
@@ -357,7 +358,7 @@
 
 
 
-##### POST/api/admin/student
+##### POST /api/admin/student
 
 学生信息修改
 
@@ -375,7 +376,7 @@
 
 
 
-##### POST/api/admin/teacher
+##### POST /api/admin/teacher
 
 教师信息修改
 
@@ -395,9 +396,9 @@
 ```
 
 
-######### 需要
+######
 ##### GET /api/admin/coursewaitlist
-待审批课程
+待审批课程列表
 
 ```doc
 @param
@@ -405,32 +406,95 @@
 	(array) json object{
 	    {
             id(string):课程号
-            num(string):开课次数
-            examdate(string):考试日期
-            tid(string):教师工号
-            capacity(string):课程容量
             name(string):课程名称
+            credit(float):课程学分
+            hour(float):课程课时
+            intro(string):课程介绍
+            semester(string):课程学期
 		}
-		...
-		{
-            id(string):课程号
-            num(string):开课次数
-            examdate(string):考试日期
-            tid(string):教师工号
-            capacity(string):课程容量
-            name(string):课程名称
-		}
-		## 按课程号排序
 	}
 ```
 
+
+
 ##### POST /api/admin/agreecourse
+
 待审批课程 同意审批
 
 ```doc
 @param
     courseid(string):课程号
-    teacherid(string):老师id
+    examdate(date):考试时间
+@return
+	json object{
+		success(bool):操作成功与否
+		reason(string):不成功的原因
+	}
+```
+
+
+
+##### POST /api/admin/disagreecourse
+
+待审批课程 不同意审批
+
+```doc
+@param
+    courseid(string):课程号
+@return
+	json object{
+		success(bool):操作成功与否
+		reason(string):不成功的原因
+	}
+```
+
+###### 
+
+##### GET /api/admin/teachwaitlist
+
+待审批授课列表
+
+```doc
+@param
+@return
+	(array) json object{
+	    {
+	    	course(string):课程代码
+	    	tid(string):教师工号
+	    	capacity(string):课程容量
+		}
+	}
+```
+
+
+
+##### POST /api/admin/agreeteach
+
+待审批授课 同意审批
+
+```doc
+@param
+    course(string):课程代码
+    tid(string):教师工号
+    capacity(string):课程容量
+@return
+	json object{
+		success(bool):操作成功与否
+		reason(string):不成功的原因
+	}
+```
+
+
+
+##### POST /api/admin/disagreeteach
+
+待审批授课 不同意审批
+
+```doc
+@param
+    course(string):课程代码
+    tid(string):教师工号
+    capacity(string):课程容量
 @return
 	json object{
 		success(bool):操作成功与否
