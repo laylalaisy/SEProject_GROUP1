@@ -20,10 +20,6 @@
                     <button type="button" onclick="search()">查询</button>
                     <div class="clearfix"></div>
                     <div class="form-group">
-                        <label for="disabledSelect">新工号</label>
-                        <input name="tid" id="teacher_newid" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_newid}}>
-                    </div>
-                    <div class="form-group">
                         <label for="disabledSelect">姓名</label>
                         <input name="tname" id="teacher_name" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_name}}>
                     </div>
@@ -37,11 +33,11 @@
                     </div>
                     <div class="form-group">
                         <label for="disabledSelect">管理学院</label>
-                        <input class="form-control" id="teacher_manage" type="text" placeholder={{teacher_manage}} >
+                        <input class="form-control" id="teacher_management" type="text" placeholder={{teacher_management}} >
                     </div>
                     <div class="form-group">
                         <label for="disabledSelect">邮箱</label>
-                        <input class="form-control" id="teacher_email" type="text" placeholder={{college_name}} >
+                        <input class="form-control" id="teacher_email" type="text" placeholder={{teacher_email}} >
                     </div>
                     <button type="button" onclick="push()">确认修改</button>
                 </form>
@@ -53,6 +49,83 @@
 
 </div>
 <!--content-ends-->
+
+<script>
+    const basicUrl="http://127.0.0.1:8000/";
+    function search() {
+        var tid=teacher_id.value;
+
+        new Promise(function (resolve){
+            $.ajax(
+                {
+                    method: "GET",
+                    url: basicUrl+"api/teacher/info",
+                    data: {
+                        account_id: tid,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    async : false,
+                    success: function (data) {
+                        resolve(data);
+                        console.log(data);
+                    }
+                }
+            )
+        }).then(
+            function (data) {
+                console.log(data);
+
+                teacher_name.value = data.name
+                teacher_title.value = data.teacher_title
+                teacher_office.value = data.teacher_office
+                teacher_management.value = data.teacher_management
+                teacher_email.value = data.email;
+            }
+
+        );
+    }
+    function push(){
+        var tid = teacher_id.value;
+        var tname = teacher_name.value;
+        var ttitle = teacher_title.value;
+        var toffice = teacher_office.value;
+        var tmanagement = teacher_management.value;
+
+        new Promise(function (resolve){
+            $.ajax(
+                {
+                    method: "POST",
+                    url: basicUrl+"api/admin/teacher",
+                    data: {
+                        account_id: tid,
+                        name: tname,
+                        title: ttitle,
+                        office: toffice,
+                        management: tmanagement,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    async : false,
+                    success: function (data) {
+                        resolve(data);
+                        console.log(data);
+                    }
+                }
+            )
+        }).then(
+            function (data) {
+                console.log(data);
+
+                if(data.success){
+                    alert("修改成功");
+                }
+                else{
+                    alert(data.reason)
+                }
+            }
+
+        );
+    }
+</script>
 
 
 {% endblock %}

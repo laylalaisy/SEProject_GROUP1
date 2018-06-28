@@ -20,10 +20,6 @@
                     <button type="button" onclick="search()">查询</button>
                     <div class="clearfix"></div>
                     <div class="form-group">
-                        <label for="disabledSelect">新学号</label>
-                        <input name="sid" id="student_newid" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{student_newid}}>
-                    </div>
-                    <div class="form-group">
                         <label for="disabledSelect">姓名</label>
                         <input name="sname" id="student_name" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{student_name}}>
                     </div>
@@ -65,8 +61,45 @@
             function (data) {
                 console.log(data);
 
-                student_newid.value = sid;
                 student_name.value = data.name
+                student_dorm.value = data.dorm
+            }
+
+        );
+    }
+    function push(){
+        var sid = student_id.value;
+        var sname = student_name.value;
+        var sdorm = student_dorm.value;
+
+        new Promise(function (resolve){
+            $.ajax(
+                {
+                    method: "POST",
+                    url: basicUrl+"api/admin/student",
+                    data: {
+                        account_id: sid,
+                        name: sname,
+                        dorm: sdorm,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    async : false,
+                    success: function (data) {
+                        resolve(data);
+                        console.log(data);
+                    }
+                }
+            )
+        }).then(
+            function (data) {
+                console.log(data);
+
+                if(data.success){
+                    alert("修改成功");
+                }
+                else{
+                    alert(data.reason)
+                }
             }
 
         );

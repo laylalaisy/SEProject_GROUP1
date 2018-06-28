@@ -296,7 +296,7 @@
 
 
 
-#### Admin
+#### Admin API
 
 
 ##### POST /api/admin/modifycourse
