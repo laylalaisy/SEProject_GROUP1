@@ -1,14 +1,13 @@
 {% extends 'basicInfo/admin_base.html' %}
 {% load staticfiles %}
 {% block body %}
-    
 
 <div class="content">
     <div id="wrapper">
         <div id="page-wrapper" style="min-height: 58px;">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">课程审批</h1>
+                    <h1 class="page-header">教学班级审批</h1>
                 </div>
             </div>
             <table class="table table-hover table-condensed" id="kexuan-tab">
@@ -16,8 +15,8 @@
                     <tr>
                         <th>课程代号</th>
                         <th>课程名称</th>
-                        <th>课程时间</th>
                         <th>课程容量</th>
+                        <th>课程时间</th>
                         <th>教师工号</th>
                         <th>教师姓名</th>
                         <th>批复</th>
@@ -32,9 +31,7 @@
     </div>
     <!-- /#wrapper -->
 </div>
-<!--content-ends-->
-
-
+                
 <script>
     $(document).ready(function () {
         courselit();
@@ -62,13 +59,19 @@
                     {#console.log(data);#}
                     for(var i=0;i<data.length;i++){
                         var text = "<tr>\n" +
+                        <th>课程代号</th>
+                                <th>课程名称</th>
+                                <th>课程容量</th>
+                                <th>课程时间</th>
+                                <th>教师工号</th>
+                                <th>教师姓名</th>
                          "<td>"+data[i].id+"</td>\n" +
                          "<td>"+data[i].name+"</td>\n" +
                          "<td>"+data[i].time+"</td>\n" +
                          "<td>"+data[i].capacity+"</td>\n" +
                          "<td>"+data[i].tid+"</td>\n" +
                          "<td>"+data[i].tname+"</td>\n" +
-                         "<td><button onclick=\"agree(\'"+data[i].id+"\',\'"+data[i].name+"\',\'"+data[i].time+"\',\'"+data[i].capacity+"\',\'"+data[i].tid+"\',\'"+data[i].tname+"\')\" id=\"b"+i+"\" type=\"button\" style=\"background-color: #1A9F00\" class=\"btn btn-primary\">同意</button></td>\n" +
+                         "<td><button onclick=\"agree(\'"+data[i].id+"\',\'"+data[i].name+"\',\'"+data[i].tid+"\')\" id=\"b"+i+"\" type=\"button\" style=\"background-color: #1A9F00\" class=\"btn btn-primary\">同意</button></td>\n" +
                          "</tr>";
                         {#console.log(text);#}
                         $("#tbody").append(text);
@@ -113,7 +116,6 @@
             }
         );
     }
-</script>
-            
+</script>     
     
 {% endblock %}
