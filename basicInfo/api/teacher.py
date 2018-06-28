@@ -30,9 +30,14 @@ def api_teacher_info(request):
             return JsonResponse(ret)
 
         except:
-            return HttpResponseBadRequest()
+            ret = {}
+            ret["name"] = "获取失败"
+            ret["teacher_title"] = "获取失败"
+            ret["teacher_office"] = "获取失败"
+            ret["teacher_management"] = "获取失败"
+            ret["email"] = "获取失败"
+            return JsonResponse(ret)
     else:
-        print("fuck")
         ret={}
         try:
             account_id=request.POST["account_id"]
@@ -42,7 +47,6 @@ def api_teacher_info(request):
             teacher_info = teacher.objects.get(teacher_id=account_id)
             teacher_attrib_info = attrib.objects.get(account_id=account_id)
 
-            print(teacher_info,teacher_attrib_info)
             teacher_info.office=teacher_office
             teacher_attrib_info.email=account_email
             teacher_info.save()
@@ -107,7 +111,8 @@ def api_teacher_course(request):
 
         except Exception as e:
             print(e)
-            return HttpResponseBadRequest()
+            return JsonResponse([], safe=False)
+    return HttpResponseBadRequest()
 
 @csrf_exempt
 def api_teacher_addcourse(request):
@@ -138,7 +143,8 @@ def api_teacher_addcourse(request):
             return JsonResponse({"success": 1, "reason": None})
 
         except:
-            return HttpResponseBadRequest()
+            return JsonResponse({"success": 0, "reason": "添加失败"})
+    return HttpResponseBadRequest()
 
 @csrf_exempt
 def api_teacher_opencourse(request):
@@ -155,11 +161,11 @@ def api_teacher_opencourse(request):
                 teacherObj=teacher.objects.get(teacher_id=account_id)
             except:
                 return JsonResponse({"success": 0, "reason": "没有这个老师"})
-            try:
-                readyteach.objects.get(teacher_id=account_id,course_id=course_id)
-                return JsonResponse({"success":0,"reason":"您已经申请过这门课"})
-            except:
-                pass
+            # try:
+            #     readyteach.objects.get(teacher_id=account_id,course_id=course_id)
+            #     return JsonResponse({"success":0,"reason":"您已经申请过这门课"})
+            # except:
+            #     pass
 
 
             waitCourse=readyteach()
@@ -168,6 +174,7 @@ def api_teacher_opencourse(request):
             waitCourse.capacity=capacity
             waitCourse.save()
             return JsonResponse({"success":1,"reason":None})
+    return HttpResponseBadRequest()
 
 
 
@@ -197,4 +204,5 @@ def api_teacher_chgcourse(request):
             except:
                 return JsonResponse({"success": 0, "reason": "没有相应的课程"})
         except:
-            return HttpResponseBadRequest()
+            return JsonResponse({"success": 0, "reason": "修改失败"})
+    return HttpResponseBadRequest()

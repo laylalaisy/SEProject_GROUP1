@@ -142,6 +142,7 @@
 		major(string):专业
 		grade(string):年级
 		email(string):邮箱
+		dorm(string):寝室
 	}
 ```
 
@@ -296,7 +297,7 @@
 
 
 
-#### Admin
+#### Admin API
 
 
 ##### POST /api/admin/modifycourse
@@ -364,7 +365,7 @@
 @param
 	account_id(string):修改学生用户名
 	name(string):真实姓名
-	dorm(int):寝室
+	dorm(string):寝室
 @return
 	json object{
 		success(bool):操作成功与否
@@ -408,6 +409,7 @@
             examdate(string):考试日期
             tid(string):教师工号
             capacity(string):课程容量
+            name(string):课程名称
 		}
 		...
 		{
@@ -416,6 +418,7 @@
             examdate(string):考试日期
             tid(string):教师工号
             capacity(string):课程容量
+            name(string):课程名称
 		}
 		## 按课程号排序
 	}
