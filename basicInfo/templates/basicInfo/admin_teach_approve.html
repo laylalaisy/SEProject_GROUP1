@@ -66,7 +66,8 @@
                          "<td>"+data[i].capacity+"</td>\n" +
                          "<td>"+data[i].tid+"</td>\n" +
                          "<td>"+data[i].name+"</td>\n" +
-                         "<td><button onclick=\"agree(\'"+data[i].course+"\',\'"+data[i].course_name+"\',\'"+data[i].tid+"\',\'"+data[i].capacity+"\',\'"+data[i].tid+"\',\'"+data[i].name+"\')\" id=\"b"+i+"\" type=\"button\" style=\"background-color: #1A9F00\" class=\"btn btn-primary\">同意</button></td>\n" +
+                         "<td><button onclick=\"disagree(\'"+data[i].course+"\',\'"+data[i].course_name+"\',\'"+data[i].tid+"\',\'"+data[i].capacity+"\',\'"+data[i].tid+"\',\'"+data[i].name+"\')\" id=\"b"+i+"\" type=\"button\" style=\"background-color: #1A9F00\" class=\"btn btn-primary\">拒绝</button>" +
+                         "<button onclick=\"agree(\'"+data[i].course+"\',\'"+data[i].course_name+"\',\'"+data[i].tid+"\',\'"+data[i].capacity+"\',\'"+data[i].tid+"\',\'"+data[i].name+"\')\" id=\"b"+i+"\" type=\"button\" style=\"background-color: #1A9F00\" class=\"btn btn-primary\">同意</button></td>\n" +
                          "</tr>";
                         {#console.log(text);#}
                         $("#tbody").append(text);
@@ -96,6 +97,40 @@
                    tid: tid,
 				   capacity: cap,
 				   permit: 1,
+                   csrfmiddlewaretoken: '{{ csrf_token }}'
+               },
+               async : false,
+               success: function (data) {
+                    resolve(data);
+               }
+
+           }
+       )
+        }).then(
+            function (data) {
+				if(data.success){
+                    alert("成功！批准课程："+id+", 教师工号:"+tid)
+                }
+                else{
+                    alert(data.reason)
+                }
+                window.location.reload();
+            }
+        );
+    }
+    function disagree(id,name,tid, cap) {
+        console.log(id,name,tid);
+        var basicUrl="http://127.0.0.1:8000/";
+        new Promise(function (resolve){
+       $.ajax(
+           {
+               method: "POST",
+               url: basicUrl+"api/admin/teach",
+               data: {
+                   course: id,
+                   tid: tid,
+				   capacity: cap,
+				   permit: 0,
                    csrfmiddlewaretoken: '{{ csrf_token }}'
                },
                async : false,

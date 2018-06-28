@@ -28,9 +28,11 @@
                     <tr>
                         <th>课程代号</th>
                         <th>课程名称</th>
-                        <th>开课次数</th>
-                        <th>教师工号</th>
-                        <th>课程容量</th>
+                        <th>课程学分</th>
+                        <th>课程课时</th>
+                        <th>课程介绍</th>
+                        <th>课程学期</th>
+                        <th>考试时间</th>
                         <th>批复</th>
                     </tr>
                 </thead>
@@ -42,7 +44,6 @@
         <!-- /#page-wrapper -->
     </div>
     <!-- /#wrapper -->
-            
 
 <script>
     $(document).ready(function () {
@@ -51,7 +52,7 @@
 
     const basicUrl="http://127.0.0.1:8000/";
     function courselit() {
-        var url = basicUrl + "api/admin/coursewaitlist";
+        var url = basicUrl + "api/admin/course";
         new Promise(function (resolve){
            $.ajax(
                {
@@ -73,10 +74,13 @@
                         var text = "<tr>\n" +
                          "<td>"+data[i].id+"</td>\n" +
                          "<td>"+data[i].name+"</td>\n" +
-                         "<td>"+data[i].+num"</td>\n" +
-                         "<td>"+data[i].tid+"</td>\n" +
-                         "<td>"+data[i].capacity+"</td>\n" +
-                         "<td><button onclick=\"agree(\'"+data[i].id+"\',\'"+data[i].name+"\',\'"+data[i].tid+"\')\" id=\"b"+i+"\" type=\"button\" style=\"background-color: #1A9F00\" class=\"btn btn-primary\">同意</button></td>\n" +
+                         "<td>"+data[i].credit+"</td>\n" +
+                         "<td>"+data[i].hour+"</td>\n" +
+                         "<td>"+data[i].intro+"</td>\n" +
+                         "<td>"+data[i].semester+"</td>\n" +
+                         "<td><input type=\"datetime-local\" class=\"datepicker\" placeholder=\"请选择日期\" id=\"d"+i+"\"/></td>\n" +
+                         "<td><button onclick=\"disagree(\'"+data[i].id+"\',"+i+")\" id=\"b"+i+"\" type=\"button\" style=\"background-color: #1A9F00\" class=\"btn btn-primary\">拒绝</button>" +
+                         "<button onclick=\"agree(\'"+data[i].id+"\',"+i+")\" id=\"b"+i+"\" type=\"button\" style=\"background-color: #1A9F00\" class=\"btn btn-primary\">同意</button></td>\n" +
                          "</tr>";
                         {#console.log(text);#}
                         $("#tbody").append(text);
@@ -93,17 +97,18 @@
             console.log("ASS");
         });
     });
-    function agree(id,name,tid) {
-        console.log(id,name,tid);
+    function agree(id,timei) {
+        console.log(id,document.getElementById("d" + timei).value);
         var basicUrl="http://127.0.0.1:8000/";
         new Promise(function (resolve){
        $.ajax(
            {
                method: "POST",
-               url: basicUrl+"api/admin/agreecourse",
+               url: basicUrl+"api/admin/course",
                data: {
                    courseid:id,
-                   teacherid:tid,
+                   examdate:document.getElementById("d" + timei).value,
+                   permit:1,
                    csrfmiddlewaretoken: '{{ csrf_token }}'
                },
                async : false,
@@ -116,7 +121,42 @@
         }).then(
             function (data) {
                 console.log(data);
-                alert("成功！批准课程："+name+", 教师工号:"+tid)
+                if(data.success)
+                    alert("成功！批准开课：" + id);
+                else
+                    alert(data.reason);
+                window.location.reload();
+            }
+        );
+    }
+    function disagree(id,timei) {
+        console.log(id,document.getElementById("d" + timei).value);
+        var basicUrl="http://127.0.0.1:8000/";
+        new Promise(function (resolve){
+       $.ajax(
+           {
+               method: "POST",
+               url: basicUrl+"api/admin/course",
+               data: {
+                   courseid:id,
+                   examdate:document.getElementById("d" + timei).value,
+                   permit:0,
+                   csrfmiddlewaretoken: '{{ csrf_token }}'
+               },
+               async : false,
+               success: function (data) {
+                    resolve(data);
+               }
+
+           }
+       )
+        }).then(
+            function (data) {
+                console.log(data);
+                if(data.success)
+                    alert("成功！拒绝开课：" + id);
+                else
+                    alert(data.reason);
                 window.location.reload();
             }
         );
