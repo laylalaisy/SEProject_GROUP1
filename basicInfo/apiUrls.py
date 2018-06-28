@@ -26,12 +26,16 @@ urlpatterns = [
     url(r"^teacher/chgcourse$",api_teacher.api_teacher_chgcourse),
     url(r"^teacher/opencourse",api_teacher.api_teacher_opencourse),
 
-    url(r"^admin/coursewaitlist",api_admin.api_admin_coursewaitlist),
-    url(r"^admin/modifycourse",api_admin.api_admin_modify_course),
-    url(r"^admin/modifyteach",api_admin.api_admin_modify_teach),
+    url(r"^admin/course$",api_admin.api_admin_course),
+    # url(r"^admin/modifycourse",api_admin.api_admin_modify_course),
+    # url(r"^admin/modifyteach",api_admin.api_admin_modify_teach),
     url(r"^admin/promote",api_admin.api_admin_promote),
     url(r"^admin/student",api_admin.api_student_info),
     url(r"^admin/teacher",api_admin.api_teacher_info),
-    url(r"^admin/agreecourse",api_admin.api_admin_agreecourse)
+    url(r"^admin/teach",api_admin.api_admin_teach),
+    url(r"^admin/listCourseAcceptedId",api_admin.api_admin_courseAccepted_id_list),
+    url(r"^admin/acceptedCourse$",api_admin.api_admin_courseAccepted),
+    url(r"^admin/acceptedTeach$",api_admin.api_admin_teachAccepted),
+
     
 ]

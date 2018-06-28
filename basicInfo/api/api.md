@@ -301,43 +301,7 @@
 #### Admin API
 
 
-##### POST /api/admin/modifycourse
 
-修改课程信息
-
-```doc
-@param
-	id(string):课程代号
-	name(string):课程名称
-	hour(real): 课程学时
-	credit(real):课程学分
-	intro(string):课程介绍
-	type(string):课程类型
-	exam_date(string): 考试时间
-@return
-	json object{
-		success(bool):操作成功与否
-		reason(string):不成功的原因
-	}
-```
-
-
-
-##### POST /api/admin/modifyteach
-
-修改授课信息
-
-```doc
-@param
-	teach_id(int):编号
-	teacher(string):教师工号(many to many)
-	capacity(int):课程容量
-@return
-	json object{
-		success(bool):操作成功与否
-		reason(string):不成功的原因
-	}
-```
 
 
 
@@ -377,6 +341,8 @@
 
 
 
+
+
 ##### POST /api/admin/teacher
 
 教师信息修改
@@ -397,8 +363,11 @@
 ```
 
 
-######
-##### GET /api/admin/coursewaitlist
+
+
+
+
+##### GET /api/admin/course
 待审批课程列表
 
 ```doc
@@ -418,7 +387,7 @@
 
 
 
-##### POST /api/admin/agreecourse
+##### POST /api/admin/course
 
 待审批课程 同意审批
 
@@ -426,6 +395,7 @@
 @param
     courseid(string):课程号
     examdate(date):考试时间
+    permit(bool):是否同意 0:不同意 1:同意
 @return
 	json object{
 		success(bool):操作成功与否
@@ -433,25 +403,10 @@
 	}
 ```
 
-
-
-##### POST /api/admin/disagreecourse
-
-待审批课程 不同意审批
-
-```doc
-@param
-    courseid(string):课程号
-@return
-	json object{
-		success(bool):操作成功与否
-		reason(string):不成功的原因
-	}
-```
 
 ###### 
 
-##### GET /api/admin/teachwaitlist
+##### GET /api/admin/teach
 
 待审批授课列表
 
@@ -463,21 +418,23 @@
 	    	course(string):课程代码
 	    	tid(string):教师工号
 	    	capacity(string):课程容量
+	    	name(string):教师姓名
 		}
 	}
 ```
 
 
 
-##### POST /api/admin/agreeteach
+##### POST /api/admin/teach
 
-待审批授课 同意审批
+待审批授课 (不)同意审批
 
 ```doc
 @param
     course(string):课程代码
     tid(string):教师工号
     capacity(string):课程容量
+    permit(bool):是否同意 0:不同意 1:同意
 @return
 	json object{
 		success(bool):操作成功与否
@@ -487,15 +444,57 @@
 
 
 
-##### POST /api/admin/disagreeteach
 
-待审批授课 不同意审批
+
+
+
+
+##### GET /api/admin/listCourseAcceptedId
+返回所有现在已经通过课程（course）的id
 
 ```doc
 @param
-    course(string):课程代码
-    tid(string):教师工号
-    capacity(string):课程容量
+
+@return
+	(array)json object{
+		course_id(string): 每个课程的id
+	}
+```
+
+##### GET /api/admin/acceptedCourse
+返回course_id 对应的信息
+
+```doc
+@param
+	course_id(string): 课程的id
+@return
+	json object{
+		course_id(string): 课程的id
+		name(string): 课程的名字
+		credit(real): 课程学分
+		hour(read): 课程学时
+		type(string): 课程类型
+		intro(string):课程介绍
+		exam_date(string): 考试时间
+		"teachList":(array)json object{
+            teach_id(string): 开课id
+        }
+	}
+```
+
+##### POST /api/admin/acceptedCourse
+
+修改课程信息
+
+```doc
+@param
+	id(string):原课程代号
+	name(string):课程名称
+	hour(read): 课程学时
+	credit(real):课程学分
+	intro(string):课程介绍
+	type(string):课程类型
+	exam_date(string): 考试时间
 @return
 	json object{
 		success(bool):操作成功与否
@@ -503,6 +502,40 @@
 	}
 ```
 
+
+
+
+
+
+##### GET /api/admin/acceptedTeach
+返回已审批teach_id对应的teach信息
+
+```doc
+@param
+	teach_id(string): teach的id
+@return
+	json object{
+		teach_id(string): 开课id
+		tid(string): 老师工号
+		capacity(string):课程容量
+	}
+```
+
+
+##### POST /api/admin/acceptedTeach
+修改已审批teach_id对应的teach信息
+
+```doc
+@param
+	teach_id(string): teach的id
+	tid(string): 老师工号
+	capacity(string):课程容量
+@return
+	json object{
+		success(bool):操作成功与否
+		reason(string):不成功的原因
+	}
+```
 
 
 
