@@ -118,4 +118,4 @@ def testTeachAcceptPost():
     print(response.text)
 
 if __name__=="__main__":
-    testTeachAcceptPost()
+    testCourseAcceptGet()
