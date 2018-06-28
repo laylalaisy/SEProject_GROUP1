@@ -50,15 +50,17 @@ def api_admin_agreecourse(request):
              "reason":None
              }
         try:
-            waitCourse=readyteach.objects.get(course_id=course_id,teacher_id=teacher_id)
-            teachobj=teach()
-            teachobj.course_id=waitCourse.course_id
-            teachobj.teacher_id=waitCourse.teacher_id
-            teachobj.capacity=waitCourse.capacity
-            teachobj.save()
-            waitCourse.course_id.duplicate+=1
-            waitCourse.course_id.save()
-            waitCourse.delete()
+            waitCourses=readyteach.objects.filter(course_id=course_id,teacher_id=teacher_id)
+            for waitCourse in waitCourses:
+                teachobj=teach()
+                teachobj.course_id=waitCourse.course_id
+                teachobj.teacher_id=waitCourse.teacher_id
+                teachobj.capacity=waitCourse.capacity
+                teachobj.save()
+                waitCourse.course_id.duplicate+=1
+                waitCourse.course_id.save()
+                waitCourse.delete()
+                break
             ret["success"]=1
 
             return JsonResponse(ret)

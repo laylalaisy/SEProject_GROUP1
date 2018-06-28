@@ -138,7 +138,7 @@ def api_teacher_addcourse(request):
             new_course.intro = intro
             new_course.hour=hour
             new_course.duplicate=0
-            new_course.type=0
+            new_course.type="0"
             new_course.save()
             return JsonResponse({"success": 1, "reason": None})
 
@@ -167,9 +167,14 @@ def api_teacher_opencourse(request):
             # except:
             #     pass
 
+            courseInfo=course.objects.get(course_id=course_id)
+            if courseInfo.type=="0":
+                return JsonResponse({"success":0,"reason":"该课程在审核中"})
+
+
 
             waitCourse=readyteach()
-            waitCourse.course_id=course.objects.get(course_id=course_id)
+            waitCourse.course_id=courseInfo
             waitCourse.teacher_id=teacherObj
             waitCourse.capacity=capacity
             waitCourse.save()

@@ -33,6 +33,7 @@ urlpatterns = [
     url(r"^admin_course_approve$", views.admin_course_approve),
     url(r"^admin_teach_approve$", views.admin_teach_approve),
     url(r"^admin_course_adjust$", views.admin_course_adjust),
+    url(r"^admin_teach_adjust$", views.admin_teach_adjust),
     url(r"^admin_apply_approve_s$", views.admin_apply_approve_s),
     url(r"^admin_apply_approve_t$", views.admin_apply_approve_t),
     url(r"^admin_select_adjust$", views.admin_select_adjust),
