@@ -222,6 +222,13 @@ def admin_course_adjust(request):
     }
     return render(request, "basicInfo/admin_course_adjust.html", feedDict)
 
+def admin_teach_adjust(request):
+    tid = request.session["account_id"]
+    feedDict={
+        "account_id": tid
+    }
+    return render(request, "basicInfo/admin_teach_adjust.html", feedDict)
+
 
 def admin_apply_approve_s(request):
     tid = request.session["account_id"]
