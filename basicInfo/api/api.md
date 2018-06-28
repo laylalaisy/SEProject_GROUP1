@@ -416,6 +416,7 @@
 	(array) json object{
 	    {
 	    	course(string):课程代码
+	    	course_name(string):课程名称
 	    	tid(string):教师工号
 	    	capacity(string):课程容量
 	    	name(string):教师姓名

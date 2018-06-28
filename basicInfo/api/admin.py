@@ -94,6 +94,7 @@ def api_admin_teach(request):
             for wait_course in wait_courses:
                 '''
                 course(string):课程代码
+                course_name
                 tid(string):教师工号
                 capacity(string):课程容量
                 name(string)
@@ -105,6 +106,7 @@ def api_admin_teach(request):
                 ret["tid"]=str(wait_course.teacher_id.teacher_id.account_id)
                 ret["capacity"]=str(wait_course.capacity)
                 ret["name"]=str(wait_course.teacher_id.name)
+                ret["course_name"]=wait_course.course_id.name
                 allret.append(ret)
             sorted(allret,key=lambda x:int(x["course"]))
             return JsonResponse(allret,safe=False)
