@@ -107,8 +107,12 @@
        )
         }).then(
             function (data) {
-                console.log(data);
-                alert("成功！批准课程："+name+", 教师工号:"+tid)
+				if(data.success){
+                    alert("成功！批准课程："+name+", 教师工号:"+tid)
+                }
+                else{
+                    alert(data.reason)
+                }
                 window.location.reload();
             }
         );
