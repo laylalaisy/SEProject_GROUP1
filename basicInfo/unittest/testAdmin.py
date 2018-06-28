@@ -8,7 +8,7 @@ def testWaitCourseList():
 def testAgreeCourse():
     api="http://127.0.0.1:8000/api/admin/agreecourse"
     postdata={
-        "teacherid":"000456",
+        "teacherid":"000123",
         "courseid":"00010000"
     }
     response=requests.post(url=api,data=postdata)
@@ -38,4 +38,4 @@ def testTeacherInfoUpdate():
     print(response.text)
 
 if __name__=="__main__":
-    testTeacherInfoUpdate()
+    testAgreeCourse()
