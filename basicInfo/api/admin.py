@@ -219,10 +219,12 @@ def api_admin_courseAccepted(request):
             ret["hour"]=float(course_t.hour)
             ret["type"]=course_t.type
             ret["intro"]=course_t.intro
-            ret["exam_date"]=course_t.exam_date.strftime("%Y-%m-%d %H:%M")
+            if course_t.exam_date:
+                ret["exam_date"]=course_t.exam_date.strftime("%Y-%m-%d %H:%M")
 
             teachList=teach.objects.filter(course_id=courseId)
             for teach_t in teachList:
+                print("-----")
                 ret["teachList"].append(
                     {"teach_id":teach_t.teach_id}
                 )
