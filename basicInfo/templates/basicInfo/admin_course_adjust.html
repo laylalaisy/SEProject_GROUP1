@@ -15,8 +15,8 @@
                     <div class="col-lg-6">
                         <form action="/teacher/student_comment" method="get">
                             <div class="form-group">
-                                <select class="form-control" name="metric">
-                                    <option value="semester">课程代号</option>
+                                <select class="form-control" name="metric" id="course_list" onchange="change()">
+								
                                 </select>
                             </div>
                         </form>
@@ -28,21 +28,33 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="disabledSelect">课程代号</label>
-                        <input name="id" id="id" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{name}}>
+                        <input name="id" id="cour_id" type="text" class="form-control" aria-describedby="basic-addon2" disabled placeholder={{id}}>
                     </div>
                     <div class="form-group">
                         <label for="disabledSelect">课程名称</label>
-                        <input name="name" id="name" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{name}}>
+                        <input name="name" id="cour_name" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{name}}>
                     </div>
                     <div class="form-group">
                         <label for="disabledSelect">课程学分</label>
-                        <input name="credit" id="credit" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_title}}>
+                        <input name="credit" id="credit" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{credit}}>
+                    </div>
+					<div class="form-group">
+                        <label for="disabledSelect">课程学时</label>
+                        <input name="hour" id="hour" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{hour}}>
+                    </div>
+					<div class="form-group">
+                        <label for="disabledSelect">课程介绍</label>
+                        <input name="intro" id="intro" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{intro}}>
                     </div>
                     <div class="form-group">
                         <label for="disabledSelect">课程类型</label>
-                        <input name="type" id="type" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{teacher_college}}>
+                        <input name="type" id="cour_type" type="text" class="form-control" aria-describedby="basic-addon2" placeholder={{type}}>
                     </div>
-                    <button type="submit" value="Submit">确认修改</button>
+					<div class="form-group">
+                        <label for="disabledSelect">时间</label>
+                        <input type="datetime-local" class="form-control" aria-describedby="basic-addon2" id="exam_time">
+                    </div>
+                    <button type="button" onClick="submitApply()">确认修改</button>
                 </form>
             </div>
         <!-- /.row -->
@@ -52,7 +64,122 @@
     <!-- /#wrapper -->
 </div>
 <!--content-ends-->
+<script>
+    $(document).ready(function () {
+        course_id_list();
+    });
 
+    const basicUrl="http://127.0.0.1:8000/";
+    function course_id_list() {
+        var url = basicUrl + "api/admin/getcourseid";
+        new Promise(function (resolve){
+           $.ajax(
+               {
+                   method: "GET",
+                   url: url,
+                   data: {
+                   },
+                   async : false,
+                   success: function (data) {
+                        resolve(data);
+                   }
+
+               }
+           )
+            }).then(
+                function (data) {
+                    console.log(data);
+					var text = "<option value=\"-1\" selected=\"true\" disabled=\"true\">课程代号</option>\n";
+                    for(var i=0;i<data.length;i++){
+                        text = text + "<option value=\""+i.toString()+"\">"+data[i].course_id+"</option>\n"
+                    }
+					var cour_list=document.getElementById("course_list");
+					cour_list.innerHTML = text;
+                }
+            );
+    }
+</script>
+<script>
+	function change(){
+		var course_select=document.getElementById("course_list");
+		var c_id=course_select.value;
+		var url = basicUrl + "api/admin/getcourse";
+        new Promise(function (resolve){
+           $.ajax(
+               {
+                   method: "POST",
+                   url: url,
+                   data: {
+						course_id: c_id,
+						csrfmiddlewaretoken: '{{ csrf_token }}'
+                   },
+                   async : false,
+                   success: function (data) {
+                        resolve(data);
+                   }
+
+               }
+           )
+            }).then(
+                function (data) {
+                    console.log(data);
+					cour_id.value = data.course_id;
+					cour_name.value = dara.name;
+					credit.value = data.credit;
+					hour.value = data.hour;
+					intro.value = data.intro;
+					cour_type.value = data.type;
+					exam_time.value = data.exam_date;
+                }
+            );
+	}
+	
+</script>
+<script>
+    function submitApply() {
+		var c_id = cour_id.value;
+		var c_name = cour_name.value;
+		var c_credit = credit.value;
+		var c_hour = hour.value;
+		var c_intro = intro.value;
+		var c_type = cour_type.value;
+		var c_exam = exam_time.value;
+        console.log(c_id,c_name);
+        var basicUrl="http://127.0.0.1:8000/";
+        new Promise(function (resolve){
+       $.ajax(
+           {
+               method: "POST",
+               url: basicUrl+"api/admin/modifycourse",
+               data: {
+					course_id: c_id,
+					name: c_name,
+					credit: c_credit,
+					hour: c_hour,
+					intro: c_intro,
+					type: c_type,
+					exam_date: c_exam
+               },
+               async : false,
+               success: function (data) {
+                    resolve(data);
+               }
+
+           }
+       )
+        }).then(
+            function (data) {
+				if(data.success){
+                    alert("成功！)
+                }
+                else{
+                    alert(data.reason)
+                }
+                window.location.reload();
+            }
+        );
+    }
+</script>
 
 {% endblock %}
 
